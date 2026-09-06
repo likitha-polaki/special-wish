@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,109 +6,148 @@
   <title>Happy Birthday Kavya Mam!</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body {
+      width: 100%;
+      height: 100vh;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+    }
+
     body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background-image: url("madam.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      font-family: Arial, sans-serif;
-      padding: 20px;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     
-    .card {
+    /* Full Screen Wrapper Without Card/Border */
+    .full-wrapper {
       width: 100%;
-      max-width: 800px;
-      min-height: 500px;
-      padding: 30px 20px;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      position: relative;
+      background: rgba(0, 0, 0, 0.45); /* Dark overlay for better text visibility */
+      backdrop-filter: blur(3px);
     }
 
-    .page { display: none; }
+    .page { 
+      display: none; 
+      width: 100%;
+      max-width: 1200px;
+    }
     .active { display: block; }
+
+    h1 {
+      color: #fff;
+      font-size: 52px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #ff80ab;
+      font-size: 36px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #ffffff;
+      font-size: 22px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+      margin: 15px 0;
+    }
 
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 25px 0;
+      gap: 25px;
+      margin: 30px auto;
+      width: 90%;
     }
     .photo-grid img {
       width: 100%;
-      height: 180px;
+      height: 320px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      border: 3px solid rgba(255, 255, 255, 0.8);
     }
 
     .gift-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 12px;
-      margin-top: 25px;
-      max-height: 360px;
+      gap: 15px;
+      margin: 30px auto 10px;
+      max-height: 520px;
       overflow-y: auto;
-      padding: 10px;
+      padding: 15px;
+      width: 95%;
     }
     .gift-box {
-      background: #ffffff;
-      border: 1.5px solid #ff4081;
-      border-radius: 10px;
-      padding: 12px 5px;
-      font-size: 18px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 20px 10px;
+      font-size: 26px;
       cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       transition: transform 0.2s, background 0.2s;
     }
     .gift-box:hover { 
-      transform: scale(1.08); 
-      background: #ffe6ed;
+      transform: scale(1.1); 
+      background: #ff4081;
+      color: white;
     }
 
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.8);
       z-index: 2000;
       justify-content: center;
       align-items: center;
     }
     .modal-content {
       background: white;
-      padding: 25px;
-      border-radius: 18px;
-      width: 85%;
-      max-width: 380px;
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
       text-align: center;
       animation: pop 0.3s ease;
     }
     .modal-content img {
       width: 100%;
-      height: 180px;
+      height: 260px;
       object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
     }
 
     button {
-      padding: 12px 28px;
+      padding: 16px 40px;
       border: none;
-      border-radius: 25px;
+      border-radius: 35px;
       background: #ff4081;
       color: white;
-      font-size: 16px;
+      font-size: 20px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: 25px;
+      box-shadow: 0 5px 20px rgba(255, 64, 129, 0.5);
       transition: transform 0.2s;
     }
-    button:hover { transform: scale(1.05); }
+    button:hover { transform: scale(1.08); }
 
     .music-btn {
       position: fixed;
@@ -125,9 +164,12 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      h1 { font-size: 36px; }
+      h2 { font-size: 26px; }
+      p { font-size: 18px; }
       .gift-grid { grid-template-columns: repeat(4, 1fr); }
-      .photo-grid img { height: 110px; }
+      .photo-grid img { height: 160px; }
     }
   </style>
 </head>
@@ -139,12 +181,12 @@
     <source src="kavaya.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="card">
+  <div class="full-wrapper">
     
     <!-- PAGE 1: Birthday Wish & Photos -->
     <div class="page active" id="page1">
-      <h1 style="color: #ff4081; font-size: 34px;">🎂 Happy Birthday! 🎉</h1>
-      <h2 style="margin-top: 10px; color: #333;">Kavya Mam ❤️</h2>
+      <h1>🎂 Happy Birthday! 🎉</h1>
+      <h2>Kavya Mam ❤️</h2>
       
       <div class="photo-grid">
         <img src="madam.jpg" alt="Pic 1">
@@ -152,27 +194,28 @@
         <img src="madam.jpg" alt="Pic 3">
       </div>
 
-      <p style="color: #555; font-size: 16px;">Wishing you endless happiness, health, and success on your special day! ✨</p>
+      <p>Wishing you endless happiness, health, and success on your special day! ✨</p>
       <button onclick="nextPage(2)">Next: Video Song 🎥</button>
     </div>
 
     <!-- PAGE 2: Video -->
     <div class="page" id="page2">
-      <h2 style="color: #ff4081; font-size: 28px;">Special Video 🎬</h2>
-      <p style="margin-bottom: 15px; color: #666;">A sweet memory created for you!</p>
+      <h1>Special Video 🎬</h1>
+      <p style="margin-bottom: 20px;">A sweet memory created for you!</p>
       
-      <video controls width="100%" style="border-radius: 12px; max-height: 320px;">
+      <video controls width="100%" style="border-radius: 20px; max-height: 500px; max-width: 900px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         <source src="madam.mp4" type="video/mp4">
         Your browser does not support video.
       </video>
 
+      <br>
       <button onclick="nextPage(3)">Next: 28 Gifts Surprise 🎁</button>
     </div>
 
     <!-- PAGE 3: 28 Gift Boxes -->
     <div class="page" id="page3">
-      <h2 style="color: #ff4081; font-size: 28px;">28 Birthday Gifts 🎁</h2>
-      <p style="font-size: 14px; color: #666;">Click any box to open your surprise message & photo!</p>
+      <h1>28 Birthday Gifts 🎁</h1>
+      <p>Click any box to open your surprise message & photo!</p>
       
       <div class="gift-grid" id="giftGrid"></div>
 
@@ -185,8 +228,8 @@
   <div class="modal" id="giftModal">
     <div class="modal-content">
       <img src="madam.jpg" id="modalImg" alt="Gift Pic">
-      <p id="modalText" style="color: #333; font-weight: bold; font-size: 16px; margin-bottom: 10px;"></p>
-      <button onclick="closeModal()" style="padding: 8px 20px; font-size: 14px; margin-top: 5px;">Close ❌</button>
+      <p id="modalText" style="color: #333; font-weight: bold; font-size: 20px; margin-bottom: 15px;"></p>
+      <button onclick="closeModal()" style="padding: 10px 30px; font-size: 16px; margin-top: 5px;">Close ❌</button>
     </div>
   </div>
 
@@ -243,7 +286,7 @@
     for (let i = 1; i <= 28; i++) {
       const box = document.createElement("div");
       box.className = "gift-box";
-      box.innerHTML = "🎁<br><span style='font-size:10px;'>#" + i + "</span>";
+      box.innerHTML = "🎁<br><span style='font-size:14px; font-weight:bold;'>#" + i + "</span>";
       box.onclick = () => openGift(i);
       grid.appendChild(box);
     }
