@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Kavya Mam!</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url("madam.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    
+    .card {
+      width: 90%;
+      max-width: 650px;
+      min-height: 580px;
+      padding: 40px 30px 30px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border: 4px solid #ff4081;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .page { display: none; }
+    .active { display: block; }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 25px 0;
+    }
+    .photo-grid img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 3px solid #ff4081;
+    }
+
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 8px;
+    }
+    .gift-box {
+      background: #ffe6ed;
+      border: 2px solid #ff4081;
+      border-radius: 12px;
+      padding: 10px 4px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .gift-box:hover { transform: scale(1.1); }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      width: 85%;
+      max-width: 380px;
+      text-align: center;
+      border: 3px solid #ff4081;
+      animation: pop 0.3s ease;
+    }
+    .modal-content img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 25px;
+      background: #ff4081;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 4px 12px rgba(255, 64, 129, 0.4);
+      transition: transform 0.2s;
+    }
+    button:hover { transform: scale(1.05); }
+
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1c1c1c;
+      color: #ff4081;
+      border: 2px solid #ff4081;
+      z-index: 1000;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.6); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .gift-grid { grid-template-columns: repeat(4, 1fr); }
+      .photo-grid img { height: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="music-btn" onclick="playMusic()" id="btnMusic">🎵 Play Song</button>
+
+  <audio id="bgSong" loop style="display:none;">
+    <source src="kavaya.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    
+    <!-- PAGE 1: Birthday Wish & Photos -->
+    <div class="page active" id="page1">
+      <h1 style="color: #ff4081; font-size: 32px;">🎂 Happy Birthday! 🎉</h1>
+      <h2 style="margin-top: 10px; color: #333;">Kavya Mam ❤️</h2>
+      
+      <div class="photo-grid">
+        <img src="madam.jpg" alt="Pic 1">
+        <img src="madam.jpg" alt="Pic 2">
+        <img src="madam.jpg" alt="Pic 3">
+      </div>
+
+      <p style="color: #555; font-size: 16px;">Wishing you endless happiness, health, and success on your special day! ✨</p>
+      <button onclick="nextPage(2)">Next: Video Song 🎥</button>
+    </div>
+
+    <!-- PAGE 2: Video -->
+    <div class="page" id="page2">
+      <h2 style="color: #ff4081; font-size: 28px;">Special Video 🎬</h2>
+      <p style="margin-bottom: 15px; color: #666;">A sweet memory created for you!</p>
+      
+      <video controls width="100%" style="border-radius: 18px; border: 2px solid #ff4081; max-height: 300px;">
+        <source src="madam.mp4" type="video/mp4">
+        Your browser does not support video.
+      </video>
+
+      <button onclick="nextPage(3)">Next: 28 Gifts Surprise 🎁</button>
+    </div>
+
+    <!-- PAGE 3: 28 Gift Boxes -->
+    <div class="page" id="page3">
+      <h2 style="color: #ff4081; font-size: 28px;">28 Birthday Gifts 🎁</h2>
+      <p style="font-size: 14px; color: #666;">Click any box to open your surprise message & photo!</p>
+      
+      <div class="gift-grid" id="giftGrid"></div>
+
+      <button onclick="nextPage(1)" style="margin-top: 20px;">Start Again 🔄</button>
+    </div>
+
+  </div>
+
+  <!-- Popup Modal for Gifts -->
+  <div class="modal" id="giftModal">
+    <div class="modal-content">
+      <img src="madam.jpg" id="modalImg" alt="Gift Pic">
+      <p id="modalText" style="color: #333; font-weight: bold; font-size: 16px; margin-bottom: 10px;"></p>
+      <button onclick="closeModal()" style="padding: 8px 20px; font-size: 14px;">Close ❌</button>
+    </div>
+  </div>
+
+  <script>
+    function nextPage(pageNumber) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page' + pageNumber).classList.add('active');
+    }
+
+    function playMusic() {
+      const song = document.getElementById("bgSong");
+      const btn = document.getElementById("btnMusic");
+      if (song.paused) {
+        song.play();
+        btn.innerHTML = "⏸️ Pause";
+      } else {
+        song.pause();
+        btn.innerHTML = "🎵 Play Song";
+      }
+    }
+
+    const giftMessages = [
+      "1. You inspire us every single day! 🌸",
+      "2. Best Teacher ever! 📚",
+      "3. Thank you for your endless guidance! ❤️",
+      "4. Stay blessed and happy always! ✨",
+      "5. May your year be full of joy! 🥳",
+      "6. Always keep smiling! 😊",
+      "7. You are a true light in our lives! 🌟",
+      "8. Wishing you health and success! 🏆",
+      "9. Thank you for your patience! 💐",
+      "10. Happy Birthday Kavya Mam! 🎂",
+      "11. Best wishes on your birthday! 🎉",
+      "12. You make learning so fun! ✏️",
+      "13. Forever grateful for you! 🙏",
+      "14. Hope all your wishes come true! 🌈",
+      "15. Brightest star of our class! ⭐",
+      "16. Enjoy your special day! 🎁",
+      "17. Keep shining bright! 💖",
+      "18. Thank you for always believing in us! 🤗",
+      "19. Super Mam! 🦸‍♀️",
+      "20. Best memories with you! 📸",
+      "21. Wishing you peace & laughter! 😄",
+      "22. Lots of love on your birthday! 💕",
+      "23. Wonderful teacher & friend! 🌼",
+      "24. May today be unforgettable! 🎈",
+      "25. Celebrating YOU today! 🥂",
+      "26. Always stay positive! 🌺",
+      "27. Thank you for being awesome! 🔥",
+      "28. Happy Birthday Kavya Mam! ❤️🎂"
+    ];
+
+    const grid = document.getElementById("giftGrid");
+    for (let i = 1; i <= 28; i++) {
+      const box = document.createElement("div");
+      box.className = "gift-box";
+      box.innerHTML = "🎁<br><span style='font-size:10px;'>#" + i + "</span>";
+      box.onclick = () => openGift(i);
+      grid.appendChild(box);
+    }
+
+    function openGift(num) {
+      document.getElementById("modalText").innerText = giftMessages[num - 1];
+      document.getElementById("giftModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("giftModal").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
