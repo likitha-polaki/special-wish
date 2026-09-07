@@ -15,7 +15,7 @@
     }
 
     body {
-      background-image: url("madam.jpg");
+      background-image: url("km.mp3.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -34,8 +34,8 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(3px);
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
     }
 
     .page { 
@@ -77,7 +77,7 @@
       width: 100%;
       height: 380px;
       object-fit: cover;
-      object-position: top center; /* ఫోటో కట్ అవ్వకుండా తల భాగం సరిగ్గా కనిపిస్తుంది */
+      object-position: top center;
       border-radius: 20px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.5);
       border: 3px solid rgba(255, 255, 255, 0.8);
@@ -112,27 +112,26 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
       z-index: 2000;
       justify-content: center;
       align-items: center;
     }
     .modal-content {
       background: white;
-      padding: 30px;
+      padding: 25px;
       border-radius: 20px;
       width: 90%;
-      max-width: 500px;
+      max-width: 550px;
       text-align: center;
       animation: pop 0.3s ease;
     }
-    .modal-content img {
+    .modal-content video {
       width: 100%;
-      height: 280px;
-      object-fit: cover;
-      object-position: top center;
+      max-height: 320px;
       border-radius: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     button {
@@ -144,7 +143,7 @@
       font-size: 20px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 25px;
+      margin-top: 20px;
       box-shadow: 0 5px 20px rgba(255, 64, 129, 0.5);
       transition: transform 0.2s;
     }
@@ -216,7 +215,7 @@
     <!-- PAGE 3: 28 Gift Boxes -->
     <div class="page" id="page3">
       <h1>28 Birthday Gifts 🎁</h1>
-      <p>Click any box to open your surprise message & photo!</p>
+      <p>Click any box to watch your video surprise & message!</p>
       
       <div class="gift-grid" id="giftGrid"></div>
 
@@ -225,11 +224,14 @@
 
   </div>
 
-  <!-- Popup Modal for Gifts -->
+  <!-- Popup Modal for Gift Videos -->
   <div class="modal" id="giftModal">
     <div class="modal-content">
-      <img src="madam.jpg" id="modalImg" alt="Gift Pic">
-      <p id="modalText" style="color: #333; font-weight: bold; font-size: 20px; margin-bottom: 15px;"></p>
+      <video id="modalVideo" controls autoplay style="width: 100%;">
+        <source id="videoSource" src="" type="video/mp4">
+        Your browser does not support video.
+      </video>
+      <p id="modalText" style="color: #333; font-weight: bold; font-size: 18px; margin-bottom: 10px;"></p>
       <button onclick="closeModal()" style="padding: 10px 30px; font-size: 16px; margin-top: 5px;">Close ❌</button>
     </div>
   </div>
@@ -283,6 +285,9 @@
       "28. Happy Birthday Kavya Mam! ❤️🎂"
     ];
 
+    /* ప్రతి బాక్స్ వీడియో ఫైల్స్ ఇక్కడ సెట్ చేయవచ్చు (ఉదాహరణకి 1.mp4, 2.mp4... లేదా kms.mp4) */
+    const giftVideos = Array.from({length: 28}, (_, i) => `${i + 1}.mp4`);
+
     const grid = document.getElementById("giftGrid");
     for (let i = 1; i <= 28; i++) {
       const box = document.createElement("div");
@@ -293,11 +298,20 @@
     }
 
     function openGift(num) {
+      const modalVideo = document.getElementById("modalVideo");
+      const videoSource = document.getElementById("videoSource");
+      
+      // గిఫ్ట్ వీడియో పాత్ సెట్ చేయడం
+      videoSource.src = giftVideos[num - 1];
+      modalVideo.load();
+      
       document.getElementById("modalText").innerText = giftMessages[num - 1];
       document.getElementById("giftModal").style.display = "flex";
     }
 
     function closeModal() {
+      const modalVideo = document.getElementById("modalVideo");
+      modalVideo.pause(); // మోడల్ క్లోజ్ అయినప్పుడు వీడియో ఆగిపోతుంది
       document.getElementById("giftModal").style.display = "none";
     }
   </script>
