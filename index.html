@@ -227,8 +227,7 @@
   <!-- Popup Modal for Gift Videos -->
   <div class="modal" id="giftModal">
     <div class="modal-content">
-      <video id="modalVideo" controls style="width: 100%;">
-        <source id="videoSource" src="v1.mp4" type="video/mp4">
+      <video id="modalVideo" controls style="width: 100%;" playsinline>
         Your browser does not support video.
       </video>
       <p id="modalText" style="color: #333; font-weight: bold; font-size: 18px; margin-bottom: 10px;"></p>
@@ -302,10 +301,9 @@
       document.getElementById("giftModal").style.display = "flex";
 
       const modalVideo = document.getElementById("modalVideo");
-      const videoSource = document.getElementById("videoSource");
 
-      // బ్రౌజర్ క్యాషే సమస్య లేకుండా వీడియో లోడ్ అవ్వడానికి
-      videoSource.src = giftVideos[num - 1] + "?v=" + new Date().getTime();
+      // వీడియో పాత్ నేరుగా మోడల్ వీడియోకి ఇవ్వడం ద్వారా త్వరగా లోడ్ అవుతుంది
+      modalVideo.src = giftVideos[num - 1];
       modalVideo.load();
       
       var playPromise = modalVideo.play();
@@ -319,6 +317,7 @@
     function closeModal() {
       const modalVideo = document.getElementById("modalVideo");
       modalVideo.pause();
+      modalVideo.src = "";
       document.getElementById("giftModal").style.display = "none";
     }
   </script>
