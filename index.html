@@ -177,8 +177,9 @@
 
   <button class="music-btn" onclick="playMusic()" id="btnMusic">🎵 Play Song</button>
 
+  <!-- GitHub లోని రన్ అయ్యే సరైన ఆడియో ఫైల్ పేరు -->
   <audio id="bgSong" loop style="display:none;">
-    <source src="kavaya.mp3" type="audio/mpeg">
+    <source src="kavaya.mp3.mp3" type="audio/mpeg">
   </audio>
 
   <div class="full-wrapper">
@@ -285,33 +286,32 @@
       "28. Happy Birthday Kavya Mam! ❤️🎂"
     ];
 
-    const giftVideos = Array.from({length: 28}, () => "vpw2.mp4");
+    // మీ వద్ద ఉన్న vpw2.mp4 మరియు vbw.mp4 లను ప్రత్యామ్నాయంగా మార్చేలా సెట్ చేసాను
+    const giftVideos = Array.from({length: 28}, (_, i) => (i % 2 === 0 ? "vpw2.mp4" : "vbw.mp4"));
 
     const grid = document.getElementById("giftGrid");
     for (let i = 1; i <= 28; i++) {
       const box = document.createElement("div");
       box.className = "gift-box";
       box.innerHTML = "🎁<br><span style='font-size:14px; font-weight:bold;'>#" + i + "</span>";
-      box.onclick = () => openGift(i);
+      box.onclick = function() { openGift(i); };
       grid.appendChild(box);
     }
 
     function openGift(num) {
-      const modalVideo = document.getElementById("modalVideo");
-      const videoSource = document.getElementById("videoSource");
-      
-      // గిఫ్ట్ వీడియో అప్‌డేట్ చేయడం
-      videoSource.src = giftVideos[num - 1];
-      modalVideo.load();
-      
       document.getElementById("modalText").innerText = giftMessages[num - 1];
       document.getElementById("giftModal").style.display = "flex";
 
-      // బ్రౌజర్ ఆటోప్లే ఎర్రర్ రాకుండా సేఫ్ ప్లే సెట్టింగ్
+      const modalVideo = document.getElementById("modalVideo");
+      const videoSource = document.getElementById("videoSource");
+
+      videoSource.src = giftVideos[num - 1];
+      modalVideo.load();
+      
       var playPromise = modalVideo.play();
       if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Autoplay blocked, user can click play manually.");
+        playPromise.catch(function(error) {
+          console.log("Autoplay blocked");
         });
       }
     }
