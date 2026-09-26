@@ -9,7 +9,7 @@
     
     html, body {
       width: 100%;
-      height: 100vh;
+      min-height: 100vh;
       overflow-x: hidden;
       font-family: Arial, sans-serif;
     }
@@ -135,7 +135,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
-    /* Quiz & Login Style */
+    /* Page 4 - Login & Questions Box Style */
     .form-card {
       background: rgba(255, 255, 255, 0.95);
       padding: 30px;
@@ -144,6 +144,7 @@
       margin: 20px auto;
       text-align: left;
       color: #333;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     }
     .form-card input, .form-card textarea {
       width: 100%;
@@ -243,22 +244,23 @@
       <button onclick="nextPage(4)">Next: Birthday Girl Special Zone 👑</button>
     </div>
 
-    <!-- PAGE 4: Birthday Girl Login & Questions -->
+    <!-- PAGE 4: Login & Questions Corner -->
     <div class="page" id="page4">
       <h1>Birthday Girl Special Corner 👑</h1>
+      <p>A small fun zone specially for Kavya Mam!</p>
       
-      <!-- Login Box -->
+      <!-- Passcode Login Box -->
       <div id="loginBox" class="form-card" style="text-align: center;">
         <h3 style="margin-bottom: 15px;">Are you Kavya Mam? 🌸</h3>
-        <p style="color: #666; font-size: 16px;">Enter your special passcode to answer my questions!</p>
-        <input type="password" id="passcode" placeholder="Enter Passcode (e.g. kavya123)">
-        <p id="loginErr" style="color: red; font-size: 14px; display: none;">Wrong Passcode! Try again 💕</p>
-        <button onclick="checkLogin()" style="width: 100%; margin-top: 10px;">Login 🔐</button>
+        <p style="color: #666; font-size: 15px;">Enter your passcode to answer my questions!</p>
+        <input type="password" id="passcode" placeholder="Passcode (e.g. kavya123)">
+        <p id="loginErr" style="color: red; font-size: 14px; display: none; margin-bottom: 10px;">Wrong Passcode! Try again 💕</p>
+        <button onclick="checkLogin()" style="width: 100%; margin-top: 5px;">Login 🔐</button>
       </div>
 
-      <!-- Question Form -->
+      <!-- Question Form (Shows after correct passcode) -->
       <form id="quizForm" class="form-card" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" style="display: none;">
-        <h3 style="text-align: center; color: #ff4081; margin-bottom: 20px;">Answer These Special Questions! 📝</h3>
+        <h3 style="text-align: center; color: #ff4081; margin-bottom: 20px;">Answer These Questions! 📝</h3>
         
         <label><b>1. What is your favourite memory with us?</b></label>
         <textarea name="Question_1" rows="3" required placeholder="Type your answer here..."></textarea>
@@ -291,8 +293,10 @@
 
   <script>
     function nextPage(pageNumber) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      const targetPage = document.getElementById('page' + pageNumber);
+      document.querySelectorAll('.page').forEach(function(p) {
+        p.classList.remove('active');
+      });
+      var targetPage = document.getElementById('page' + pageNumber);
       if (targetPage) {
         targetPage.classList.add('active');
         window.scrollTo(0, 0);
@@ -380,6 +384,7 @@
 
     function checkLogin() {
       const pass = document.getElementById('passcode').value;
+      // Passcode is set to kavya123
       if (pass === "kavya123") {
         document.getElementById('loginBox').style.display = "none";
         document.getElementById('quizForm').style.display = "block";
