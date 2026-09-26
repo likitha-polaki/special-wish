@@ -227,8 +227,8 @@
   <!-- Popup Modal for Gift Videos -->
   <div class="modal" id="giftModal">
     <div class="modal-content">
-      <video id="modalVideo" controls autoplay style="width: 100%;">
-        <source id="videoSource" src="" type="video/mp4">
+      <video id="modalVideo" controls style="width: 100%;">
+        <source id="videoSource" src="vpw2.mp4" type="video/mp4">
         Your browser does not support video.
       </video>
       <p id="modalText" style="color: #333; font-weight: bold; font-size: 18px; margin-bottom: 10px;"></p>
@@ -285,8 +285,8 @@
       "28. Happy Birthday Kavya Mam! ❤️🎂"
     ];
 
-    /* ప్రతి బాక్స్ వీడియో ఫైల్స్ ఇక్కడ సెట్ చేయవచ్చు (ఉదాహరణకి 1.mp4, 2.mp4... లేదా kms.mp4) */
-    const giftVideos = Array.from({length: 28}, (_, i) => `${i + 1}.mp4`);
+    /* ప్రతి బాక్స్ కోసం వీడియో ఫైల్ (అన్నీ ప్రత్యేక వీడియోలు ఉంటే 1.mp4, 2.mp4... లేదా ఒకటే వీడియోకి vpw2.mp4 ఇవ్వవచ్చు) */
+    const giftVideos = Array.from({length: 28}, (_, i) => "vpw2.mp4");
 
     const grid = document.getElementById("giftGrid");
     for (let i = 1; i <= 28; i++) {
@@ -298,12 +298,13 @@
     }
 
     function openGift(num) {
-      const modalVideo = document.getElementById("vpw2.mp4");
-      const videoSource = document.getElementById("vpw2.mp4");
+      const modalVideo = document.getElementById("modalVideo");
+      const videoSource = document.getElementById("videoSource");
       
-      // గిఫ్ట్ వీడియో పాత్ సెట్ చేయడం
+      // గిఫ్ట్ వీడియో ప్లే చేయడం
       videoSource.src = giftVideos[num - 1];
       modalVideo.load();
+      modalVideo.play();
       
       document.getElementById("modalText").innerText = giftMessages[num - 1];
       document.getElementById("giftModal").style.display = "flex";
@@ -311,7 +312,7 @@
 
     function closeModal() {
       const modalVideo = document.getElementById("modalVideo");
-      modalVideo.pause(); // మోడల్ క్లోజ్ అయినప్పుడు వీడియో ఆగిపోతుంది
+      modalVideo.pause(); // క్లోజ్ నొక్కినప్పుడు వీడియో ఆగిపోతుంది
       document.getElementById("giftModal").style.display = "none";
     }
   </script>
