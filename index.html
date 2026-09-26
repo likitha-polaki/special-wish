@@ -27,10 +27,10 @@
     /* Floating Moon Background Element */
     .moon-bg {
       position: fixed;
-      top: 50px;
-      right: 60px;
-      font-size: 110px;
-      filter: drop-shadow(0 0 35px rgba(255, 255, 200, 0.9));
+      top: 40px;
+      right: 50px;
+      font-size: 100px;
+      filter: drop-shadow(0 0 30px rgba(255, 255, 200, 0.9));
       z-index: 0;
       opacity: 0.9;
       animation: floatMoon 4s ease-in-out infinite alternate;
@@ -107,7 +107,7 @@
 
     /* Glowing Shining Title Text */
     .shining-title {
-      font-size: 72px;
+      font-size: 70px;
       font-weight: 900;
       line-height: 1.2;
       background: linear-gradient(90deg, #ff80ab, #ffffff, #ff4081, #ffffff, #ff80ab);
@@ -176,6 +176,36 @@
       font-size: 32px;
       font-weight: bold;
       color: #ff80ab;
+    }
+
+    /* Clean Photo Page Styling (No Cut Heads, Properly Scaled) */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin: 30px auto;
+      width: 100%;
+    }
+
+    .photo-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 128, 171, 0.4);
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: 0 0 25px rgba(255, 64, 129, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-height: 480px;
+      overflow: hidden;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      max-height: 450px;
+      object-fit: contain; /* Prevents Head Cut Off */
+      border-radius: 12px;
     }
 
     /* Cake Cutting */
@@ -310,6 +340,7 @@
       .shining-title { font-size: 40px; }
       .sub-heading { font-size: 22px; }
       .gift-grid { grid-template-columns: repeat(4, 1fr); }
+      .photo-grid { grid-template-columns: 1fr; }
       .moon-bg { top: 20px; right: 20px; font-size: 60px; }
     }
   </style>
@@ -345,7 +376,7 @@
       </div>
     </div>
 
-    <!-- PAGE 1: FULL SCREEN SHINING WISHES (NO BOXES) -->
+    <!-- PAGE 1: FULL SCREEN SHINING WISHES (PAGE MOTHAM) -->
     <div class="page" id="page1">
       <div class="hero-container">
         <h1 class="shining-title">🎉 Happy Birthday Kavya Mam! 🎉</h1>
@@ -358,12 +389,26 @@
           <div class="time-box"><span id="secs">00</span>Secs</div>
         </div>
 
-        <button onclick="nextPage(2)">Next: Cut the Cake 🎂</button>
+        <button onclick="nextPage(2)">Next: Sweet Memories 📸</button>
       </div>
     </div>
 
-    <!-- PAGE 2: Virtual Cake Cutting -->
+    <!-- PAGE 2: SEPARATE PHOTO GALLERY PAGE -->
     <div class="page" id="page2">
+      <h1 class="shining-title" style="font-size: 48px;">Sweet Memories 📸</h1>
+      <p style="font-size: 20px; color: #ff80ab;">Capturing your beautiful moments!</p>
+
+      <div class="photo-grid">
+        <div class="photo-card"><img src="km.mp3.jpg" alt="Pic 1"></div>
+        <div class="photo-card"><img src="kmp.mp3.jpg" alt="Pic 2"></div>
+        <div class="photo-card"><img src="kmp4.mp3.jpg" alt="Pic 3"></div>
+      </div>
+
+      <button onclick="nextPage(3)">Next: Cut the Cake 🎂</button>
+    </div>
+
+    <!-- PAGE 3: Virtual Cake Cutting -->
+    <div class="page" id="page3">
       <h1 class="shining-title" style="font-size: 48px;">Virtual Cake Cutting 🎂</h1>
       <p id="cakeInstruction" style="font-size: 22px; margin: 15px 0;">Click on the Cake to blow candle & cut! 🕯️</p>
 
@@ -372,11 +417,11 @@
         <div style="font-size: 130px; line-height: 180px;">🎂</div>
       </div>
 
-      <button onclick="nextPage(3)">Next: Video Song 🎥</button>
+      <button onclick="nextPage(4)">Next: Video Song 🎥</button>
     </div>
 
-    <!-- PAGE 3: Video -->
-    <div class="page" id="page3">
+    <!-- PAGE 4: Video -->
+    <div class="page" id="page4">
       <h1 class="shining-title" style="font-size: 48px;">Special Video 🎬</h1>
       <p style="margin-bottom: 20px; font-size: 20px;">A sweet memory created for you!</p>
       
@@ -386,21 +431,21 @@
       </video>
 
       <br>
-      <button onclick="nextPage(4)">Next: 28 Gifts Surprise 🎁</button>
+      <button onclick="nextPage(5)">Next: 28 Gifts Surprise 🎁</button>
     </div>
 
-    <!-- PAGE 4: 28 Gift Boxes -->
-    <div class="page" id="page4">
+    <!-- PAGE 5: 28 Gift Boxes -->
+    <div class="page" id="page5">
       <h1 class="shining-title" style="font-size: 48px;">28 Birthday Gifts 🎁</h1>
       <p style="font-size: 20px;">Click any box to watch your video surprise & message!</p>
       
       <div class="gift-grid" id="giftGrid"></div>
 
-      <button onclick="nextPage(5)">Next: Birthday Girl Special Zone 👑</button>
+      <button onclick="nextPage(6)">Next: Birthday Girl Special Zone 👑</button>
     </div>
 
-    <!-- PAGE 5: Login & Questions -->
-    <div class="page" id="page5">
+    <!-- PAGE 6: Login & Questions -->
+    <div class="page" id="page6">
       <h1 class="shining-title" style="font-size: 48px;">Birthday Girl Special Corner 👑</h1>
       <p style="font-size: 20px; margin-bottom: 20px;">28 Special Questions for your 28th Birthday!</p>
       
