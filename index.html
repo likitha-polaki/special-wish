@@ -43,7 +43,7 @@
       width: 100%;
       max-width: 1200px;
     }
-    .active { display: block; }
+    .active { display: block !important; }
 
     h1 {
       color: #fff;
@@ -256,8 +256,7 @@
         <button onclick="checkLogin()" style="width: 100%; margin-top: 10px;">Login 🔐</button>
       </div>
 
-      <!-- Question Form (Hidden initially) -->
-      <!-- Formspree Endpoint ని కింద Action లో మార్చాలి -->
+      <!-- Question Form -->
       <form id="quizForm" class="form-card" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" style="display: none;">
         <h3 style="text-align: center; color: #ff4081; margin-bottom: 20px;">Answer These Special Questions! 📝</h3>
         
@@ -273,6 +272,7 @@
         <button type="submit" style="width: 100%;">Send Answers to Me 💌</button>
       </form>
 
+      <br>
       <button onclick="nextPage(1)" style="background: #333;">Start Again 🔄</button>
     </div>
 
@@ -292,7 +292,11 @@
   <script>
     function nextPage(pageNumber) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById('page' + pageNumber).classList.add('active');
+      const targetPage = document.getElementById('page' + pageNumber);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo(0, 0);
+      }
     }
 
     function playMusic() {
@@ -374,10 +378,8 @@
       document.getElementById("giftModal").style.display = "none";
     }
 
-    // Login Passcode Check Function
     function checkLogin() {
       const pass = document.getElementById('passcode').value;
-      // మీరు పాస్‌వర్డ్‌ని ఇక్కడ మార్చుకోవచ్చు (ప్రస్తుతం 'kavya123' అని పెట్టాను)
       if (pass === "kavya123") {
         document.getElementById('loginBox').style.display = "none";
         document.getElementById('quizForm').style.display = "block";
