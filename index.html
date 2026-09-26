@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday Kavya Mam!</title>
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
@@ -66,6 +68,27 @@
       margin: 15px 0;
     }
 
+    /* Countdown Timer Style */
+    .timer-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .time-box {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ff4081;
+      padding: 10px 15px;
+      border-radius: 12px;
+      color: #fff;
+    }
+    .time-box span {
+      display: block;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    /* Photos */
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -83,6 +106,38 @@
       border: 3px solid rgba(255, 255, 255, 0.8);
     }
 
+    /* Cake Cutting Area */
+    .cake-container {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      margin: 30px auto;
+      cursor: pointer;
+    }
+    .cake-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+    .candle-flame {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 30px;
+      background: orange;
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 15px orange, 0 0 25px yellow;
+      animation: flicker 0.5s infinite alternate;
+    }
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1); }
+      100% { transform: translateX(-50%) scale(1.15); }
+    }
+
+    /* Gifts */
     .gift-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -135,6 +190,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
+    /* Form */
     .form-card {
       background: rgba(255, 255, 255, 0.95);
       padding: 30px;
@@ -209,10 +265,18 @@
 
   <div class="full-wrapper">
     
-    <!-- PAGE 1: Birthday Wish & Photos -->
+    <!-- PAGE 1: Wishes, Countdown & Photos -->
     <div class="page active" id="page1">
       <h1>🎂 Happy Birthday! 🎉</h1>
       <h2>Kavya Mam ❤️</h2>
+
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <div class="time-box"><span id="days">00</span>Days</div>
+        <div class="time-box"><span id="hours">00</span>Hours</div>
+        <div class="time-box"><span id="mins">00</span>Mins</div>
+        <div class="time-box"><span id="secs">00</span>Secs</div>
+      </div>
       
       <div class="photo-grid">
         <img src="km.mp3.jpg" alt="Pic 1">
@@ -221,11 +285,24 @@
       </div>
 
       <p>Wishing you endless happiness, health, and success on your special day! ✨</p>
-      <button onclick="nextPage(2)">Next: Video Song 🎥</button>
+      <button onclick="nextPage(2)">Next: Cut the Cake 🎂</button>
     </div>
 
-    <!-- PAGE 2: Video -->
+    <!-- PAGE 2: Virtual Cake Cutting -->
     <div class="page" id="page2">
+      <h1>Virtual Cake Cutting 🎂</h1>
+      <p id="cakeInstruction">Click on the Cake to blow candle & cut! 🕯️</p>
+
+      <div class="cake-container" onclick="cutCake()">
+        <div class="candle-flame" id="flame"></div>
+        <div style="font-size: 140px; line-height: 200px;">🎂</div>
+      </div>
+
+      <button onclick="nextPage(3)">Next: Video Song 🎥</button>
+    </div>
+
+    <!-- PAGE 3: Video -->
+    <div class="page" id="page3">
       <h1>Special Video 🎬</h1>
       <p style="margin-bottom: 20px;">A sweet memory created for you!</p>
       
@@ -235,25 +312,24 @@
       </video>
 
       <br>
-      <button onclick="nextPage(3)">Next: 28 Gifts Surprise 🎁</button>
+      <button onclick="nextPage(4)">Next: 28 Gifts Surprise 🎁</button>
     </div>
 
-    <!-- PAGE 3: 28 Gift Boxes -->
-    <div class="page" id="page3">
+    <!-- PAGE 4: 28 Gift Boxes -->
+    <div class="page" id="page4">
       <h1>28 Birthday Gifts 🎁</h1>
       <p>Click any box to watch your video surprise & message!</p>
       
       <div class="gift-grid" id="giftGrid"></div>
 
-      <button onclick="nextPage(4)">Next: Birthday Girl Special Zone 👑</button>
+      <button onclick="nextPage(5)">Next: Birthday Girl Special Zone 👑</button>
     </div>
 
-    <!-- PAGE 4: Login & Questions Corner -->
-    <div class="page" id="page4">
+    <!-- PAGE 5: Login & 28 Questions -->
+    <div class="page" id="page5">
       <h1>Birthday Girl Special Corner 👑</h1>
       <p>28 Special Questions for your 28th Birthday!</p>
       
-      <!-- Passcode Login Box -->
       <div id="loginBox" class="form-card" style="text-align: center;">
         <h3 style="margin-bottom: 15px;">Are you Kavya Mam? 🌸</h3>
         <p style="color: #666; font-size: 15px;">Enter your passcode to answer my questions!</p>
@@ -262,7 +338,6 @@
         <button onclick="checkLogin()" style="width: 100%; margin-top: 5px;">Login 🔐</button>
       </div>
 
-      <!-- Question Form (28 Questions) -->
       <form id="quizForm" class="form-card" action="https://formspree.io/f/moevkkyw" method="POST" style="display: none;">
         <h3 style="text-align: center; color: #ff4081; margin-bottom: 20px;">28 Birthday Questions 📝</h3>
         
@@ -359,7 +434,6 @@
 
   </div>
 
-  <!-- Popup Modal for Gift Videos -->
   <div class="modal" id="giftModal">
     <div class="modal-content">
       <video id="modalVideo" controls style="width: 100%;" playsinline>
@@ -371,6 +445,20 @@
   </div>
 
   <script>
+    // Trigger Confetti on Page Load
+    window.onload = function() {
+      triggerConfetti();
+      startCountdown();
+    };
+
+    function triggerConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+
     function nextPage(pageNumber) {
       document.querySelectorAll('.page').forEach(function(p) {
         p.classList.remove('active');
@@ -392,6 +480,28 @@
         song.pause();
         btn.innerHTML = "🎵 Play Song";
       }
+    }
+
+    // Countdown Timer logic
+    function startCountdown() {
+      const birthday = new Date("2026-12-31T00:00:00").getTime(); // Change date here if needed
+      setInterval(() => {
+        const now = new Date().getTime();
+        const diff = birthday - now;
+        if(diff > 0) {
+          document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+          document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }
+      }, 1000);
+    }
+
+    // Virtual Cake Cutting Logic
+    function cutCake() {
+      document.getElementById('flame').style.display = 'none';
+      document.getElementById('cakeInstruction').innerHTML = "🎉 Yay! Happy Birthday Kavya Mam! 🎉";
+      triggerConfetti();
     }
 
     const giftMessages = [
@@ -442,7 +552,6 @@
       document.getElementById("giftModal").style.display = "flex";
 
       const modalVideo = document.getElementById("modalVideo");
-
       modalVideo.src = giftVideos[num - 1];
       modalVideo.load();
       
@@ -466,6 +575,7 @@
       if (pass === "kavya123") {
         document.getElementById('loginBox').style.display = "none";
         document.getElementById('quizForm').style.display = "block";
+        triggerConfetti();
       } else {
         document.getElementById('loginErr').style.display = "block";
       }
