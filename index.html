@@ -177,7 +177,6 @@
 
   <button class="music-btn" onclick="playMusic()" id="btnMusic">🎵 Play Song</button>
 
-  <!-- GitHub లోని రన్ అయ్యే సరైన ఆడియో ఫైల్ పేరు -->
   <audio id="bgSong" loop style="display:none;">
     <source src="kavaya.mp3.mp3" type="audio/mpeg">
   </audio>
@@ -229,7 +228,7 @@
   <div class="modal" id="giftModal">
     <div class="modal-content">
       <video id="modalVideo" controls style="width: 100%;">
-        <source id="videoSource" src="vpw2.mp4" type="video/mp4">
+        <source id="videoSource" src="v1.mp4" type="video/mp4">
         Your browser does not support video.
       </video>
       <p id="modalText" style="color: #333; font-weight: bold; font-size: 18px; margin-bottom: 10px;"></p>
@@ -286,8 +285,9 @@
       "28. Happy Birthday Kavya Mam! ❤️🎂"
     ];
 
-    // మీ వద్ద ఉన్న vpw2.mp4 మరియు vbw.mp4 లను ప్రత్యామ్నాయంగా మార్చేలా సెట్ చేసాను
-    const giftVideos = Array.from({length: 28}, (_, i) => (i % 2 === 0 ? "vpw2.mp4" : "vbw.mp4"));
+    // మీ వద్ద ఉన్న v1, v2, v3, v4, v5, v6, vbw, vpw2 వీడియోలను 28 బాక్సులకు మార్చి మార్చి సెట్ చేశాను
+    const availableVideos = ["v1.mp4", "v2.mp4", "v3.mp4", "v4.mp4", "v5.mp4", "v6.mp4", "vbw.mp4", "vpw2.mp4"];
+    const giftVideos = Array.from({length: 28}, (_, i) => availableVideos[i % availableVideos.length]);
 
     const grid = document.getElementById("giftGrid");
     for (let i = 1; i <= 28; i++) {
