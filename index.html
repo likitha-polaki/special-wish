@@ -114,12 +114,6 @@
       margin: 30px auto;
       cursor: pointer;
     }
-    .cake-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      transition: transform 0.3s;
-    }
     .candle-flame {
       position: absolute;
       top: 25px;
@@ -445,18 +439,27 @@
   </div>
 
   <script>
-    // Trigger Confetti on Page Load
+    // Mega Confetti Blast for Page 1
     window.onload = function() {
-      triggerConfetti();
+      triggerMegaConfetti();
       startCountdown();
     };
 
-    function triggerConfetti() {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+    function triggerMegaConfetti() {
+      var count = 200;
+      var defaults = { origin: { y: 0.7 } };
+
+      function fire(particleRatio, opts) {
+        confetti(Object.assign({}, defaults, opts, {
+          particleCount: Math.floor(count * particleRatio)
+        }));
+      }
+
+      fire(0.25, { spread: 26, startVelocity: 55 });
+      fire(0.2, { spread: 60 });
+      fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+      fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+      fire(0.1, { spread: 120, startVelocity: 45 });
     }
 
     function nextPage(pageNumber) {
@@ -482,12 +485,19 @@
       }
     }
 
-    // Countdown Timer logic
+    // Countdown Timer logic set to October 30
     function startCountdown() {
-      const birthday = new Date("2026-12-31T00:00:00").getTime(); // Change date here if needed
+      const currentYear = new Date().getFullYear();
+      let bdayDate = new Date(`${currentYear}-10-30T00:00:00`).getTime();
+      
+      // If Oct 30 this year has already passed, set for next year
+      if (new Date().getTime() > bdayDate) {
+        bdayDate = new Date(`${currentYear + 1}-10-30T00:00:00`).getTime();
+      }
+
       setInterval(() => {
         const now = new Date().getTime();
-        const diff = birthday - now;
+        const diff = bdayDate - now;
         if(diff > 0) {
           document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
           document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -501,7 +511,7 @@
     function cutCake() {
       document.getElementById('flame').style.display = 'none';
       document.getElementById('cakeInstruction').innerHTML = "🎉 Yay! Happy Birthday Kavya Mam! 🎉";
-      triggerConfetti();
+      triggerMegaConfetti();
     }
 
     const giftMessages = [
@@ -575,7 +585,7 @@
       if (pass === "kavya123") {
         document.getElementById('loginBox').style.display = "none";
         document.getElementById('quizForm').style.display = "block";
-        triggerConfetti();
+        triggerMegaConfetti();
       } else {
         document.getElementById('loginErr').style.display = "block";
       }
