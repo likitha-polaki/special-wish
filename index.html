@@ -285,8 +285,8 @@
       "28. Happy Birthday Kavya Mam! ❤️🎂"
     ];
 
-    // మీ వద్ద ఉన్న v1, v2, v3, v4, v5, v6, vbw, vpw2 వీడియోలను 28 బాక్సులకు మార్చి మార్చి సెట్ చేశాను
-    const availableVideos = ["v1.mp4", "v2.mp4", "v3.mp4", "v4.mp4", "v5.mp4", "v6.mp4", "vbw.mp4", "vpw2.mp4"];
+    // కేవలం మీ దగ్గర ప్రస్తుతం ఉన్న v1, v2, v3, v4, v5, v6 వీడియోలనే 28 బాక్సులకు వరుసగా మార్చి మార్చి సెట్ చేశాను
+    const availableVideos = ["v1.mp4", "v2.mp4", "v3.mp4", "v4.mp4", "v5.mp4", "v6.mp4"];
     const giftVideos = Array.from({length: 28}, (_, i) => availableVideos[i % availableVideos.length]);
 
     const grid = document.getElementById("giftGrid");
