@@ -437,14 +437,14 @@
       touch-action: none;
     }
 
-    /* PAGE 10: PUZZLE STYLES */
+    /* PAGE 10: TOUGH 4x4 PUZZLE STYLES */
     .puzzle-board {
-      width: 300px;
-      height: 300px;
+      width: 320px;
+      height: 320px;
       margin: 20px auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
       gap: 3px;
       background: #ff71ce;
       padding: 3px;
@@ -454,15 +454,20 @@
 
     .puzzle-tile {
       background-image: url('kmp.mp3.jpg');
-      background-size: 300px 300px;
+      background-size: 320px 320px;
       cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.2s ease;
+      border-radius: 3px;
+      transition: transform 0.2s ease, outline 0.2s ease;
+      position: relative;
     }
 
     .puzzle-tile.selected {
       outline: 3px solid #00f0ff;
-      transform: scale(0.95);
+      z-index: 10;
+    }
+
+    .puzzle-controls {
+      margin: 15px 0;
     }
 
     .puzzle-wish-box {
@@ -763,28 +768,35 @@
       <p style="font-size: 18px; color: #ff9ebb;">Draw/Scratch with your finger or hand to reveal the hidden surprise!</p>
 
       <div class="scratch-container">
-        <!-- Kindha Unde Image -->
+        <!-- Hidden Picture -->
         <img src="km.mp3.jpg" alt="Hidden Picture" class="scratch-hidden-img">
         
-        <!-- Paina Cover Chese Canvas Layer -->
+        <!-- Canvas Cover Layer -->
         <canvas id="scratchCanvas"></canvas>
       </div>
 
-      <button onclick="nextPage(10)">Next: Birthday Puzzle Challenge 🧩</button>
+      <button onclick="nextPage(10)">Next: Tough 4x4 Puzzle Challenge 🧩</button>
     </div>
 
-    <!-- PAGE 10: PUZZLE GAME & FINAL WISH (NEW PAGE) -->
+    <!-- PAGE 10: TOUGH 4x4 PUZZLE GAME & FINAL WISH -->
     <div class="page" id="page10">
-      <h1 class="shining-title" style="font-size: 45px;">Photo Puzzle Challenge 🧩</h1>
-      <p style="font-size: 18px; color: #ff9ebb;">Click 2 tiles to swap and complete your picture!</p>
+      <h1 class="shining-title" style="font-size: 40px;">Pro 4x4 Rotation Puzzle 🧩</h1>
+      <p style="font-size: 16px; color: #ff9ebb;">
+        1. Click tile to select, then click another to <b>SWAP</b>!<br>
+        2. Double click/Tap on tile to <b>ROTATE</b> piece! Align 100% straight!
+      </p>
 
       <div class="puzzle-board" id="puzzleBoard"></div>
 
+      <div class="puzzle-controls">
+        <button onclick="shuffleToughPuzzle()" style="padding: 8px 20px; font-size: 14px; margin-top:5px;">Reshuffle Grid 🔀</button>
+      </div>
+
       <div class="puzzle-wish-box" id="puzzleWishBox">
-        <h2 style="color: #ff71ce; font-size: 28px; margin-bottom: 10px;">🎉 Puzzle Unlocked! 🎉</h2>
+        <h2 style="color: #ff71ce; font-size: 28px; margin-bottom: 10px;">🎉 Mastermind Unlocked! 🎉</h2>
         <p style="font-size: 18px; color: #ffffff; line-height: 1.6;">
           Dear Kavya Mam, <br>
-          You solved the puzzle! Just like how you arrange every tile perfectly, you bring perfect happiness and bright guidance into our lives. May your entire year ahead be filled with unlimited joy, peace, success, and beautiful moments! 🌟💐❤️
+          You solved the Tough 4x4 Puzzle! You handled all 16 pieces and rotation angles smoothly. Just like how you guide us through every tough challenge, may your life always navigate to pure success, prosperity, and unlimited joy! Happy Birthday! 🌟💐❤️
         </p>
       </div>
 
@@ -909,7 +921,7 @@
         if(pageNumber === 9) {
           initScratchCanvas();
         } else if(pageNumber === 10) {
-          initPuzzleGame();
+          initToughPuzzleGame();
         }
       }
     }
@@ -1131,53 +1143,86 @@
       }
     }
 
-    /* PAGE 10 PUZZLE GAME LOGIC */
-    let puzzleArr = [1, 2, 0, 4, 3, 5, 7, 6, 8]; // Initial shuffled state
-    let selectedTileIndex = null;
-    let puzzleInited = false;
+    /* PAGE 10: ADVANCED 4x4 ROTATIONAL PUZZLE LOGIC */
+    let puzzle4x4 = []; 
+    let selected4x4Idx = null;
+    let puzzle4Inited = false;
+    let clickTimer = null;
 
-    function initPuzzleGame() {
-      if(puzzleInited) return;
-      renderPuzzle();
-      puzzleInited = true;
+    function initToughPuzzleGame() {
+      if(puzzle4Inited) return;
+      shuffleToughPuzzle();
+      puzzle4Inited = true;
     }
 
-    function renderPuzzle() {
+    function shuffleToughPuzzle() {
+      // 16 tiles object: { id: 0..15, rot: 0/90/180/270 }
+      let angles = [0, 90, 180, 270];
+      puzzle4x4 = [];
+      for(let i=0; i<16; i++) {
+        puzzle4x4.push({
+          id: i,
+          rot: angles[Math.floor(Math.random() * angles.length)]
+        });
+      }
+      
+      // Random shuffle array
+      puzzle4x4.sort(() => Math.random() - 0.5);
+      
+      selected4x4Idx = null;
+      document.getElementById('puzzleWishBox').style.display = 'none';
+      renderToughPuzzle();
+    }
+
+    function renderToughPuzzle() {
       const board = document.getElementById('puzzleBoard');
       board.innerHTML = "";
 
-      puzzleArr.forEach((tilePos, index) => {
+      puzzle4x4.forEach((tileObj, index) => {
         const tile = document.createElement('div');
         tile.className = 'puzzle-tile';
-        if(selectedTileIndex === index) tile.classList.add('selected');
+        if(selected4x4Idx === index) tile.classList.add('selected');
 
-        // Calculate background positioning for 3x3 grid
-        const row = Math.floor(tilePos / 3);
-        const col = tilePos % 3;
-        tile.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+        // Background offset calculation for 4x4
+        const row = Math.floor(tileObj.id / 4);
+        const col = tileObj.id % 4;
+        tile.style.backgroundPosition = `-${col * 80}px -${row * 80}px`;
+        tile.style.transform = `rotate(${tileObj.rot}deg)`;
 
-        tile.onclick = () => onTileClick(index);
+        tile.onclick = () => handleTileClicks(index);
         board.appendChild(tile);
       });
 
-      checkPuzzleSolved();
+      checkToughPuzzleSolved();
     }
 
-    function onTileClick(index) {
-      if (selectedTileIndex === null) {
-        selectedTileIndex = index;
+    function handleTileClicks(index) {
+      if (clickTimer == null) {
+        clickTimer = setTimeout(() => {
+          clickTimer = null;
+          // Single Click Action: Select or Swap
+          if (selected4x4Idx === null) {
+            selected4x4Idx = index;
+          } else {
+            let temp = puzzle4x4[selected4x4Idx];
+            puzzle4x4[selected4x4Idx] = puzzle4x4[index];
+            puzzle4x4[index] = temp;
+            selected4x4Idx = null;
+          }
+          renderToughPuzzle();
+        }, 250);
       } else {
-        // Swap tiles
-        let temp = puzzleArr[selectedTileIndex];
-        puzzleArr[selectedTileIndex] = puzzleArr[index];
-        puzzleArr[index] = temp;
-        selectedTileIndex = null;
+        // Double Click Action: Rotate 90 degrees
+        clearTimeout(clickTimer);
+        clickTimer = null;
+        puzzle4x4[index].rot = (puzzle4x4[index].rot + 90) % 360;
+        selected4x4Idx = null;
+        renderToughPuzzle();
       }
-      renderPuzzle();
     }
 
-    function checkPuzzleSolved() {
-      const isSolved = puzzleArr.every((val, i) => val === i);
+    function checkToughPuzzleSolved() {
+      const isSolved = puzzle4x4.every((item, idx) => item.id === idx && item.rot === 0);
       if (isSolved) {
         document.getElementById('puzzleWishBox').style.display = 'block';
         triggerMegaConfetti();
