@@ -225,6 +225,61 @@
       animation: flicker 0.5s infinite alternate;
     }
 
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+      100% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+    }
+
+    /* MAKE A WISH PAGE STYLING */
+    .wish-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255, 113, 206, 0.5);
+      border-radius: 25px;
+      padding: 40px;
+      max-width: 600px;
+      margin: 30px auto;
+      box-shadow: 0 0 30px rgba(255, 113, 206, 0.3);
+    }
+
+    .wish-candle-box {
+      position: relative;
+      width: 80px;
+      height: 180px;
+      margin: 30px auto;
+      cursor: pointer;
+    }
+
+    .wish-candle-body {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(to right, #ff71ce, #ff4081, #ff71ce);
+      border-radius: 12px;
+      position: absolute;
+      bottom: 0;
+      box-shadow: 0 0 15px rgba(255, 113, 206, 0.5);
+    }
+
+    .wish-flame {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 35px;
+      background: radial-gradient(circle, #fff, orange, red);
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 20px orange, 0 0 35px yellow;
+      animation: flicker 0.4s infinite alternate;
+    }
+
+    .glow-sparkles {
+      font-size: 26px;
+      margin-top: 15px;
+      color: #00f0ff;
+      animation: pulse 1.5s infinite alternate;
+    }
+
     /* GIFT BOXES */
     .gift-grid {
       display: grid;
@@ -391,11 +446,34 @@
         <div class="photo-card"><img src="kmp4.mp3.jpg" alt="Pic 3"></div>
       </div>
 
-      <button onclick="nextPage(3)">Next: Cut the Cake 🎂</button>
+      <button onclick="nextPage(3)">Next: Make A Wish ✨</button>
     </div>
 
-    <!-- PAGE 3: CAKE -->
+    <!-- NEW PAGE 3: MAKE A WISH PAGE -->
     <div class="page" id="page3">
+      <h1 class="shining-title" style="font-size: 45px;">Make A Magical Wish 🌠</h1>
+      <p style="font-size: 20px; color: #ff9ebb;">Close your eyes, think of a wish & blow the candle!</p>
+
+      <div class="wish-card">
+        <div class="wish-candle-box" onclick="blowWishCandle()">
+          <div class="wish-flame" id="wishFlame"></div>
+          <div class="wish-candle-body"></div>
+        </div>
+
+        <p id="wishMsg" style="font-size: 22px; color: #ffffff; font-weight: 600; margin-top: 15px;">
+          Click or Blow on the candle to make your wish! 🕯️
+        </p>
+        
+        <div id="wishMagicBox" style="display:none;" class="glow-sparkles">
+          ✨ May all your secret dreams & wishes come true this year! ✨
+        </div>
+      </div>
+
+      <button onclick="nextPage(4)">Next: Cut the Cake 🎂</button>
+    </div>
+
+    <!-- PAGE 4: CAKE -->
+    <div class="page" id="page4">
       <h1 class="shining-title" style="font-size: 45px;">Virtual Cake Cutting 🎂</h1>
       <p id="cakeInstruction" style="font-size: 22px; margin: 15px 0;">Click on the Cake to blow candle & cut! 🕯️</p>
 
@@ -404,11 +482,11 @@
         <div style="font-size: 130px; line-height: 180px;">🎂</div>
       </div>
 
-      <button onclick="nextPage(4)">Next: Video Song 🎥</button>
+      <button onclick="nextPage(5)">Next: Video Song 🎥</button>
     </div>
 
-    <!-- PAGE 4: VIDEO -->
-    <div class="page" id="page4">
+    <!-- PAGE 5: VIDEO -->
+    <div class="page" id="page5">
       <h1 class="shining-title" style="font-size: 45px;">Special Video 🎬</h1>
       <p style="margin-bottom: 20px; font-size: 20px;">A sweet memory created for you!</p>
       
@@ -417,21 +495,21 @@
       </video>
 
       <br>
-      <button onclick="nextPage(5)">Next: 28 Gifts Surprise 🎁</button>
+      <button onclick="nextPage(6)">Next: 28 Gifts Surprise 🎁</button>
     </div>
 
-    <!-- PAGE 5: 28 GIFTS -->
-    <div class="page" id="page5">
+    <!-- PAGE 6: 28 GIFTS -->
+    <div class="page" id="page6">
       <h1 class="shining-title" style="font-size: 45px;">28 Birthday Gifts 🎁</h1>
       <p style="font-size: 20px;">Click any box to watch your video surprise & message!</p>
       
       <div class="gift-grid" id="giftGrid"></div>
 
-      <button onclick="nextPage(6)">Next: Birthday Girl Special Zone 👑</button>
+      <button onclick="nextPage(7)">Next: Birthday Girl Special Zone 👑</button>
     </div>
 
-    <!-- PAGE 6: QUESTIONS -->
-    <div class="page" id="page6">
+    <!-- PAGE 7: QUESTIONS -->
+    <div class="page" id="page7">
       <h1 class="shining-title" style="font-size: 45px;">Birthday Girl Special Corner 👑</h1>
       <p style="font-size: 20px; margin-bottom: 20px;">28 Special Questions for your 28th Birthday!</p>
       
@@ -670,6 +748,14 @@
           document.getElementById('secs').innerText = "00";
         }
       }, 1000);
+    }
+
+    /* BLOW CANDLE FUNCTION FOR MAKE A WISH PAGE */
+    function blowWishCandle() {
+      document.getElementById('wishFlame').style.display = 'none';
+      document.getElementById('wishMsg').innerText = "🎉 Your Wish Has Been Made! 🎉";
+      document.getElementById('wishMagicBox').style.display = 'block';
+      triggerMegaConfetti();
     }
 
     function cutCake() {
