@@ -248,7 +248,7 @@
     }
 
     .pop-item-display {
-      min-height: 180px;
+      min-height: 250px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -256,22 +256,14 @@
       margin-top: 15px;
     }
 
-    .big-icon {
-      font-size: 70px;
-      animation: bounce 0.6s ease infinite alternate;
-    }
-
     @keyframes bounce {
       from { transform: translateY(0); }
-      to { transform: translateY(-15px); }
+      to { transform: translateY(-12px); }
     }
 
-    .pop-msg {
-      font-size: 20px;
-      color: #ff71ce;
-      font-weight: 600;
-      margin-top: 10px;
-      text-shadow: 0 0 10px rgba(255, 113, 206, 0.5);
+    @keyframes popIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     /* CAKE CUTTING */
@@ -519,21 +511,21 @@
       <button onclick="nextPage(3)">Next: Phone Number Magic 📲</button>
     </div>
 
-    <!-- NEW PAGE 3: PHONE NUMBER MAGIC SURPRISE -->
+    <!-- PAGE 3: PHONE NUMBER MAGIC SURPRISE -->
     <div class="page" id="page3">
-      <h1 class="shining-title" style="font-size: 42px;">Phone Number Magic Surprise 📱</h1>
-      <p style="font-size: 18px; color: #ff9ebb;">Click each digit of Kavya Mam's number to unlock Pandas, Gifts & Bouquets! 🐼🎁💐</p>
+      <h1 class="shining-title" style="font-size: 40px;">Phone Number Magic Surprise 📱</h1>
+      <p style="font-size: 16px; color: #ff9ebb;">Click any number to unlock Panda with Gift Box! 🐼🎁</p>
 
       <div class="phone-container">
         <div class="phone-digits" id="phoneDigitsBox"></div>
 
         <div class="pop-item-display" id="popDisplay">
-          <div class="big-icon">📲</div>
-          <div class="pop-msg">Click on any number above to reveal your surprise!</div>
+          <div style="font-size: 70px;">📲</div>
+          <div style="font-size: 18px; color: #ff71ce; margin-top: 10px;">Click on any digit above to open Panda's Gift!</div>
         </div>
       </div>
 
-      <button onclick="nextPage(4)">Next: Make A Wish ✨</button>
+      <button onclick="nextPage(4)" style="margin-top: 15px;">Next: Make A Wish ✨</button>
     </div>
 
     <!-- PAGE 4: MAKE A WISH PAGE -->
@@ -837,43 +829,66 @@
       }, 1000);
     }
 
-    /* PHONE NUMBER MAGIC SURPRISE LOGIC */
-    const phoneNumber = "9876543210"; // మేడమ్ ఫోన్ నంబర్‌తో ఇక్కడ రీప్లేస్ చేసుకోవచ్చు
-    const phoneSurprises = [
-      { icon: "🐼🎂", msg: "Cute Panda 1 brought a Birthday Cake for Kavya Mam!" },
-      { icon: "💐🌸", msg: "A Fresh Bouquet of Flowers for the Best Teacher!" },
-      { icon: "🎁✨", msg: "Special Gift Box 1: Full of Love & Respect!" },
-      { icon: "🐼🎈", msg: "Panda 2 is flying with Birthday Balloons!" },
-      { icon: "🌷💖", msg: "A Beautiful Tulip Flower Bouquet for You Mam!" },
-      { icon: "🎁🌟", msg: "Special Gift Box 2: Wishing You Eternal Success!" },
-      { icon: "🐼🧸", msg: "Panda 3 is sending a Warm Hug & Birthday Smile!" },
-      { icon: "🌹👑", msg: "A Royal Rose Bouquet for the Queen of Knowledge!" },
-      { icon: "🎁🎊", msg: "Special Gift Box 3: Loaded with Happiness & Joy!" },
-      { icon: "🐼💐🎁", msg: "SUPER SURPRISE! Pandas + Gifts + Bouquets together for Kavya Mam! ❤️" }
-    ];
+    /* PHONE NUMBER PANDA GIFT SURPRISE LOGIC */
+    const phoneNumber = "9491274986"; // Updated Phone Number
+    
+    // Messages for each digit (0 to 9)
+    const phoneLetters = {
+      '9': "Dear Kavya Mam, 💖\nPanda brought a special gift for you! May your life be filled with endless smiles, peace, and great achievements! Happy Birthday! 🎉🎂",
+      '4': "Dearest Mam! 🌸\nYou are the most inspiring teacher ever. Thank you for guiding us with so much love and patience! ✨",
+      '1': "Happy Birthday Kavya Mam! 🌟\nMay this new year of your life bring you unlimited happiness, health, and success! 💐",
+      '2': "Wishing You A Wonderful Birthday! 🎂\nMay all your dreams and secret wishes come true today and always! 🌺",
+      '7': "To The Best Mam! 👑\nYour bright smile always lights up our day. Keep shining and smiling forever! 😊",
+      '8': "Happy Birthday Mam! 🎁\nSending you tons of love, respect, and warm wishes on your special day! ❤️",
+      '6': "Special Wishes For You! 💖\nThank you for being such an awesome teacher and guiding light in our lives! 📚"
+    };
 
     const digitsContainer = document.getElementById("phoneDigitsBox");
-    let clickedCount = 0;
 
     for (let i = 0; i < phoneNumber.length; i++) {
       const btn = document.createElement("button");
       btn.className = "digit-btn";
       btn.innerText = phoneNumber[i];
       btn.onclick = function() {
+        document.querySelectorAll('.digit-btn').forEach(b => b.classList.remove('clicked'));
         btn.classList.add("clicked");
-        showPhoneSurprise(i);
+        showPandaGift(phoneNumber[i]);
       };
       digitsContainer.appendChild(btn);
     }
 
-    function showPhoneSurprise(index) {
-      const item = phoneSurprises[index % phoneSurprises.length];
+    function showPandaGift(digit) {
       const display = document.getElementById("popDisplay");
+      
+      // Step 1: Panda holding gift box
       display.innerHTML = `
-        <div class="big-icon">${item.icon}</div>
-        <div class="pop-msg">${item.msg}</div>
+        <div onclick="openPandaLetter('${digit}')" style="cursor: pointer; text-align: center; animation: bounce 1s infinite alternate;">
+          <div style="font-size: 80px; line-height: 1;">🐼</div>
+          <div style="font-size: 60px; margin-top: -25px;">🎁</div>
+          <p style="color: #00f0ff; font-size: 16px; font-weight: bold; margin-top: 10px;">
+            Panda is holding Gift #${digit}! 🎁<br>
+            <span style="color: #ff71ce;">(Click on the Gift Box to open the Letter ✉️)</span>
+          </p>
+        </div>
       `;
+    }
+
+    function openPandaLetter(digit) {
+      const display = document.getElementById("popDisplay");
+      const letterText = phoneLetters[digit] || "Dear Kavya Mam, 💖\nWishing you a magical birthday full of love, happiness, and success! 🎉🎂";
+
       triggerMegaConfetti();
+
+      // Step 2: Open Gift Box & Show Letter
+      display.innerHTML = `
+        <div style="animation: popIn 0.5s ease-out; text-align: center; background: rgba(255, 255, 255, 0.1); border: 2px dashed #ff71ce; border-radius: 20px; padding: 20px; max-width: 450px; margin: 0 auto;">
+          <div style="font-size: 50px;">✉️ 🐼 🎁</div>
+          <h2 style="color: #ff71ce; margin: 8px 0; font-size: 22px;">Panda's Special Letter! 📜</h2>
+          <div style="background: #ffffff; color: #333333; padding: 18px; border-radius: 12px; font-size: 15px; text-align: left; line-height: 1.6; font-family: 'Georgia', serif; box-shadow: 0 4px 15px rgba(0,0,0,0.4); white-space: pre-line;">
+            ${letterText}
+          </div>
+        </div>
+      `;
     }
 
     /* BLOW CANDLE FUNCTION FOR MAKE A WISH PAGE */
