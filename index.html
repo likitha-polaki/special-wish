@@ -437,6 +437,46 @@
       touch-action: none;
     }
 
+    /* PAGE 10: PUZZLE STYLES */
+    .puzzle-board {
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 3px;
+      background: #ff71ce;
+      padding: 3px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(255, 113, 206, 0.6);
+    }
+
+    .puzzle-tile {
+      background-image: url('kmp.mp3.jpg');
+      background-size: 300px 300px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .puzzle-tile.selected {
+      outline: 3px solid #00f0ff;
+      transform: scale(0.95);
+    }
+
+    .puzzle-wish-box {
+      display: none;
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid #00f0ff;
+      border-radius: 20px;
+      padding: 25px;
+      max-width: 500px;
+      margin: 20px auto;
+      animation: popIn 0.6s ease-out;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+    }
+
     button {
       padding: 14px 38px;
       border: none;
@@ -717,20 +757,38 @@
       <button onclick="nextPage(9)">Next: Scratch Surprise 🎨</button>
     </div>
 
-    <!-- PAGE 9: SCRATCH & DRAW REVEAL SURPRISE (LAST PAGE) -->
+    <!-- PAGE 9: SCRATCH & DRAW REVEAL SURPRISE -->
     <div class="page" id="page9">
       <h1 class="shining-title" style="font-size: 45px;">Scratch & Draw Surprise ✨</h1>
       <p style="font-size: 18px; color: #ff9ebb;">Draw/Scratch with your finger or hand to reveal the hidden surprise!</p>
 
       <div class="scratch-container">
-        <!-- Kindha Unde Image (Mee kavalsina image name replace cheyandi) -->
+        <!-- Kindha Unde Image -->
         <img src="km.mp3.jpg" alt="Hidden Picture" class="scratch-hidden-img">
         
         <!-- Paina Cover Chese Canvas Layer -->
         <canvas id="scratchCanvas"></canvas>
       </div>
 
-      <button onclick="nextPage(1)" style="background: rgba(255,255,255,0.1); border: 1px solid #ccc; margin-top: 15px;">Start Again 🔄</button>
+      <button onclick="nextPage(10)">Next: Birthday Puzzle Challenge 🧩</button>
+    </div>
+
+    <!-- PAGE 10: PUZZLE GAME & FINAL WISH (NEW PAGE) -->
+    <div class="page" id="page10">
+      <h1 class="shining-title" style="font-size: 45px;">Photo Puzzle Challenge 🧩</h1>
+      <p style="font-size: 18px; color: #ff9ebb;">Click 2 tiles to swap and complete your picture!</p>
+
+      <div class="puzzle-board" id="puzzleBoard"></div>
+
+      <div class="puzzle-wish-box" id="puzzleWishBox">
+        <h2 style="color: #ff71ce; font-size: 28px; margin-bottom: 10px;">🎉 Puzzle Unlocked! 🎉</h2>
+        <p style="font-size: 18px; color: #ffffff; line-height: 1.6;">
+          Dear Kavya Mam, <br>
+          You solved the puzzle! Just like how you arrange every tile perfectly, you bring perfect happiness and bright guidance into our lives. May your entire year ahead be filled with unlimited joy, peace, success, and beautiful moments! 🌟💐❤️
+        </p>
+      </div>
+
+      <button onclick="nextPage(1)" style="background: rgba(255,255,255,0.1); border: 1px solid #ccc; margin-top: 20px;">Start Again From Page 1 🔄</button>
     </div>
 
   </div>
@@ -850,6 +908,8 @@
 
         if(pageNumber === 9) {
           initScratchCanvas();
+        } else if(pageNumber === 10) {
+          initPuzzleGame();
         }
       }
     }
@@ -1068,6 +1128,59 @@
         canvas.addEventListener('touchmove', scratch);
 
         canvasInited = true;
+      }
+    }
+
+    /* PAGE 10 PUZZLE GAME LOGIC */
+    let puzzleArr = [1, 2, 0, 4, 3, 5, 7, 6, 8]; // Initial shuffled state
+    let selectedTileIndex = null;
+    let puzzleInited = false;
+
+    function initPuzzleGame() {
+      if(puzzleInited) return;
+      renderPuzzle();
+      puzzleInited = true;
+    }
+
+    function renderPuzzle() {
+      const board = document.getElementById('puzzleBoard');
+      board.innerHTML = "";
+
+      puzzleArr.forEach((tilePos, index) => {
+        const tile = document.createElement('div');
+        tile.className = 'puzzle-tile';
+        if(selectedTileIndex === index) tile.classList.add('selected');
+
+        // Calculate background positioning for 3x3 grid
+        const row = Math.floor(tilePos / 3);
+        const col = tilePos % 3;
+        tile.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+
+        tile.onclick = () => onTileClick(index);
+        board.appendChild(tile);
+      });
+
+      checkPuzzleSolved();
+    }
+
+    function onTileClick(index) {
+      if (selectedTileIndex === null) {
+        selectedTileIndex = index;
+      } else {
+        // Swap tiles
+        let temp = puzzleArr[selectedTileIndex];
+        puzzleArr[selectedTileIndex] = puzzleArr[index];
+        puzzleArr[index] = temp;
+        selectedTileIndex = null;
+      }
+      renderPuzzle();
+    }
+
+    function checkPuzzleSolved() {
+      const isSolved = puzzleArr.every((val, i) => val === i);
+      if (isSolved) {
+        document.getElementById('puzzleWishBox').style.display = 'block';
+        triggerMegaConfetti();
       }
     }
   </script>
