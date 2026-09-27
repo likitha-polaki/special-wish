@@ -198,7 +198,6 @@
       border-radius: 14px;
     }
 
-    /* PHONE NUMBER SURPRISE PAGE STYLES */
     .phone-container {
       background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(15px);
@@ -266,7 +265,6 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    /* CAKE CUTTING */
     .cake-container {
       position: relative;
       width: 220px;
@@ -292,7 +290,6 @@
       100% { transform: translateX(-50%) scale(1.15); opacity: 1; }
     }
 
-    /* MAKE A WISH */
     .wish-card {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(15px);
@@ -342,7 +339,6 @@
       animation: pulse 1.5s infinite alternate;
     }
 
-    /* GIFT BOXES */
     .gift-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -366,7 +362,6 @@
       background: linear-gradient(135deg, #ff71ce, #ff4081);
     }
 
-    /* MODAL */
     .modal {
       display: none;
       position: fixed;
@@ -387,7 +382,6 @@
       box-shadow: 0 0 30px rgba(255, 113, 206, 0.3);
     }
 
-    /* FORM */
     .form-card {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 113, 206, 0.3);
@@ -413,7 +407,6 @@
       color: #fff;
     }
 
-    /* BUTTONS */
     button {
       padding: 14px 38px;
       border: none;
@@ -564,12 +557,12 @@
       <button onclick="nextPage(6)">Next: Video Song 🎥</button>
     </div>
 
-    <!-- PAGE 6: VIDEO -->
+    <!-- PAGE 6: VIDEO (UPDATED PERFECT RESIZABLE VIDEO STYLES) -->
     <div class="page" id="page6">
       <h1 class="shining-title" style="font-size: 45px;">Special Video 🎬</h1>
       <p style="margin-bottom: 20px; font-size: 20px;">A sweet memory created for you!</p>
       
-      <video id="page4Video" controls width="100%" style="border-radius: 20px; max-height: 480px; max-width: 850px; box-shadow: 0 0 35px rgba(255,113,206,0.4);">
+      <video id="page4Video" controls style="width: 100%; max-width: 700px; max-height: 450px; border-radius: 20px; object-fit: contain; box-shadow: 0 0 35px rgba(255,113,206,0.4);">
         <source src="akka.mp4" type="video/mp4">
       </video>
 
@@ -833,7 +826,6 @@
       }, 1000);
     }
 
-    /* PHONE NUMBER SURPRISE LOGIC */
     const phoneNumber = "9491274986"; 
     
     const phoneLettersList = [
@@ -896,7 +888,6 @@
       `;
     }
 
-    /* BLOW CANDLE FUNCTION FOR MAKE A WISH PAGE */
     function blowWishCandle() {
       document.getElementById('wishFlame').style.display = 'none';
       document.getElementById('wishMsg').innerText = "🎉 Your Wish Has Been Made! 🎉";
