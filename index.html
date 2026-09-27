@@ -407,7 +407,6 @@
       color: #fff;
     }
 
-    /* PAGE 9: SCRATCH CANVAS STYLES */
     .scratch-container {
       position: relative;
       width: 320px;
@@ -437,7 +436,6 @@
       touch-action: none;
     }
 
-    /* PAGE 10: TOUGH 4x4 PUZZLE STYLES & HINT / PERFECT REVEAL */
     .puzzle-board {
       width: 320px;
       height: 320px;
@@ -477,7 +475,6 @@
       background: linear-gradient(45deg, #00f0ff, #7000ff) !important;
     }
 
-    /* PERFECT ANIMATION BOX */
     .puzzle-wish-box {
       display: none;
       background: rgba(255, 255, 255, 0.08);
@@ -543,6 +540,13 @@
       z-index: 1000;
       padding: 8px 18px;
       font-size: 14px;
+    }
+
+    .mic-btn {
+      background: linear-gradient(45deg, #00f0ff, #0072ff);
+      font-size: 15px;
+      padding: 10px 20px;
+      margin-top: 10px;
     }
 
     @media (max-width: 768px) {
@@ -631,7 +635,7 @@
       <button onclick="nextPage(4)" style="margin-top: 15px;">Next: Make A Wish ✨</button>
     </div>
 
-    <!-- PAGE 4: MAKE A WISH PAGE -->
+    <!-- PAGE 4: MAKE A WISH PAGE WITH MIC BLOW -->
     <div class="page" id="page4">
       <h1 class="shining-title" style="font-size: 45px;">Make A Magical Wish 🌠</h1>
       <p style="font-size: 20px; color: #ff9ebb;">Close your eyes, think of a wish & blow the candle!</p>
@@ -643,8 +647,10 @@
         </div>
 
         <p id="wishMsg" style="font-size: 22px; color: #ffffff; font-weight: 600; margin-top: 15px;">
-          Click or Blow on the candle to make your wish! 🕯️
+          Click or Blow (uuu ani udandi) on the candle to make your wish! 🕯️
         </p>
+
+        <button class="mic-btn" onclick="startMicForWish()">🎤 Enable Mic to Blow Candle</button>
         
         <div id="wishMagicBox" style="display:none;" class="glow-sparkles">
           ✨ May all your secret dreams & wishes come true this year! ✨
@@ -654,16 +660,18 @@
       <button onclick="nextPage(5)">Next: Cut the Cake 🎂</button>
     </div>
 
-    <!-- PAGE 5: CAKE -->
+    <!-- PAGE 5: CAKE WITH MIC BLOW -->
     <div class="page" id="page5">
       <h1 class="shining-title" style="font-size: 45px;">Virtual Cake Cutting 🎂</h1>
-      <p id="cakeInstruction" style="font-size: 22px; margin: 15px 0;">Click on the Cake to blow candle & cut! 🕯️</p>
+      <p id="cakeInstruction" style="font-size: 22px; margin: 15px 0;">Click or Blow (uuu) on the Cake to blow candle & cut! 🕯️</p>
 
       <div class="cake-container" onclick="cutCake()">
         <div class="candle-flame" id="flame"></div>
         <div style="font-size: 130px; line-height: 180px;">🎂</div>
       </div>
 
+      <button class="mic-btn" onclick="startMicForCake()">🎤 Enable Mic to Blow Cake Candle</button>
+      <br>
       <button onclick="nextPage(6)">Next: Video Song 🎥</button>
     </div>
 
@@ -803,10 +811,7 @@
       <p style="font-size: 18px; color: #ff9ebb;">Draw/Scratch with your finger or hand to reveal the hidden surprise!</p>
 
       <div class="scratch-container">
-        <!-- Hidden Picture -->
         <img src="km.mp3.jpg" alt="Hidden Picture" class="scratch-hidden-img">
-        
-        <!-- Canvas Cover Layer -->
         <canvas id="scratchCanvas"></canvas>
       </div>
 
@@ -828,7 +833,6 @@
         <button onclick="givePuzzleHint()" class="hint-btn" style="padding: 10px 22px; font-size: 15px;">Hint 💡</button>
       </div>
 
-      <!-- PERFECT & ONCE AGAIN WISH REVEAL BOX -->
       <div class="puzzle-wish-box" id="puzzleWishBox">
         <div class="perfect-text" id="perfectHeading">PERFECT! ✨</div>
         <div class="once-again-wish" id="onceAgainWishText">
@@ -1046,6 +1050,48 @@
       `;
     }
 
+    /* --- REAL MICROPHONE BLOW LOGIC --- */
+    function listenToBlow(onBlowSuccess) {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          const analyser = audioContext.createAnalyser();
+          const microphone = audioContext.createMediaStreamSource(stream);
+          microphone.connect(analyser);
+          const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+          function checkBlow() {
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+              sum += dataArray[i];
+            }
+            let average = sum / dataArray.length;
+
+            if (average > 35) { // Threshold for blow/loud sound
+              onBlowSuccess();
+              stream.getTracks().forEach(track => track.stop()); // Stop mic
+            } else {
+              requestAnimationFrame(checkBlow);
+            }
+          }
+          checkBlow();
+        })
+        .catch(err => {
+          alert("Mic Permission Denied or Not Supported! Candle Click చేసి Aarpandi.");
+        });
+    }
+
+    function startMicForWish() {
+      document.getElementById('wishMsg').innerText = "Listening... Candle పైన గట్టిగా ఊదండి (uuu)! 🌬️";
+      listenToBlow(blowWishCandle);
+    }
+
+    function startMicForCake() {
+      document.getElementById('cakeInstruction').innerText = "Listening... Cake Candle పైన ఊదండి! 🌬️";
+      listenToBlow(cutCake);
+    }
+
     function blowWishCandle() {
       document.getElementById('wishFlame').style.display = 'none';
       document.getElementById('wishMsg').innerText = "🎉 Your Wish Has Been Made! 🎉";
@@ -1207,7 +1253,6 @@
       
       selected4x4Idx = null;
       
-      // Hide wish box and reset class
       const wishBox = document.getElementById('puzzleWishBox');
       const wishText = document.getElementById('onceAgainWishText');
       wishBox.style.display = 'none';
@@ -1262,11 +1307,9 @@
       }
     }
 
-    /* HINT OPTION LOGIC */
     function givePuzzleHint() {
       if (isSolvedState) return;
 
-      // Find all wrong tiles (either wrong position or wrong rotation)
       let wrongIndices = [];
       for (let i = 0; i < 16; i++) {
         if (puzzle4x4[i].id !== i || puzzle4x4[i].rot !== 0) {
@@ -1275,14 +1318,11 @@
       }
 
       if (wrongIndices.length > 0) {
-        // Pick one wrong tile to fix
         let targetSlot = wrongIndices[0];
         let correctPieceId = targetSlot;
 
-        // Find where the piece actually is currently
         let currentPieceIndex = puzzle4x4.findIndex(tile => tile.id === correctPieceId);
 
-        // Swap it to its correct position and reset rotation
         let temp = puzzle4x4[targetSlot];
         puzzle4x4[targetSlot] = puzzle4x4[currentPieceIndex];
         puzzle4x4[currentPieceIndex] = temp;
@@ -1304,10 +1344,8 @@
         const wishBox = document.getElementById('puzzleWishBox');
         const wishText = document.getElementById('onceAgainWishText');
 
-        // Step 1: Show Box with "PERFECT!" Heading
         wishBox.style.display = 'block';
 
-        // Step 2: Delay and Reveal "Once again, Happy Birthday Akka!"
         setTimeout(() => {
           wishText.classList.add('show');
           triggerMegaConfetti();
