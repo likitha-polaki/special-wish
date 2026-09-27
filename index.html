@@ -9,12 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: radial-gradient(circle at 50% 50%, #1e052d, #080112);
             font-family: 'Poppins', sans-serif;
@@ -27,7 +22,6 @@
             padding: 20px;
         }
 
-        /* Glassmorphism Dynamic Cards */
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(16px) saturate(180%);
@@ -38,33 +32,25 @@
             padding: 30px;
             margin: 20px 0;
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             text-align: center;
-            transition: transform 0.3s ease;
         }
 
-        /* Neon Animated Title */
         .neon-title {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: #fff;
-            text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 40px #ff1493, 0 0 80px #ff1493;
+            text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 40px #ff1493;
             animation: pulseGlow 2s infinite alternate;
-            margin-bottom: 10px;
         }
 
         @keyframes pulseGlow {
             0% { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4; }
-            100% { text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493, 0 0 60px #ff1493; }
+            100% { text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493; }
         }
 
-        .cursive-sub {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2rem;
-            color: #ffb6c1;
-        }
+        .cursive-sub { font-family: 'Great Vibes', cursive; font-size: 2rem; color: #ffb6c1; }
 
-        /* Interactive Buttons */
         .btn-magic {
             background: linear-gradient(45deg, #ff1493, #ff69b4);
             border: none;
@@ -75,205 +61,170 @@
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(255, 20, 147, 0.6);
-            transition: all 0.3s ease;
             margin-top: 15px;
+            transition: 0.3s;
         }
 
-        .btn-magic:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 20, 147, 0.9);
+        .btn-magic:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(255, 20, 147, 0.9); }
+
+        /* Timer Boxes */
+        .countdown { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
+        .time-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
         }
 
-        /* 3D Photo Grid */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
+        /* 3D Photos */
+        .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin-top: 20px; }
         .photo-card img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s;
+            width: 100%; height: 150px; object-fit: cover; border-radius: 15px;
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+        .photo-card img:hover { transform: scale(1.08) rotate(2deg); box-shadow: 0 10px 25px rgba(255, 105, 180, 0.8); }
+
+        /* Phone Magic PIN Inputs */
+        .pin-container { display: flex; justify-content: center; gap: 8px; margin: 15px 0; }
+        .pin-input {
+            width: 40px; height: 50px; font-size: 1.2rem; text-align: center;
+            background: rgba(255,255,255,0.1); border: 1px solid #ff69b4; color: white; border-radius: 8px;
         }
 
-        .photo-card img:hover {
-            transform: scale(1.1) rotate(3deg);
-            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.8);
+        /* 28 Gifts Grid */
+        .gifts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
+        .gift-box {
+            background: rgba(255, 105, 180, 0.15); border: 1px solid #ff69b4;
+            padding: 12px; border-radius: 10px; cursor: pointer; transition: 0.3s;
         }
+        .gift-box:hover { background: #ff1493; transform: translateY(-3px); }
 
-        /* Candle & Flame Styling */
-        .candle-container {
-            margin: 30px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .candle {
-            width: 35px;
-            height: 100px;
-            background: linear-gradient(to bottom, #ff9a9e, #fecfef);
-            border-radius: 10px 10px 0 0;
-            position: relative;
-        }
-
-        .flame {
-            width: 20px;
-            height: 30px;
-            background: orange;
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            position: absolute;
-            top: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 0 20px #ff0, 0 0 40px #f00;
-            animation: flicker 0.1s infinite alternate;
-        }
-
-        @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1); }
-            100% { transform: translateX(-50%) scale(1.1); }
-        }
-
-        /* Background Floating Hearts Particle Effect */
-        .heart {
-            position: fixed;
-            color: #ff69b4;
-            font-size: 20px;
-            top: -10vh;
-            user-select: none;
-            pointer-events: none;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(105vh) rotate(360deg);
-            }
-        }
+        /* Floating Hearts */
+        .heart { position: fixed; color: #ff69b4; font-size: 20px; top: -10vh; pointer-events: none; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <!-- Section 1: Main Birthday Wish -->
+    <!-- 1. INTRO LANDING CARD -->
     <div class="glass-card">
-        <p class="cursive-sub">Something Special For You...</p>
+        <p class="cursive-sub">Something special is waiting for you...</p>
+        <button class="btn-magic" onclick="triggerBlast()">Celebrate Her Day 💖</button>
+    </div>
+
+    <!-- 2. MAIN COUNTDOWN & WISH -->
+    <div class="glass-card">
         <h1 class="neon-title">Happy Birthday Kavya Akka! 🎉</h1>
-        <p>You bring so much joy and sweetness into our lives!</p>
-        <button class="btn-magic" onclick="triggerBlast()">Celebrate Now! 🎂</button>
-    </div>
-
-    <!-- Section 2: Sweet Memories Gallery -->
-    <div class="glass-card">
-        <h2>📸 Sweet Memories</h2>
-        <div class="photo-grid">
-            <div class="photo-card"><img src="https://picsum.photos/200/200?random=1" alt="Photo 1"></div>
-            <div class="photo-card"><img src="https://picsum.photos/200/200?random=2" alt="Photo 2"></div>
-            <div class="photo-card"><img src="https://picsum.photos/200/200?random=3" alt="Photo 3"></div>
-        </div>
-    </div>
-
-    <!-- Section 3: Candle Blow Surprise (Mic Integration) -->
-    <div class="glass-card">
-        <h2>🎂 Make A Magical Wish</h2>
-        <p id="mic-status">Mic enable chesi candle ki blow (uuu ani udandi) cheyandi!</p>
+        <p>Wishing You A Life Full Of Happiness, Love & Smiles 💕✨</p>
         
-        <div class="candle-container">
-            <div class="candle">
-                <div class="flame" id="flame"></div>
-            </div>
+        <div class="countdown">
+            <div class="time-box"><h3 id="days">32</h3><small>Days</small></div>
+            <div class="time-box"><h3 id="hours">05</h3><small>Hours</small></div>
+            <div class="time-box"><h3 id="mins">38</h3><small>Mins</small></div>
+            <div class="time-box"><h3 id="secs">59</h3><small>Secs</small></div>
         </div>
-
-        <button class="btn-magic" onclick="startMicBlow()">Mic Start Cheyandi 🎤</button>
     </div>
 
-    <!-- Section 4: Virtual Gift Grid -->
+    <!-- 3. SWEET MEMORIES GALLERY -->
     <div class="glass-card">
-        <h2>🎁 Surprise Gifts</h2>
-        <p>Click a gift box for a special message!</p>
-        <button class="btn-magic" onclick="openGift()">Open Gift 🎁</button>
+        <h2>📁 Sweet Memories</h2>
+        <p>Capturing your beautiful moments</p>
+        <div class="photo-grid">
+            <div class="photo-card"><img src="https://picsum.photos/200/300?random=1" alt="Photo 1"></div>
+            <div class="photo-card"><img src="https://picsum.photos/200/300?random=2" alt="Photo 2"></div>
+            <div class="photo-card"><img src="https://picsum.photos/200/300?random=3" alt="Photo 3"></div>
+        </div>
+    </div>
+
+    <!-- 4. PHONE NUMBER MAGIC SURPRISE -->
+    <div class="glass-card">
+        <h2>📱 Phone Number Magic Surprise 💖</h2>
+        <p>Enter secret phone code digits:</p>
+        <div class="pin-container">
+            <input type="password" maxlength="1" class="pin-input">
+            <input type="password" maxlength="1" class="pin-input">
+            <input type="password" maxlength="1" class="pin-input">
+            <input type="password" maxlength="1" class="pin-input">
+        </div>
+        <button class="btn-magic" onclick="triggerBlast()">Unlock Magic ✨</button>
+    </div>
+
+    <!-- 5. MAKE A MAGICAL WISH (CANDLE BLOW) -->
+    <div class="glass-card">
+        <h2>🕯️ Make A Magical Wish</h2>
+        <p>Close your eyes, think of a wish & blow the candle!</p>
+        <div style="font-size: 60px; margin: 15px 0;" id="candle">🕯️</div>
+        <button class="btn-magic" onclick="blowCandle()">Blow Flame 🌬️</button>
+    </div>
+
+    <!-- 6. VIRTUAL CAKE CUTTING -->
+    <div class="glass-card">
+        <h2>🎂 Virtual Cake Cutting</h2>
+        <p>Click on the Cake to blow candle & cut!</p>
+        <div style="font-size: 70px; margin: 10px 0; cursor: pointer;" onclick="cutCake()">🎂</div>
+    </div>
+
+    <!-- 7. SPECIAL VIDEO -->
+    <div class="glass-card">
+        <h2>🎬 Special Video</h2>
+        <p>A sweet memory created for you!</p>
+        <div style="margin-top: 15px;">
+            <video controls width="100%" style="border-radius: 15px; border: 1px solid #ff69b4;">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <!-- 8. 28 BIRTHDAY GIFTS GRID -->
+    <div class="glass-card">
+        <h2>🎁 28 Birthday Gifts</h2>
+        <p>Click any box to watch your surprise & message!</p>
+        <div class="gifts-grid" id="gifts-container"></div>
     </div>
 
     <script>
-        // Universal Confetti Blast Function
+        // Universal Confetti Blast
         function triggerBlast() {
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { y: 0.6 }
-            });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         }
 
-        // Floating Hearts Background Animation
+        // Generate 28 Gift Boxes automatically
+        const giftsContainer = document.getElementById('gifts-container');
+        for (let i = 1; i <= 28; i++) {
+            const box = document.createElement('div');
+            box.className = 'gift-box';
+            box.innerText = `Gift #${i}`;
+            box.onclick = () => {
+                triggerBlast();
+                alert(`🎁 Surprise Message for Gift #${i}: Happy Birthday Kavya Akka! 🎉`);
+            };
+            giftsContainer.appendChild(box);
+        }
+
+        // Candle Blow
+        function blowCandle() {
+            document.getElementById('candle').innerText = '💨🕯️';
+            triggerBlast();
+            alert('Your Wish Has Been Sent To The Stars! ✨');
+        }
+
+        // Cake Cut
+        function cutCake() {
+            triggerBlast();
+            alert('🍰 Cake cut completely! Sweet celebration initialized!');
+        }
+
+        // Floating Hearts Background
         function createHeart() {
             const heart = document.createElement('div');
-            heart.classList.add('heart');
+            heart.className = 'heart';
             heart.innerHTML = '💖';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.opacity = Math.random();
             document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
+            setTimeout(() => heart.remove(), 5000);
         }
         setInterval(createHeart, 300);
-
-        // Candle Blow Sensor using Web Audio API
-        function startMicBlow() {
-            const micStatus = document.getElementById('mic-status');
-            const flame = document.getElementById('flame');
-
-            navigator.mediaDevices.getUserMedia({ audio: true })
-            .then(stream => {
-                micStatus.innerText = "Listening... Eppo Candle Blow Cheyandi! 🌬️";
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const analyser = audioContext.createAnalyser();
-                const microphone = audioContext.createMediaStreamSource(stream);
-                microphone.connect(analyser);
-
-                const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-                function checkVolume() {
-                    analyser.getByteFrequencyData(dataArray);
-                    let sum = 0;
-                    for (let i = 0; i < dataArray.length; i++) {
-                        sum += dataArray[i];
-                    }
-                    let average = sum / dataArray.length;
-
-                    // Blow Sound Threshold Limit
-                    if (average > 35) {
-                        flame.style.display = 'none'; // Candle off
-                        micStatus.innerText = "Wish Granted! 🎉 Candle Off Ayyindi!";
-                        triggerBlast(); // Grand Blast Confetti
-                    } else {
-                        requestAnimationFrame(checkVolume);
-                    }
-                }
-                checkVolume();
-            })
-            .catch(err => {
-                micStatus.innerText = "Mic Permission Denied! Candle Click Chesi Aarpandi.";
-                flame.style.cursor = 'pointer';
-                flame.onclick = () => {
-                    flame.style.display = 'none';
-                    triggerBlast();
-                };
-            });
-        }
-
-        // Open Gift Alert
-        function openGift() {
-            triggerBlast();
-            alert("💖 Kavya Akka! You are the best sister ever! Stay happy always!");
-        }
     </script>
 </body>
 </html>
