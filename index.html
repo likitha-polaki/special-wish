@@ -437,7 +437,7 @@
       touch-action: none;
     }
 
-    /* PAGE 10: TOUGH 4x4 PUZZLE STYLES & PERFECT REVEAL */
+    /* PAGE 10: TOUGH 4x4 PUZZLE STYLES & HINT / PERFECT REVEAL */
     .puzzle-board {
       width: 320px;
       height: 320px;
@@ -468,6 +468,13 @@
 
     .puzzle-controls {
       margin: 15px 0;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hint-btn {
+      background: linear-gradient(45deg, #00f0ff, #7000ff) !important;
     }
 
     /* PERFECT ANIMATION BOX */
@@ -817,7 +824,8 @@
       <div class="puzzle-board" id="puzzleBoard"></div>
 
       <div class="puzzle-controls">
-        <button onclick="shuffleToughPuzzle()" style="padding: 8px 20px; font-size: 14px; margin-top:5px;">Reshuffle Grid 🔀</button>
+        <button onclick="shuffleToughPuzzle()" style="padding: 10px 22px; font-size: 15px;">Reshuffle Grid 🔀</button>
+        <button onclick="givePuzzleHint()" class="hint-btn" style="padding: 10px 22px; font-size: 15px;">Hint 💡</button>
       </div>
 
       <!-- PERFECT & ONCE AGAIN WISH REVEAL BOX -->
@@ -1171,7 +1179,7 @@
       }
     }
 
-    /* PAGE 10: ADVANCED 4x4 ROTATIONAL PUZZLE LOGIC WITH PERFECT REVEAL */
+    /* PAGE 10: ADVANCED 4x4 ROTATIONAL PUZZLE LOGIC WITH HINT & PERFECT REVEAL */
     let puzzle4x4 = []; 
     let selected4x4Idx = null;
     let puzzle4Inited = false;
@@ -1249,6 +1257,38 @@
         clearTimeout(clickTimer);
         clickTimer = null;
         puzzle4x4[index].rot = (puzzle4x4[index].rot + 90) % 360;
+        selected4x4Idx = null;
+        renderToughPuzzle();
+      }
+    }
+
+    /* HINT OPTION LOGIC */
+    function givePuzzleHint() {
+      if (isSolvedState) return;
+
+      // Find all wrong tiles (either wrong position or wrong rotation)
+      let wrongIndices = [];
+      for (let i = 0; i < 16; i++) {
+        if (puzzle4x4[i].id !== i || puzzle4x4[i].rot !== 0) {
+          wrongIndices.push(i);
+        }
+      }
+
+      if (wrongIndices.length > 0) {
+        // Pick one wrong tile to fix
+        let targetSlot = wrongIndices[0];
+        let correctPieceId = targetSlot;
+
+        // Find where the piece actually is currently
+        let currentPieceIndex = puzzle4x4.findIndex(tile => tile.id === correctPieceId);
+
+        // Swap it to its correct position and reset rotation
+        let temp = puzzle4x4[targetSlot];
+        puzzle4x4[targetSlot] = puzzle4x4[currentPieceIndex];
+        puzzle4x4[currentPieceIndex] = temp;
+
+        puzzle4x4[targetSlot].rot = 0;
+
         selected4x4Idx = null;
         renderToughPuzzle();
       }
