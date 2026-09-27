@@ -753,9 +753,13 @@
     const p4Video = document.getElementById('page4Video');
     const modalVideo = document.getElementById('modalVideo');
 
-    p4Video.onplay = function() { pauseMusic(); };
-    p4Video.onpause = function() { if(isMusicPlaying) playMusic(); };
-    modalVideo.onplay = function() { pauseMusic(); };
+    if(p4Video) {
+      p4Video.onplay = function() { pauseMusic(); };
+      p4Video.onpause = function() { if(isMusicPlaying) playMusic(); };
+    }
+    if(modalVideo) {
+      modalVideo.onplay = function() { pauseMusic(); };
+    }
 
     function startInitialCountdown() {
       document.getElementById('startBtnArea').style.display = 'none';
@@ -829,73 +833,62 @@
       }, 1000);
     }
 
-    /* PHONE NUMBER PANDA GIFT SURPRISE LOGIC */
-    const phoneNumber = "9491274986"; // Updated Phone Number
+    /* PHONE NUMBER SURPRISE LOGIC */
+    const phoneNumber = "9491274986"; 
     
-    // Messages for each digit (0 to 9)
-    const phoneLetters = {
-      '9': "Dear Kavya Mam, 💖
-Wishing you the happiest birthday! You are not just a teacher who teaches lessons from books, but someone who teaches us how to believe in ourselves, face challenges, and keep moving forward. Your patience, kindness, guidance, and constant encouragement mean so much to me. I feel truly lucky to have a teacher like you in my journey. May your life always be filled with happiness, peace, beautiful memories, and countless reasons to smile. Keep inspiring and shining always, Mam! 🎂✨💐",
-      '4': "On your special day, I just want to say a heartfelt thank you for being such a wonderful teacher and an amazing human being. Your words have always given me confidence, your guidance has shown me the right direction, and your support has made many things feel easier. Some teachers become a part of our education, but a few become a beautiful part of our memories. You are definitely one of those special teachers in my life. May this birthday bring you everything your heart wishes for. Happy Birthday, Mam! 🎂❤️
-",   '9':"Dear Kavya Mam, 💐
-Panda may have brought you a special gift today, but my heart brings something much more special—my heartfelt wishes and gratitude for everything you have done. ❤️ Your guidance has been an important part of my journey, and your kind words have always stayed with me. I truly appreciate every little thing you have taught and every moment you have encouraged me. May your life be filled with endless smiles, peaceful days, wonderful people, and great achievements. Keep shining and inspiring everyone around you. Happy Birthday, Mam! 🥰🎂✨",
-  
-      '1': "Happy Birthday, Kavya Mam! 🎉💖
-Every student remembers a teacher who made a difference in their life, and for me, you are one of those unforgettable people. Your way of teaching, your patience, your caring nature, and the way you encourage us make you truly special. Thank you for always believing in us and motivating us to become better. I hope the coming year brings you endless happiness, success, peace, and beautiful moments. May your smile always remain as bright as it is today. Have a wonderful birthday, Mam! 🌸🎂💐",
-      '2': "Dearest Mam, ❤️
-A birthday is a beautiful reminder of how special a person is to the people around them. Today, I want you to know how much your presence, guidance, and kindness are appreciated. You have always been more than just a teacher to me—you have been a source of motivation and inspiration. Thank you for making learning meaningful and for encouraging us to believe in ourselves. May every dream you have slowly turn into reality, and may every new year of your life bring more happiness and success than the previous one. Happiest Birthday, Kavya Mam! 🎂💖🌸! 🌺",
-      '7': "Happy Birthday to a truly wonderful teacher, Kavya Mam! 🌸
-Your teaching may be part of our academic journey, but the confidence and values you give us can stay with us for a lifetime. Your patience, positive attitude, and caring nature make you someone we can always look up to. Thank you for being there with your guidance and encouragement whenever we need it. I hope your birthday is as beautiful and special as the person you are. May you always have a reason to smile, a reason to be proud, and many beautiful moments to cherish. 💕🎂✨ 😊",
-     '4':"Dearest Kavya Mam, 💖
-Wishing a very Happy Birthday to an incredible teacher and a beautiful inspiration! 🌸 Your presence makes learning more meaningful, and your encouragement gives us the confidence to do better. I truly admire the patience and kindness with which you guide your students. Thank you for always sharing your knowledge and motivating us to grow. May the coming year open the doors to many wonderful opportunities and bring you all the happiness you deserve. May your smile never fade and your dreams always find their way to reality. Happy Birthday, Mam! 🎂💐✨"'
-  '8': "Dear Kavya Mam, 🌷
-Some people enter our lives and leave behind memories that remain forever. You are one such person in my journey. Your guidance has helped me learn not only academic lessons but also the importance of confidence, patience, and believing in myself. I am genuinely grateful for every piece of advice, every encouraging word, and every little moment that made a difference. On your birthday, I wish you a life full of peace, happiness, good health, success, and unforgettable memories. Keep being the wonderful person you are. Happy Birthday, Mam! ❤️🎉❤️",
-      '6': "Happy Birthday, Dear Kavya Mam! 🎂❤️
-There are teachers whom we respect, teachers whom we remember, and teachers who become a special part of our journey. You are someone I will always remember with a smile and gratitude. Your guidance, encouragement, and kindness have made a beautiful impact on me. Thank you for being patient with us and for always inspiring us to become better versions of ourselves. I hope your special day is filled with love, laughter, happiness, and all the beautiful things you deserve. Wishing you a wonderful year ahead, Mam! 🌸💖
-10. 🌺
-Dearest Kavya Mam, 💕
-Today is not just your birthday; it is a beautiful day to celebrate the wonderful person and inspiring teacher you are. Thank you for every lesson, every word of encouragement, every moment of patience, and every time you made us believe that we could do better. Your impact goes beyond the classroom, and the memories you create with your students are truly priceless. May your life always be surrounded by happiness, peace, love, success, and people who value you. Keep smiling, keep inspiring, and keep shining exactly the way you do. Wishing you the happiest and most beautiful birthday, Kavya Mam! 🎂🎉💖🌸",
-    const digitsContainer = document.getElementById("phoneDigitsBox");
+    const phoneLettersList = [
+      `Dear Kavya Mam, 💖\nWishing you the happiest birthday! You are not just a teacher who teaches lessons from books, but someone who teaches us how to believe in ourselves, face challenges, and keep moving forward. Your patience, kindness, guidance, and constant encouragement mean so much to me. I feel truly lucky to have a teacher like you in my journey. May your life always be filled with happiness, peace, beautiful memories, and countless reasons to smile. Keep inspiring and shining always, Mam! 🎂✨💐`,
+      `Dearest Kavya Mam, 🌷\nOn your special day, I just want to say a heartfelt thank you for being such a wonderful teacher and an amazing human being. Your words have always given me confidence, your guidance has shown me the right direction, and your support has made many things feel easier. Some teachers become a part of our education, but a few become a beautiful part of our memories. You are definitely one of those special teachers in my life. May this birthday bring you everything your heart wishes for. Happy Birthday, Mam! 🎂❤️`,
+      `Happy Birthday, Kavya Mam! 🎉💖\nEvery student remembers a teacher who made a difference in their life, and for me, you are one of those unforgettable people. Your way of teaching, your patience, your caring nature, and the way you encourage us make you truly special. Thank you for always believing in us and motivating us to become better. I hope the coming year brings you endless happiness, success, peace, and beautiful moments. May your smile always remain as bright as it is today. Have a wonderful birthday, Mam! 🌸🎂`,
+      `Dear Kavya Mam, 💐\nPanda may have brought you a special gift today, but my heart brings something much more special—my heartfelt wishes and gratitude for everything you have done. ❤️ Your guidance has been an important part of my journey, and your kind words have always stayed with me. I truly appreciate every little thing you have taught and every moment you have encouraged me. May your life be filled with endless smiles, peaceful days, wonderful people, and great achievements. Keep shining and inspiring everyone around you. Happy Birthday, Mam! 🥰🎂✨`,
+      `Dearest Mam, ❤️\nA birthday is a beautiful reminder of how special a person is to the people around them. Today, I want you to know how much your presence, guidance, and kindness are appreciated. You have always been more than just a teacher to me—you have been a source of motivation and inspiration. Thank you for making learning meaningful and for encouraging us to believe in ourselves. May every dream you have slowly turn into reality, and may every new year of your life bring more happiness and success than the previous one. Happiest Birthday, Kavya Mam! 🎂💖🌸`,
+      `Happy Birthday to a truly wonderful teacher, Kavya Mam! 🌸\nYour teaching may be part of our academic journey, but the confidence and values you give us can stay with us for a lifetime. Your patience, positive attitude, and caring nature make you someone we can always look up to. Thank you for being there with your guidance and encouragement whenever we need it. I hope your birthday is as beautiful and special as the person you are. May you always have a reason to smile, a reason to be proud, and many beautiful moments to cherish. 💕🎂✨`,
+      `Dear Kavya Mam, 🌷\nSome people enter our lives and leave behind memories that remain forever. You are one such person in my journey. Your guidance has helped me learn not only academic lessons but also the importance of confidence, patience, and believing in myself. I am genuinely grateful for every piece of advice, every encouraging word, and every little moment that made a difference. On your birthday, I wish you a life full of peace, happiness, good health, success, and unforgettable memories. Keep being the wonderful person you are. Happy Birthday, Mam! ❤️🎉`,
+      `Dearest Kavya Mam, 💖\nWishing a very Happy Birthday to an incredible teacher and a beautiful inspiration! 🌸 Your presence makes learning more meaningful, and your encouragement gives us the confidence to do better. I truly admire the patience and kindness with which you guide your students. Thank you for always sharing your knowledge and motivating us to grow. May the coming year open the doors to many wonderful opportunities and bring you all the happiness you deserve. May your smile never fade and your dreams always find their way to reality. Happy Birthday, Mam! 🎂💐✨`,
+      `Happy Birthday, Dear Kavya Mam! 🎂❤️\nThere are teachers whom we respect, teachers whom we remember, and teachers who become a special part of our journey. You are someone I will always remember with a smile and gratitude. Your guidance, encouragement, and kindness have made a beautiful impact on me. Thank you for being patient with us and for always inspiring us to become better versions of ourselves. I hope your special day is filled with love, laughter, happiness, and all the beautiful things you deserve. Wishing you a wonderful year ahead, Mam! 🌸💖`,
+      `Dearest Kavya Mam, 💕\nToday is not just your birthday; it is a beautiful day to celebrate the wonderful person and inspiring teacher you are. Thank you for every lesson, every word of encouragement, every moment of patience, and every time you made us believe that we could do better. Your impact goes beyond the classroom, and the memories you create with your students are truly priceless. May your life always be surrounded by happiness, peace, love, success, and people who value you. Keep smiling, keep inspiring, and keep shining exactly the way you do. Wishing you the happiest and most beautiful birthday, Kavya Mam! 🎂🎉💖🌸`
+    ];
 
-    for (let i = 0; i < phoneNumber.length; i++) {
-      const btn = document.createElement("button");
-      btn.className = "digit-btn";
-      btn.innerText = phoneNumber[i];
-      btn.onclick = function() {
-        document.querySelectorAll('.digit-btn').forEach(b => b.classList.remove('clicked'));
-        btn.classList.add("clicked");
-        showPandaGift(phoneNumber[i]);
-      };
-      digitsContainer.appendChild(btn);
+    const digitsContainer = document.getElementById("phoneDigitsBox");
+    if(digitsContainer) {
+      digitsContainer.innerHTML = "";
+      for (let i = 0; i < phoneNumber.length; i++) {
+        const btn = document.createElement("button");
+        btn.className = "digit-btn";
+        btn.innerText = phoneNumber[i];
+        btn.onclick = function() {
+          document.querySelectorAll('.digit-btn').forEach(b => b.classList.remove('clicked'));
+          btn.classList.add("clicked");
+          showPandaGift(i);
+        };
+        digitsContainer.appendChild(btn);
+      }
     }
 
-    function showPandaGift(digit) {
+    function showPandaGift(index) {
       const display = document.getElementById("popDisplay");
-      
-      // Step 1: Panda holding gift box
       display.innerHTML = `
-        <div onclick="openPandaLetter('${digit}')" style="cursor: pointer; text-align: center; animation: bounce 1s infinite alternate;">
+        <div onclick="openPandaLetter(${index})" style="cursor: pointer; text-align: center; animation: bounce 1s infinite alternate;">
           <div style="font-size: 80px; line-height: 1;">🐼</div>
           <div style="font-size: 60px; margin-top: -25px;">🎁</div>
           <p style="color: #00f0ff; font-size: 16px; font-weight: bold; margin-top: 10px;">
-            Panda is holding Gift #${digit}! 🎁<br>
+            Panda is holding Gift #${index + 1}! 🎁<br>
             <span style="color: #ff71ce;">(Click on the Gift Box to open the Letter ✉️)</span>
           </p>
         </div>
       `;
     }
 
-    function openPandaLetter(digit) {
+    function openPandaLetter(index) {
       const display = document.getElementById("popDisplay");
-      const letterText = phoneLetters[digit] || "Dear Kavya Mam, 💖\nWishing you a magical birthday full of love, happiness, and success! 🎉🎂";
+      const letterText = phoneLettersList[index] || "Dear Kavya Mam, 💖\nWishing you a magical birthday full of love, happiness, and success! 🎉🎂";
 
       triggerMegaConfetti();
 
-      // Step 2: Open Gift Box & Show Letter
       display.innerHTML = `
         <div style="animation: popIn 0.5s ease-out; text-align: center; background: rgba(255, 255, 255, 0.1); border: 2px dashed #ff71ce; border-radius: 20px; padding: 20px; max-width: 450px; margin: 0 auto;">
           <div style="font-size: 50px;">✉️ 🐼 🎁</div>
-          <h2 style="color: #ff71ce; margin: 8px 0; font-size: 22px;">Panda's Special Letter! 📜</h2>
+          <h2 style="color: #ff71ce; margin: 8px 0; font-size: 22px;">Panda's Special Letter #${index + 1}! 📜</h2>
           <div style="background: #ffffff; color: #333333; padding: 18px; border-radius: 12px; font-size: 15px; text-align: left; line-height: 1.6; font-family: 'Georgia', serif; box-shadow: 0 4px 15px rgba(0,0,0,0.4); white-space: pre-line;">
             ${letterText}
           </div>
@@ -938,12 +931,14 @@ Today is not just your birthday; it is a beautiful day to celebrate the wonderfu
     const giftVideos = Array.from({length: 28}, (_, i) => availableVideos[i % availableVideos.length]);
 
     const grid = document.getElementById("giftGrid");
-    for (let i = 1; i <= 28; i++) {
-      const box = document.createElement("div");
-      box.className = "gift-box";
-      box.innerHTML = "🎁<br><span style='font-size:16px; font-weight:bold;'>Gift #" + i + "</span>";
-      box.onclick = function() { openGift(i); };
-      grid.appendChild(box);
+    if(grid) {
+      for (let i = 1; i <= 28; i++) {
+        const box = document.createElement("div");
+        box.className = "gift-box";
+        box.innerHTML = "🎁<br><span style='font-size:16px; font-weight:bold;'>Gift #" + i + "</span>";
+        box.onclick = function() { openGift(i); };
+        grid.appendChild(box);
+      }
     }
 
     function openGift(num) {
