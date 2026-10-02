@@ -660,17 +660,17 @@
       <button onclick="nextPage(5)">Next: Cut the Cake 🎂</button>
     </div>
 
-    <!-- PAGE 5: CAKE WITH MIC BLOW -->
+    <!-- PAGE 5: CAKE WITH TOUCH OR CLICK -->
     <div class="page" id="page5">
       <h1 class="shining-title" style="font-size: 45px;">Virtual Cake Cutting 🎂</h1>
-      <p id="cakeInstruction" style="font-size: 22px; margin: 15px 0;">Click or Blow (uuu) on the Cake to blow candle & cut! 🕯️</p>
+      <p id="cakeInstruction" style="font-size: 22px; margin: 15px 0;">Screen మీద టచ్ చేయండి లేదా క్లిక్ చేయండి, కేక్ కట్ అవుతుంది! 🔪🎂</p>
 
-      <div class="cake-container" onclick="cutCake()">
+      <div class="cake-container" id="cakeBox" onclick="cutCake()" ontouchstart="cutCake()">
         <div class="candle-flame" id="flame"></div>
-        <div style="font-size: 130px; line-height: 180px;">🎂</div>
+        <div style="font-size: 130px; line-height: 180px;" id="cakeEmoji">🎂</div>
       </div>
 
-      <button class="mic-btn" onclick="startMicForCake()">🎤 Enable Mic to Blow Cake Candle</button>
+      <button class="mic-btn" onclick="startMicForCake()">🎤 లేదా మైక్‌లో ఊదండి (Blow)</button>
       <br>
       <button onclick="nextPage(6)">Next: Video Song 🎥</button>
     </div>
@@ -735,7 +735,7 @@
         <label>7. What is your dream birthday celebration?</label>
         <input type="text" name="Q7_Coffee_Or_Tea">
 
-        <label>8. What is your favourite place to relax? 🏖️️</label>
+        <label>8. What is your favourite place to relax? 🏖</label>
         <input type="text" name="Q8_Favourite_Place">
 
         <label>9. One habit of yours that you love the most? ✨</label>
@@ -884,7 +884,7 @@
       const btn = document.getElementById("btnMusic");
       song.play().then(() => {
         isMusicPlaying = true;
-        btn.innerHTML = "⏸️ Pause Music";
+        btn.innerHTML = "⏸️️ Pause Music";
       }).catch(e => console.log("Music play blocked"));
     }
 
@@ -1056,7 +1056,6 @@
       `;
     }
 
-    /* --- REAL MICROPHONE BLOW LOGIC --- */
     function listenToBlow(onBlowSuccess) {
       navigator.mediaDevices.getUserMedia({ audio: true })
         .then(stream => {
@@ -1084,7 +1083,7 @@
           checkBlow();
         })
         .catch(err => {
-          alert("Mic Permission Denied or Not Supported! Candle Click చేసి Aarpandi.");
+          alert("Mic Permission Denied or Not Supported! Click చేసి aarpandi.");
         });
     }
 
@@ -1106,29 +1105,47 @@
     }
 
     function cutCake() {
-      document.getElementById('flame').style.display = 'none';
-      document.getElementById('cakeInstruction').innerHTML = "🎉 Yay! Happy Birthday Kavya Akka! 🎉";
-      triggerMegaConfetti();
+      const flame = document.getElementById('flame');
+      if (flame.style.display !== 'none') {
+        flame.style.display = 'none';
+        document.getElementById('cakeEmoji').innerText = "🍰✨";
+        document.getElementById('cakeInstruction').innerHTML = "🎉 Yay! కేక్ సక్సెస్‌ఫుల్‌గా కట్ అయింది! Happy Birthday Kavya Akka! 🎉";
+        triggerMegaConfetti();
+      }
     }
 
     const giftMessages = [
-      "1. You inspire us every single day! 🌸", "2. Best Akka ever! 📚",
-      "3. Thank you for your endless guidance! ❤️", "4. Stay blessed and happy always! ✨",
-      "5. May your year be full of joy! 🥳", "6. Always keep smiling! 😊",
-      "7. You are a true light in our lives! 🌟", "8. Wishing you health and success! 🏆",
-      "9. Thank you for your patience! 💐", "10. Happy Birthday Kavya Akka! 🎂",
-      "11. Best wishes on your birthday! 🎉", "12. You make everything special! ✏️",
-      "13. Forever grateful for you! 🙏", "14. Hope all your wishes come true! 🌈",
-      "15. Brightest star! ⭐", "16. Enjoy your special day! 🎁",
-      "17. Keep shining bright! 💖", "18. Thank you for always believing in us! 🤗",
-      "19. Super Akka! 🦸‍♀️", "20. Best memories with you! 📸",
-      "21. Wishing you peace & laughter! 😄", "22. Lots of love on your birthday! 💕",
-      "23. Wonderful guide & friend! 🌼", "24. May today be unforgettable! 🎈",
-      "25. Celebrating YOU today! 🥂", "26. Always stay positive! 🌺",
-      "27. Thank you for being awesome! 🔥", "28. Happy Birthday Kavya Akka! ❤️🎂"
+      "1. You inspire us every single day! 🌸", 
+      "2. Best Akka ever! 📚",
+      "3. Thank you for your endless guidance! ❤️", 
+      "4. Stay blessed and happy always! ✨",
+      "5. May your year be full of joy! 🥳", 
+      "6. Always keep smiling! 😊",
+      "7. You are a true light in our lives! 🌟", 
+      "8. h8: Special surprise for you! 💖",   
+      "9. h9: You're amazing, Akka! 🌟",      
+      "10. h10: Keep smiling always! 🌸",    
+      "11. Wishing you health and success! 🏆", 
+      "12. Thank you for your patience! 💐",
+      "13. Happy Birthday Kavya Akka! 🎂", 
+      "14. Best wishes on your birthday! 🎉",
+      "15. You make everything special! ✏️", 
+      "16. Forever grateful for you! 🙏",
+      "17. Hope all your wishes come true! 🌈", 
+      "18. Brightest star! ⭐",
+      "19. Enjoy your special day! 🎁", 
+      "20. Keep shining bright! 💖",
+      "21. Thank you for always believing in us! 🤗", 
+      "22. Super Akka! 🦸‍♀️",
+      "23. Best memories with you! 📸", 
+      "24. Wishing you peace & laughter! 😄",
+      "25. Lots of love on your birthday! 💕", 
+      "26. Wonderful guide & friend! 🌼",
+      "27. May today be unforgettable! 🎈", 
+      "28. Celebrating YOU today! 🥂"
     ];
 
-    const availableVideos = ["v1.mp4", "v2.mp4", "jo.mp4", "v3.mp4", "v4.mp4", "v5.mp4", "h8.mp4", "h1.mp4", "h2.mp4", "h3.mp4", "h5.mp4", "h7.mp4","h9.mp4","h10.mp4"];
+    const availableVideos = ["v1.mp4", "v2.mp4", "jo.mp4", "v3.mp4", "v4.mp4", "v5.mp4", "h1.mp4", "h2.mp4", "h3.mp4", "h5.mp4", "h7.mp4"];
     const giftVideos = Array.from({length: 28}, (_, i) => availableVideos[i % availableVideos.length]);
 
     const grid = document.getElementById("giftGrid");
@@ -1176,7 +1193,6 @@
       }
     }
 
-    /* SCRATCH CANVAS LOGIC FOR PAGE 9 */
     let canvasInited = false;
     function initScratchCanvas() {
       const canvas = document.getElementById('scratchCanvas');
@@ -1231,7 +1247,6 @@
       }
     }
 
-    /* PAGE 10: ADVANCED 4x4 ROTATIONAL PUZZLE LOGIC WITH HINT & PERFECT REVEAL */
     let puzzle4x4 = []; 
     let selected4x4Idx = null;
     let puzzle4Inited = false;
@@ -1256,7 +1271,6 @@
       }
       
       puzzle4x4.sort(() => Math.random() - 0.5);
-      
       selected4x4Idx = null;
       
       const wishBox = document.getElementById('puzzleWishBox');
