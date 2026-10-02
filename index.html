@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday mam!</title>
+  <title>Happy Birthday Kavya Akka!</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
   <style>
@@ -590,7 +590,7 @@
     <!-- PAGE 1: WISHES -->
     <div class="page" id="page1">
       <div style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <h1 class="shining-title">🎉 Happy Birthday Kavya mam! 🎉</h1>
+        <h1 class="shining-title">🎉 Happy Birthday Kavya Akka! 🎉</h1>
         <h2 class="sub-heading">Wishing You A Life Full Of Happiness, Love & Smiles ❤️✨</h2>
 
         <div class="timer-container">
@@ -732,10 +732,10 @@
         <label>6. What is your go-to comfort food? 🍕</label>
         <input type="text" name="Q6_Comfort_Food">
 
-        <label>7.What is your dream birthday celebration?</label>
+        <label>7. What is your dream birthday celebration?</label>
         <input type="text" name="Q7_Coffee_Or_Tea">
 
-        <label>8. What is your favourite place to relax? 🏖️</label>
+        <label>8. What is your favourite place to relax? 🏖️️</label>
         <input type="text" name="Q8_Favourite_Place">
 
         <label>9. One habit of yours that you love the most? ✨</label>
@@ -795,14 +795,14 @@
         <label>27. Did you like the gift box surprises & video clips? 🎁</label>
         <input type="text" name="Q27_Gift_Surprise_Feedback">
 
-        <lable> 28. Who told you that she is your favorite or the best student? Tell me the truth.</lable>
-        <input type="text" name="Q28_Gift_Surprise_Feedback">
+        <label>28. Who told you that she is your favorite or the best student? Tell me the truth.</label>
+        <input type="text" name="Q28_Favorite_Student">
 
-        <label style="color: #ff4081; font-size: 16px; margin-top: 25px;">28. Say something special about ME! ❤️</label>
+        <label style="color: #ff4081; font-size: 16px; margin-top: 25px;">29. Say something special about ME! ❤️</label>
         <textarea name="Q29_Words_About_Me" rows="4" placeholder="Write whatever you feel about me..." required></textarea>
 
-        <label> 30.What are you trying to ask me? </label>
-         <input type="text" name="Q30_Gift_Surprise_Feedback">
+        <label>30. What are you trying to ask me?</label>
+        <input type="text" name="Q30_Trying_To_Ask">
           
         <button type="submit" style="width: 100%; margin-top: 20px;">Send All Answers 💌</button>
       </form>
@@ -1074,9 +1074,9 @@
             }
             let average = sum / dataArray.length;
 
-            if (average > 35) { // Threshold for blow/loud sound
+            if (average > 35) {
               onBlowSuccess();
-              stream.getTracks().forEach(track => track.stop()); // Stop mic
+              stream.getTracks().forEach(track => track.stop());
             } else {
               requestAnimationFrame(checkBlow);
             }
@@ -1119,7 +1119,7 @@
       "9. Thank you for your patience! 💐", "10. Happy Birthday Kavya Akka! 🎂",
       "11. Best wishes on your birthday! 🎉", "12. You make everything special! ✏️",
       "13. Forever grateful for you! 🙏", "14. Hope all your wishes come true! 🌈",
-      "15. Brightest star! ⭐", "16. Enjoy your special day! 🎁",'
+      "15. Brightest star! ⭐", "16. Enjoy your special day! 🎁",
       "17. Keep shining bright! 💖", "18. Thank you for always believing in us! 🤗",
       "19. Super Akka! 🦸‍♀️", "20. Best memories with you! 📸",
       "21. Wishing you peace & laughter! 😄", "22. Lots of love on your birthday! 💕",
@@ -1128,7 +1128,7 @@
       "27. Thank you for being awesome! 🔥", "28. Happy Birthday Kavya Akka! ❤️🎂"
     ];
 
-    const availableVideos = ["v1.mp4", "v2.mp4","jo.mp4," "v3.mp4", "v4.mp4", "v5.mp4", "v6.mp4,"h1.mp4","h2.mp4","h3.mp4","h5.mp4","h7.mp4"];
+    const availableVideos = ["v1.mp4", "v2.mp4", "jo.mp4", "v3.mp4", "v4.mp4", "v5.mp4", "v6.mp4", "h1.mp4", "h2.mp4", "h3.mp4", "h5.mp4", "h7.mp4"];
     const giftVideos = Array.from({length: 28}, (_, i) => availableVideos[i % availableVideos.length]);
 
     const grid = document.getElementById("giftGrid");
