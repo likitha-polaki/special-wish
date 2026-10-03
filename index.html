@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday Kavya Akka!</title>
+  <!-- Safe Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
   <style>
@@ -231,7 +232,7 @@
     <div class="page active" id="page0">
       <div class="intro-box">
         <p style="font-size: 18px; color: #ff71ce;">Something special is waiting for you...</p>
-        <button onclick="nextPage(1)">Celebrate Her Day ❤️️</button>
+        <button onclick="nextPage(1)">Celebrate Her Day ❤️</button>
       </div>
     </div>
 
@@ -278,7 +279,7 @@
     <div class="page" id="page5">
       <h1 class="shining-title">Virtual Cake Cutting 🎂</h1>
       <p style="font-size: 18px; margin: 15px 0;">Screen మీద టచ్ చేయండి, కేక్ కట్ అవుతుంది! 🔪🎂</p>
-      <div style="font-size: 110px; cursor: pointer; margin: 25px 0;" onclick="this.innerHTML='🍰😋'; confetti();">🎂</div>
+      <div style="font-size: 110px; cursor: pointer; margin: 25px 0;" onclick="this.innerHTML='🍰😋'; safeConfetti();">🎂</div>
       <button onclick="nextPage(6)">Next: Video Song 🎥</button>
     </div>
 
@@ -392,6 +393,17 @@
   </div>
 
   <script>
+    // Safe confetti wrapper so offline doesn't break buttons
+    function safeConfetti(options) {
+      try {
+        if (typeof confetti === 'function') {
+          confetti(options);
+        }
+      } catch (e) {
+        console.log("Confetti skipped (offline mode)");
+      }
+    }
+
     // Page switching function
     function nextPage(num) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -400,7 +412,7 @@
         target.classList.add('active');
         window.scrollTo(0, 0);
         if(num === 1 || num === 9 || num === 10) {
-          confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+          safeConfetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
         }
       }
     }
@@ -451,7 +463,7 @@
       btn.style.cursor = 'pointer';
       btn.onclick = () => {
         popDisplay.innerHTML = `<div style="font-size:45px;">🐼🎁</div><div style="color:#00f0ff; margin-top:5px;">Digit ${d} Unlocked Panda Surprise!</div>`;
-        confetti({ particleCount: 30, spread: 40 });
+        safeConfetti({ particleCount: 30, spread: 40 });
       };
       phoneDigitsBox.appendChild(btn);
     });
@@ -464,15 +476,4 @@
       box.innerHTML = `🎁<br><span style="font-size:11px; color:#ff9ebb;">Gift #${i}</span>`;
       box.onclick = () => {
         document.getElementById('modalTitle').innerText = `Birthday Gift #${i} 🎁`;
-        document.getElementById('modalText').innerText = `You opened Gift #${i}! Wishing Kavya Akka endless smiles, success, and happiness always! ❤️✨`;
-        document.getElementById('giftModal').style.display = 'flex';
-        confetti({ particleCount: 40, spread: 50 });
-      };
-      giftGrid.appendChild(box);
-    }
-
-    function closeGiftModal() {
-      document.getElementById('giftModal').style.display = 'none';
-    }
-
-    // Magic button
+        document.getElementById('modalText').innerText = `You opened Gift #${i}! Wishing Kavya Akka endless smiles, success
