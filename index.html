@@ -3,73 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kavya Akka Birthday - Special Journey</title>
+    <title>Happy Birthday Kavya Akka!</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
+
         body {
-            background-color: #0c0906;
-            color: #f4e8c1;
-            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: none;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        .card.active {
+            display: block;
+        }
+
+        h1 {
+            color: #ff4757;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff4757, #ff6b81);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+            transition: 0.3s;
+            display: block;
+            margin: 15px auto 0 auto;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            from { transform: scale(1); text-shadow: 0 0 10px rgba(255,65,108,0.5); }
+            to { transform: scale(1.05); text-shadow: 0 0 25px rgba(255,65,108,1); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Final Page: Ancient Royal Scroll Letter (Full Story) -->
-    <div id="royalPage" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0c0906; display: flex; justify-content: center; align-items: center; z-index: 9999; overflow-y: auto; padding: 20px;">
+    <div class="container">
         
-        <!-- Ancient Scroll Paper Box -->
-        <div style="background: #f4e8c1; width: 100%; max-width: 600px; padding: 40px 30px; border-radius: 5px; box-shadow: 0 0 50px rgba(0,0,0,0.9), inset 0 0 40px rgba(139, 69, 19, 0.4); border: 8px solid #5c2c16; position: relative; text-align: left; background-image: radial-gradient(circle, #f9f3df 60%, #e2c999 100%); margin: auto;">
-            
-            <!-- Royal Stamp / Seal -->
-            <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 45px; height: 45px; background: #8b0000; border-radius: 50%; border: 3px solid #ffcc00; box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; color: #ffcc00; font-weight: bold; font-size: 1.2rem;">📜</div>
+        <!-- Page 1: Welcome -->
+        <div class="card active" id="page1">
+            <h1>Hey Kavya Akka! 👋</h1>
+            <p>Oka chinna surprise mee kosam ready ayindi... Chustara? 😉</p>
+            <button class="btn" onclick="nextPage(2)">Let's Go! 🚀</button>
+        </div>
 
-            <!-- Title -->
-            <h2 style="color: #4a2511; font-size: 1.5rem; text-align: center; margin-top: 10px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 2px dashed #8b5a2b; padding-bottom: 10px;">
-                Naa Jeevitha Prayanam (My Journey)
+        <!-- Page 2: Cute Message -->
+        <div class="card" id="page2">
+            <h1>Special Day! 🌟</h1>
+            <p>Mee navvu eppudu ilaage kalakalalaaduthu undali ani korukuntu...</p>
+            <button class="btn" onclick="nextPage(3)">Next ➡️️</button>
+        </div>
+
+        <!-- Page 3: Cake Cutting -->
+        <div class="card" id="page3">
+            <h1>Virtual Cake Cutting 🎂</h1>
+            <p>Screen mida touch chesi cake cut cheseeyandi!</p>
+            <button class="btn" onclick="nextPage(4)">Next ➡️</button>
+        </div>
+
+        <!-- Page 4: Candles -->
+        <div class="card" id="page4">
+            <h1>Light Up the Candles 🕯️</h1>
+            <p>Nee jeevitham eppudu ilaage veligipovali!</p>
+            <button class="btn" onclick="nextPage(5)">Next ➡️</button>
+        </div>
+
+        <!-- Page 5: Gift Box -->
+        <div class="card" id="page5">
+            <h1>Gift Box Unlocking 🎁</h1>
+            <p>Mee kosam unna special gift ikkada undi!</p>
+            <button class="btn" onclick="nextPage(6)">Next ➡️️</button>
+        </div>
+
+        <!-- Page 6: Memories -->
+        <div class="card" id="page6">
+            <h1>Sweet Memories 📸</h1>
+            <p>Mana life lo chala unforgettable moments unnayi.</p>
+            <button class="btn" onclick="nextPage(7)">Next ➡️</button>
+        </div>
+
+        <!-- Page 7: Smiles -->
+        <div class="card" id="page7">
+            <h1>Beautiful Smiles 😊</h1>
+            <p>Mee happiness chudadam maaku chala anandamm ga untundi.</p>
+            <button class="btn" onclick="nextPage(8)">Next ➡️</button>
+        </div>
+
+        <!-- Page 8: Good Vibes -->
+        <div class="card" id="page8">
+            <h1>Good Vibes ✨</h1>
+            <p>Eppudu ilaage chala energetic ga, happy ga undali Akka!</p>
+            <button class="btn" onclick="nextPage(9)">Final Surprise 🎉</button>
+        </div>
+
+        <!-- Page 9: Final Magical Page with Letter Option -->
+        <div class="card" id="page9" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: white; padding: 40px 20px;">
+            <h1 style="color: #ff416c; font-size: 1.8rem; text-shadow: 0 0 20px rgba(255, 65, 108, 0.8); margin-bottom: 15px; animation: glow 1.5s infinite alternate;">
+                ✨ HAPPY BIRTHDAY ✨<br><span style="color: #fff; font-size: 2rem;">KAVYA AKKA!</span>
+            </h1>
+            
+            <p style="color: #ddd; font-size: 0.95rem; margin-bottom: 20px;">
+                Ee roju antha andaroo happy ga undali, mee face lo navvu eppatiki marakapovali! ❤️
+            </p>
+
+            <button class="btn" onclick="nextPage(10)" style="background: linear-gradient(45deg, #f7b733, #fc4a1a); margin-bottom: 15px; width: 100%;">
+                📜 Open Royal Journey Letter
+            </button>
+
+            <div id="magicBtn" onclick="triggerMagic()" style="background: linear-gradient(45deg, #ff416c, #ff4b2b); color: white; padding: 10px 20px; font-size: 0.95rem; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 75, 43, 0.8); display: inline-block;">
+                🎁 Tap for Magic! 💖
+            </div>
+
+            <p id="magicText" style="color: #00ffcc; font-size: 1rem; margin-top: 15px; opacity: 0; transition: 1s; text-shadow: 0 0 10px rgba(0,255,204,0.5);">
+                🎉 Stay Awesome & Keep Smiling Forever! 🌟
+            </p>
+        </div>
+
+        <!-- PAGE 10: Ancient Royal Scroll Letter (Parts 1 to 4) -->
+        <div class="card" id="page10" style="background: #f4e8c1; border: 5px solid #5c2c16; background-image: radial-gradient(circle, #f9f3df 60%, #e2c999 100%); font-family: 'Georgia', serif; text-align: left; max-height: 85vh; overflow-y: auto; padding: 25px 15px; position: relative;">
+            
+            <!-- Seal -->
+            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 35px; height: 35px; background: #8b0000; border-radius: 50%; border: 2px solid #ffcc00; display: flex; align-items: center; justify-content: center; color: #ffcc00; font-size: 1rem;">📜</div>
+
+            <h2 style="color: #4a2511; font-size: 1.3rem; text-align: center; margin-bottom: 15px; text-transform: uppercase; border-bottom: 2px dashed #8b5a2b; padding-bottom: 8px; font-family: 'Georgia', serif;">
+                Naa Jeevitha Prayanam
             </h2>
 
             <!-- Part 1 -->
-            <p style="color: #2c1810; font-size: 0.95rem; line-height: 1.7; margin-bottom: 15px;">
+            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
                 <b>1.</b> Nenu e stage lo vunna ante only u mam. Because chala ariga vdedhani next ma grand ma government teacher, ma mommy duty ki vellipoyaru. Nenu ma grand mother chinappati nundi school ki velladhni, lekopthe vihilo evariko valaki ichi vellivaru. Nenu ami kavali ante adi iche varuku chala allari chese dani. So 7th varaku iam good and excellent student. 7th lo naku hostel lo join chesaru. Nenu appudu ma parents lekuda vere village kuda velledhu, so hostel lo vudatam chala kastam, chala adichanu. Thisukuvallipomani chepa kani na maata evaru vinaledhu. Sunday mom daddy vachevaru, valla kallu pattukoni akkadiki chala prayatnallu chesa kani thsukuvallru kadhu. Ma mommy ithe chala gattiga kottèvaru, akkada ami vunte avi like stone chipuru alla chesavru, kani nenu vdaledhu chadvaledhu. Intiki thisuvallipoyaru next 2 days vudi ala chala jarigaiee.
             </p>
-            
-            <p style="color: #2c1810; font-size: 0.95rem; line-height: 1.7; margin-bottom: 15px;">
+
+            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
                 Naku health issue vachindi. Na chinappudu body lo water valla right side pipes pettru lopala, adi edhebaddiki malli stage 1 vachindi. One month bed rest, next malli routine. One day come my father and grandma in hostel, nenu ithe ee gatulu nanana kallu pattukuni bathimadanu. Daddy okaroju kuda kottaledhu, intiki thisuvallipoyaru. Intiki velinaka mommy maatalu adleshu, appudu anipichidhi nenu andhuku puthaniyo ani. Inka ala pindi ma polam lo minapa vaseu, nait matadukuni mrg he nanu lepi "nuv natho polam ki ra, nuv ango chdavu gaa" ani thisuku valli akkada ithe sun mummy affusthundi nannu chusu. Naku okapaka pain, thnakopam + badha... akkada unna matto tho kotti chala adicharu.
             </p>
 
-            <p style="color: #2c1810; font-size: 0.95rem; line-height: 1.7; margin-bottom: 15px;">
+            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
                 Next day naku hostel vallu naku dascholer chaimani option ischru, ina maata niledhu nenu. Ithe gate ki kallu cheyulu katti andalo vdhili valliporu duty ki ma amma garu. Ithe ra maa lopalki annakuda nenu na mondhi tho ma amma savaste kani nenu vallnu ani 11:30 ki vachiru intiki. Apotuvaraku andalu vunna ma ma chusi "pichipilla ilaachesta" ani thisukuvallru lopali. Aa roju ithe kallu tho thensru, nannalariki inak ela kshu nai tc thisukoni old school lo jion chesry. Appudunaku e chadhuvu ante istem poindhi, 10th varaku ala china allriltho completely chesaa.
             </p>
 
             <!-- Part 2 -->
-            <p style="color: #2c1810; font-size: 0.95rem; line-height: 1.7; margin-bottom: 15px;">
+            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
                 <b>2. Diploma stage:</b> Nenu agri diploma rasaa naku rank 2000 vachidhi, polytechnic kuda rank vachidhi ma school lo nadhi, ur ma family ki support because ma annaya valla. Akkada sir cheppru okasari political counseling ki velladi ani last day counseling.. Complete chesanu return avuthuna time lo naku nijaiga chepputhuna mam ur my biggest god mam. Naku e roju ani pistudhi nakosam oka devatha ni naku ichadu, aa devudu only u mam. Meru call cheyకపోతే iam a unlucky fellow.
             </p>
 
             <!-- Part 3 -->
-            <p style="color: #2c1810; font-size: 0.95rem; line-height: 1.7; margin-bottom: 15px;">
+            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
                 <b>3. Memorable moments:</b> Return time lo call vachidhi nenu lift chesanu dryving lo vunna malli call chesamu ani cheppanu. Intiki vellu inka food thintunte malli call chesaru. Memu ists college some village ani chepparu, ma ku ee maata nachidhi, picha laga chusamu next college chudani ki vachaa. A roju ists lo movie promotion name "Kotha Kotha Ga"... E name lo vudhu na life new chapter.
             </p>
 
             <!-- Part 4 -->
-            <p style="color: #2c1810; font-size: 0.95rem; line-height: 1.7; margin-bottom: 15px;">
+            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
                 <b>4. Kotha kotha ga movie la na life kotha ga marindi:</b> Meru mana clg lo reciving ki mamtha mam tho vacharu. Na dhariki ki vachi likitha ani adgaru, naku edhi appatiki gurtu vudipothidhi mam. Yes mam ani cheopa, admission ki thisu vellru. Kada kuda ma mommy and nayya ithe chudu join avtavu ante ne certificates istamu ani hali items adigaru. Ma maya ithee nenu chdhavunu ni judgment ichesaru ma village lo. Nenu me matalulu falt ipoya mam tqq!
             </p>
 
-            <!-- Ending Note -->
-            <div style="text-align: center; margin-top: 30px; border-top: 2px dashed #8b5a2b; padding-top: 15px;">
-                <p style="color: #8b0000; font-weight: bold; font-size: 1.1rem;">
-                    ✨ Happy Birthday Kavya Akka! Stay Blessed Always! 💖
-                </p>
+            <!-- Restart button inside letter -->
+            <div style="text-align: center; margin-top: 15px; border-top: 2px dashed #8b5a2b; padding-top: 10px;">
+                <button class="btn" onclick="nextPage(1)" style="font-size: 0.85rem; padding: 8px 18px; margin: 0 auto; background: #5c2c16;">
+                    🔄 Restart Story
+                </button>
             </div>
 
         </div>
+
     </div>
+
+    <script>
+        // Page switching function
+        function nextPage(num) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => card.classList.remove('active'));
+            
+            const targetPage = document.getElementById('page' + num);
+            if(targetPage) {
+                targetPage.classList.add('active');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        // Magical Button Heart Burst Effect for Page 9
+        function triggerMagic() {
+            document.getElementById('magicText').style.opacity = '1';
+            document.getElementById('magicBtn').innerHTML = "💖 So Awesome! 🎈";
+            
+            for (let i = 0; i < 35; i++) {
+                let heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.left = (window.innerWidth / 2 + (Math.random() - 0.5) * 200) + 'px';
+                heart.style.top = (window.innerHeight / 2 + (Math.random() - 0.5) * 200) + 'px';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.zIndex = '9999';
+                heart.style.transition = 'all 2s ease-out';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.style.transform = `translate(${(Math.random() - 0.5) * 350}px, ${-Math.random() * 350}px) scale(1.5)`;
+                    heart.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 2000);
+            }
+        }
+    </script>
 
 </body>
 </html>
