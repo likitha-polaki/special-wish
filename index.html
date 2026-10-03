@@ -1,709 +1,1369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Kavya Akka!</title>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    html, body {
-      width: 100%;
-      min-height: 100vh;
-      overflow-x: hidden;
-      font-family: 'Poppins', sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      background: radial-gradient(circle at center, #3b0a45 0%, #110216 100%);
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
+<title>Happy Birthday Kavya Akka!</title>
 
-    .moon-bg {
-      position: fixed;
-      top: 30px;
-      right: 40px;
-      font-size: 90px;
-      filter: drop-shadow(0 0 35px rgba(255, 220, 150, 0.9));
-      z-index: 0;
-      opacity: 0.85;
-      animation: floatMoon 4s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    @keyframes floatMoon {
-      0% { transform: translateY(0px) rotate(-5deg); }
-      100% { transform: translateY(-20px) rotate(5deg); }
-    }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-    .heart-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    .heart {
-      position: absolute;
-      bottom: -50px;
-      color: rgba(255, 105, 180, 0.6);
-      font-size: 24px;
-      animation: floatUp 7s linear infinite;
-    }
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+}
 
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-      20% { opacity: 0.9; }
-      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-    }
+body {
+  background: radial-gradient(circle at center, #3b0a45 0%, #110216 100%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .full-wrapper {
-      width: 100%;
-      min-height: 100vh;
-      padding: 40px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+.moon-bg {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  font-size: 80px;
+  filter: drop-shadow(0 0 35px rgba(255,220,150,.9));
+  z-index: 0;
+  animation: floatMoon 4s ease-in-out infinite alternate;
+}
 
-    .page { 
-      display: none; 
-      width: 100%;
-      max-width: 1200px;
-      animation: fadeIn 0.8s ease-in-out;
-    }
-    .active { display: block !important; }
+@keyframes floatMoon {
+  from {
+    transform: translateY(0) rotate(-5deg);
+  }
+  to {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
-    }
+.heart-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
 
-    .shining-title {
-      font-size: 58px;
-      font-weight: 900;
-      line-height: 1.2;
-      background: linear-gradient(90deg, #ff71ce, #ffffff, #00f0ff, #ffffff, #ff71ce);
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      animation: shine 3s linear infinite;
-      text-shadow: 0 0 25px rgba(255, 113, 206, 0.6);
-      margin-bottom: 15px;
-    }
+.heart {
+  position: absolute;
+  bottom: -50px;
+  color: rgba(255,105,180,.6);
+  font-size: 24px;
+  animation: floatUp 7s linear infinite;
+}
 
-    @keyframes shine {
-      to { background-position: 200% center; }
-    }
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: .9;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    .sub-heading {
-      color: #ff9ebb;
-      font-size: 24px;
-      margin-bottom: 35px;
-      text-shadow: 0 0 10px rgba(255, 158, 187, 0.5);
-    }
+.full-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
 
-    .intro-box {
-      max-width: 500px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.07);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 182, 193, 0.3);
-      border-radius: 24px;
-      padding: 40px 25px;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    }
+.page {
+  display: none;
+  width: 100%;
+  max-width: 1200px;
+  animation: fadeIn .8s ease;
+}
 
-    .count-overlay {
-      font-size: 100px;
-      font-weight: bold;
-      color: #ff4081;
-      animation: pulse 1s infinite alternate;
-      margin: 20px 0;
-    }
+.active {
+  display: block !important;
+}
 
-    @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.15); }
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
-    .timer-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin: 25px 0 35px 0;
-    }
-    .time-box {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 113, 206, 0.5);
-      padding: 15px 22px;
-      border-radius: 16px;
-      color: #fff;
-      box-shadow: 0 0 15px rgba(255, 113, 206, 0.2);
-    }
-    .time-box span {
-      display: block;
-      font-size: 32px;
-      font-weight: bold;
-      color: #ff71ce;
-    }
+.shining-title {
+  font-size: 58px;
+  font-weight: 900;
+  line-height: 1.2;
+  background: linear-gradient(
+    90deg,
+    #ff71ce,
+    white,
+    #00f0ff,
+    white,
+    #ff71ce
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  animation: shine 3s linear infinite;
+  margin-bottom: 15px;
+}
 
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-      margin: 30px auto;
-      width: 100%;
-    }
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
 
-    .photo-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(255, 113, 206, 0.6);
-      border-radius: 20px;
-      padding: 10px;
-      box-shadow: 0 0 25px rgba(255, 113, 206, 0.25);
-      height: 480px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.sub-heading {
+  color: #ff9ebb;
+  font-size: 24px;
+  margin-bottom: 35px;
+}
 
-    .photo-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: #00f0ff;
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
-    }
+.intro-box,
+.phone-container,
+.wish-card,
+.form-card {
+  background: rgba(255,255,255,.07);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,182,193,.3);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.37);
+}
 
-    .photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      border-radius: 14px;
-    }
+.intro-box {
+  max-width: 500px;
+  margin: auto;
+  padding: 40px 25px;
+}
 
-    .phone-container {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(15px);
-      border: 2px solid rgba(255, 113, 206, 0.5);
-      border-radius: 25px;
-      padding: 30px;
-      max-width: 650px;
-      margin: 20px auto;
-      box-shadow: 0 0 30px rgba(255, 113, 206, 0.3);
-    }
+.count-overlay {
+  font-size: 100px;
+  font-weight: bold;
+  color: #ff4081;
+  animation: pulse 1s infinite alternate;
+  margin: 20px 0;
+}
 
-    .phone-digits {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 25px 0;
-    }
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.15);
+  }
+}
 
-    .digit-btn {
-      width: 50px;
-      height: 55px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;
-      background: linear-gradient(135deg, #ff71ce, #9b51e0);
-      border: 2px solid #ffffff;
-      border-radius: 15px;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(255, 113, 206, 0.4);
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.timer-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 25px 0 35px;
+}
 
-    .digit-btn:hover {
-      transform: translateY(-5px) scale(1.1);
-      background: linear-gradient(135deg, #00f0ff, #ff71ce);
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
-    }
+.time-box {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,113,206,.5);
+  padding: 15px 22px;
+  border-radius: 16px;
+}
 
-    .digit-btn.clicked {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: #ff4081;
-      opacity: 0.7;
-    }
+.time-box span {
+  display: block;
+  font-size: 32px;
+  font-weight: bold;
+  color: #ff71ce;
+}
 
-    .pop-item-display {
-      min-height: 250px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-top: 15px;
-    }
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 25px;
+  margin: 30px auto;
+  width: 100%;
+}
 
-    @keyframes bounce {
-      from { transform: translateY(0); }
-      to { transform: translateY(-12px); }
-    }
+.photo-card {
+  background: rgba(255,255,255,.05);
+  border: 2px solid rgba(255,113,206,.6);
+  border-radius: 20px;
+  padding: 10px;
+  height: 480px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(255,113,206,.25);
+}
 
-    @keyframes popIn {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 14px;
+}
 
-    .cake-container {
-      position: relative;
-      width: 220px;
-      height: 220px;
-      margin: 30px auto;
-      cursor: pointer;
-    }
-    .candle-flame {
-      position: absolute;
-      top: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 18px;
-      height: 30px;
-      background: orange;
-      border-radius: 50% 50% 20% 20%;
-      box-shadow: 0 0 15px orange, 0 0 25px yellow;
-      animation: flicker 0.5s infinite alternate;
-    }
+.phone-container {
+  max-width: 650px;
+  padding: 30px;
+  margin: 20px auto;
+}
 
-    @keyframes flicker {
-      0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
-      100% { transform: translateX(-50%) scale(1.15); opacity: 1; }
-    }
+.phone-digits {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 
-    .wish-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(15px);
-      border: 2px solid rgba(255, 113, 206, 0.5);
-      border-radius: 25px;
-      padding: 40px;
-      max-width: 600px;
-      margin: 30px auto;
-      box-shadow: 0 0 30px rgba(255, 113, 206, 0.3);
-    }
+.digit-btn {
+  width: 50px;
+  height: 55px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg,#ff71ce,#9b51e0);
+  border: 2px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+}
 
-    .wish-candle-box {
-      position: relative;
-      width: 80px;
-      height: 180px;
-      margin: 30px auto;
-      cursor: pointer;
-    }
+.digit-btn.clicked {
+  opacity: .6;
+}
 
-    .wish-candle-body {
-      width: 100%;
-      height: 140px;
-      background: linear-gradient(to right, #ff71ce, #ff4081, #ff71ce);
-      border-radius: 12px;
-      position: absolute;
-      bottom: 0;
-      box-shadow: 0 0 15px rgba(255, 113, 206, 0.5);
-    }
+.pop-item-display {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-    .wish-flame {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 22px;
-      height: 35px;
-      background: radial-gradient(circle, #fff, orange, red);
-      border-radius: 50% 50% 20% 20%;
-      box-shadow: 0 0 20px orange, 0 0 35px yellow;
-      animation: flicker 0.4s infinite alternate;
-    }
+.wish-card {
+  max-width: 600px;
+  padding: 40px;
+  margin: 30px auto;
+}
 
-    .glow-sparkles {
-      font-size: 26px;
-      margin-top: 15px;
-      color: #00f0ff;
-      animation: pulse 1.5s infinite alternate;
-    }
+.wish-candle-box {
+  position: relative;
+  width: 80px;
+  height: 180px;
+  margin: 30px auto;
+  cursor: pointer;
+}
 
-    .gift-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin: 25px auto;
-      max-height: 600px;
-      overflow-y: auto;
-      padding: 15px;
-    }
-    .gift-box {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1.5px solid rgba(255, 113, 206, 0.4);
-      border-radius: 18px;
-      padding: 25px 15px;
-      font-size: 38px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .gift-box:hover { 
-      transform: translateY(-8px) scale(1.05); 
-      background: linear-gradient(135deg, #ff71ce, #ff4081);
-    }
+.wish-candle-body {
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(
+    to right,
+    #ff71ce,
+    #ff4081,
+    #ff71ce
+  );
+  border-radius: 12px;
+  position: absolute;
+  bottom: 0;
+}
 
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background: #1d0726;
-      border: 1px solid rgba(255, 113, 206, 0.5);
-      padding: 25px;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 480px;
-      text-align: center;
-      box-shadow: 0 0 30px rgba(255, 113, 206, 0.3);
-    }
+.wish-flame {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 35px;
+  background: radial-gradient(circle,#fff,orange,red);
+  border-radius: 50%;
+  box-shadow: 0 0 20px orange;
+  animation: flicker .4s infinite alternate;
+}
 
-    .form-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 113, 206, 0.3);
-      padding: 25px;
-      border-radius: 20px;
-      max-width: 650px;
-      margin: 20px auto;
-      text-align: left;
-    }
-    .form-card label {
-      display: block;
-      margin-top: 15px;
-      font-size: 15px;
-      color: #ff71ce;
-    }
-    .form-card input, .form-card textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
-      color: #fff;
-    }
+@keyframes flicker {
+  from {
+    transform: translateX(-50%) scale(1);
+  }
+  to {
+    transform: translateX(-50%) scale(1.15);
+  }
+}
 
-    .scratch-container {
-      position: relative;
-      width: 320px;
-      height: 320px;
-      margin: 25px auto;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 0 30px rgba(255, 113, 206, 0.5);
-      border: 3px solid #ff71ce;
-    }
+.glow-sparkles {
+  font-size: 26px;
+  margin-top: 15px;
+  color: #00f0ff;
+}
 
-    .scratch-hidden-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      user-select: none;
-    }
+.cake-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 30px auto;
+  cursor: pointer;
+}
 
-    #scratchCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      cursor: pointer;
-      touch-action: none;
-    }
+.candle-flame {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 30px;
+  background: orange;
+  border-radius: 50%;
+  box-shadow: 0 0 15px orange;
+  animation: flicker .5s infinite alternate;
+}
 
-    .puzzle-board {
-      width: 320px;
-      height: 320px;
-      margin: 20px auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(4, 1fr);
-      gap: 3px;
-      background: #ff71ce;
-      padding: 3px;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(255, 113, 206, 0.6);
-    }
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+  margin: 25px auto;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 15px;
+}
 
-    .puzzle-tile {
-      background-image: url('kmp.mp3.jpg');
-      background-size: 320px 320px;
-      cursor: pointer;
-      border-radius: 3px;
-      transition: transform 0.2s ease, outline 0.2s ease;
-      position: relative;
-    }
+.gift-box {
+  background: rgba(255,255,255,.08);
+  border: 1.5px solid rgba(255,113,206,.4);
+  border-radius: 18px;
+  padding: 25px 15px;
+  font-size: 38px;
+  cursor: pointer;
+  transition: .3s;
+}
 
-    .puzzle-tile.selected {
-      outline: 3px solid #00f0ff;
-      z-index: 10;
-    }
+.gift-box:hover {
+  transform: translateY(-8px) scale(1.05);
+  background: linear-gradient(135deg,#ff71ce,#ff4081);
+}
 
-    .puzzle-controls {
-      margin: 15px 0;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-    }
+.form-card {
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 25px;
+  text-align: left;
+}
 
-    .hint-btn {
-      background: linear-gradient(45deg, #00f0ff, #7000ff) !important;
-    }
+.form-card label {
+  display: block;
+  margin-top: 15px;
+  color: #ff71ce;
+}
 
-    .puzzle-wish-box {
-      display: none;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(15px);
-      border: 2px solid #00f0ff;
-      border-radius: 20px;
-      padding: 30px 20px;
-      max-width: 550px;
-      margin: 25px auto;
-      box-shadow: 0 0 35px rgba(0, 240, 255, 0.5);
-    }
+.form-card input,
+.form-card textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+}
 
-    .perfect-text {
-      font-size: 55px;
-      font-weight: 900;
-      color: #00f0ff;
-      text-shadow: 0 0 25px #00f0ff, 0 0 40px #ff71ce;
-      animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      letter-spacing: 2px;
-    }
+button {
+  padding: 14px 38px;
+  border: none;
+  border-radius: 35px;
+  background: linear-gradient(45deg,#ff71ce,#ff4081);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 0 20px rgba(255,113,206,.5);
+}
 
-    .once-again-wish {
-      font-size: 28px;
-      font-weight: 800;
-      color: #ff71ce;
-      margin-top: 15px;
-      text-shadow: 0 0 15px rgba(255, 113, 206, 0.8);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 1s ease;
-    }
+button:hover {
+  transform: scale(1.05);
+}
 
-    .once-again-wish.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.music-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 8px 18px;
+  font-size: 14px;
+  background: rgba(0,0,0,.6);
+  border: 1px solid #ff71ce;
+  color: #ff71ce;
+}
 
-    button {
-      padding: 14px 38px;
-      border: none;
-      border-radius: 35px;
-      background: linear-gradient(45deg, #ff71ce, #ff4081);
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 20px;
-      box-shadow: 0 0 20px rgba(255, 113, 206, 0.5);
-      transition: all 0.3s ease;
-    }
-    button:hover { 
-      transform: scale(1.06); 
-      box-shadow: 0 0 30px rgba(255, 113, 206, 0.8);
-    }
+.mic-btn {
+  background: linear-gradient(45deg,#00f0ff,#0072ff);
+  font-size: 15px;
+  padding: 10px 20px;
+}
 
-    .music-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(0,0,0,0.6);
-      color: #ff71ce;
-      border: 1px solid #ff71ce;
-      z-index: 1000;
-      padding: 8px 18px;
-      font-size: 14px;
-    }
+video {
+  width: 100%;
+  max-width: 700px;
+  max-height: 450px;
+  border-radius: 20px;
+}
 
-    .mic-btn {
-      background: linear-gradient(45deg, #00f0ff, #0072ff);
-      font-size: 15px;
-      padding: 10px 20px;
-      margin-top: 10px;
-    }
+@media(max-width:768px) {
 
-    @media (max-width: 768px) {
-      .shining-title { font-size: 36px; }
-      .gift-grid { grid-template-columns: repeat(2, 1fr); }
-      .photo-grid { grid-template-columns: 1fr; }
-      .photo-card { height: 420px; }
-      .perfect-text { font-size: 40px; }
-      .once-again-wish { font-size: 22px; }
-    }
-  </style>
+  .shining-title {
+    font-size: 36px !important;
+  }
+
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-card {
+    height: 420px;
+  }
+
+  .gift-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .moon-bg {
+    font-size: 50px;
+    right: 15px;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <div class="moon-bg">🌙</div>
-  <div class="heart-bg" id="heartBg"></div>
+<div class="moon-bg">🌙</div>
 
-  <button class="music-btn" onclick="toggleMusic()" id="btnMusic">🎵 Play Music</button>
+<div class="heart-bg" id="heartBg"></div>
 
-  <audio id="bgSong" loop style="display:none;">
-    <source src="kavaya.mp3.mp3" type="audio/mpeg">
-  </audio>
+<button class="music-btn" onclick="toggleMusic()" id="btnMusic">
+🎵 Play Music
+</button>
 
-  <div class="full-wrapper">
-    
-    <!-- PAGE 0: INTRO -->
-    <div class="page active" id="page0">
-      <div class="intro-box">
-        <p style="font-size: 18px; color: #ff71ce;">Something special is waiting for you...</p>
-        
-        <div id="countdownBox" style="display:none;">
-          <div class="count-overlay" id="countNum">3</div>
-        </div>
+<audio id="bgSong" loop>
+  <source src="kavaya.mp3.mp3" type="audio/mpeg">
+</audio>
 
-        <div id="startBtnArea">
-          <button onclick="startInitialCountdown()">Celebrate Her Day ❤️</button>
-        </div>
-      </div>
+<div class="full-wrapper">
+
+<!-- PAGE 0 -->
+
+<div class="page active" id="page0">
+
+  <div class="intro-box">
+
+    <p style="font-size:18px;color:#ff71ce;">
+      Something special is waiting for you...
+    </p>
+
+    <div id="countdownBox" style="display:none;">
+      <div class="count-overlay" id="countNum">3</div>
     </div>
 
-    <!-- PAGE 1: WISHES -->
-    <div class="page" id="page1">
-      <div style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <h1 class="shining-title">🎉 Happy Birthday Kavya Akka! 🎉</h1>
-        <h2 class="sub-heading">Wishing You A Life Full Of Happiness, Love & Smiles ❤️✨</h2>
+    <div id="startBtnArea">
 
-        <div class="timer-container">
-          <div class="time-box"><span id="days">00</span>Days</div>
-          <div class="time-box"><span id="hours">00</span>Hours</div>
-          <div class="time-box"><span id="mins">00</span>Mins</div>
-          <div class="time-box"><span id="secs">00</span>Secs</div>
-        </div>
+      <button onclick="startInitialCountdown()">
+        Celebrate Her Day ❤️
+      </button>
 
-        <button onclick="nextPage(2)">Next: Sweet Memories 📸</button>
-      </div>
     </div>
 
-    <!-- PAGE 2: BEAUTIFUL PHOTO GRID -->
-    <div class="page" id="page2">
-      <h1 class="shining-title" style="font-size: 45px;">Sweet Memories 📸</h1>
-      <p style="font-size: 18px; color: #ff9ebb; margin-bottom: 10px;">Capturing your beautiful moments!</p>
+  </div>
 
-      <div class="photo-grid">
-        <div class="photo-card"><img src="km.mp3.jpg" alt="Pic 1"></div>
-        <div class="photo-card"><img src="kmp.mp3.jpg" alt="Pic 2"></div>
-        <div class="photo-card"><img src="kmp4.mp3.jpg" alt="Pic 3"></div>
-      </div>
+</div>
 
-      <button onclick="nextPage(3)">Next: Phone Number Magic 📲</button>
-    </div>
 
-    <!-- PAGE 3: PHONE NUMBER MAGIC SURPRISE -->
-    <div class="page" id="page3">
-      <h1 class="shining-title" style="font-size: 40px;">Phone Number Magic Surprise 📱</h1>
-      <p style="font-size: 16px; color: #ff9ebb;">Click any number to unlock Panda with Gift Box! 🐼🎁</p>
+<!-- PAGE 1 -->
 
-      <div class="phone-container">
-        <div class="phone-digits" id="phoneDigitsBox"></div>
+<div class="page" id="page1">
 
-        <div class="pop-item-display" id="popDisplay">
-          <div style="font-size: 70px;">📲</div>
-          <div style="font-size: 18px; color: #ff71ce; margin-top: 10px;">Click on any digit above to open Panda's Gift!</div>
-        </div>
+  <div style="
+  min-height:80vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  ">
+
+    <h1 class="shining-title">
+      🎉 Happy Birthday Kavya Akka! 🎉
+    </h1>
+
+    <h2 class="sub-heading">
+      Wishing You A Life Full Of Happiness, Love & Smiles ❤️✨
+    </h2>
+
+    <div class="timer-container">
+
+      <div class="time-box">
+        <span id="days">00</span>
+        Days
       </div>
 
-      <button onclick="nextPage(4)" style="margin-top: 15px;">Next: Make A Wish ✨</button>
-    </div>
-
-    <!-- PAGE 4: MAKE A WISH PAGE WITH MIC BLOW -->
-    <div class="page" id="page4">
-      <h1 class="shining-title" style="font-size: 45px;">Make A Magical Wish 🌠</h1>
-      <p style="font-size: 20px; color: #ff9ebb;">Close your eyes, think of a wish & blow the candle!</p>
-
-      <div class="wish-card">
-        <div class="wish-candle-box" onclick="blowWishCandle()">
-          <div class="wish-flame" id="wishFlame"></div>
-          <div class="wish-candle-body"></div>
-        </div>
-
-        <p id="wishMsg" style="font-size: 22px; color: #ffffff; font-weight: 600; margin-top: 15px;">
-          Click or Blow (uuu ani udandi) on the candle to make your wish! 🕯️
-        </p>
-
-        <button class="mic-btn" onclick="startMicForWish()">🎤 Enable Mic to Blow Candle</button>
-        
-        <div id="wishMagicBox" style="display:none;" class="glow-sparkles">
-          ✨ May all your secret dreams & wishes come true this year! ✨
-        </div>
+      <div class="time-box">
+        <span id="hours">00</span>
+        Hours
       </div>
 
-      <button onclick="nextPage(5)">Next: Cut the Cake 🎂</button>
-    </div>
-
-    <!-- PAGE 5: CAKE WITH TOUCH OR CLICK -->
-    <div class="page" id="page5">
-      <h1 class="shining-title" style="font-size: 45px;">Virtual Cake Cutting 🎂</h1>
-      <p id="cakeInstruction" style="font-size: 22px; margin: 15px 0;">Screen మీద టచ్ చేయండి లేదా క్లిక్ చేయండి, కేక్ కట్ అవుతుంది! 🔪🎂</p>
-
-      <div class="cake-container" id="cakeBox" onclick="cutCake()" ontouchstart="cutCake()">
-        <div class="candle-flame" id="flame"></div>
-        <div style="font-size: 130px; line-height: 180px;" id="cakeEmoji">🎂</div>
+      <div class="time-box">
+        <span id="mins">00</span>
+        Mins
       </div>
 
-      <button class="mic-btn" onclick="startMicForCake()">🎤 లేదా మైక్‌లో ఊదండి (Blow)</button>
-      <br>
-      <button onclick="nextPage(6)">Next: Video Song 🎥</button>
+      <div class="time-box">
+        <span id="secs">00</span>
+        Secs
+      </div>
+
     </div>
 
-    <!-- PAGE 6: VIDEO -->
-    <div class="page" id="page6">
-      <h1 class="shining-title" style="font-size: 45px;">Special Video 🎬</h1>
-      <p style="margin-bottom: 20px; font-size: 20px;">A sweet memory created for you!</p>
-      
-      <video id="page4Video" controls style="width: 100%; max-width: 700px; max-height: 450px; border-radius: 20px; object-fit: contain; box-shadow: 0 0 35px rgba(255,113,206,0.4);">
-        <source src="akka.mp4" type="video/mp4">
-      </video>
+    <button onclick="nextPage(2)">
+      Next: Sweet Memories 📸
+    </button>
 
-      <br>
-      <button onclick="nextPage(7)">Next: 28 Gifts Surprise 🎁</button>
+  </div>
+
+</div>
+
+
+<!-- PAGE 2 -->
+
+<div class="page" id="page2">
+
+  <h1 class="shining-title" style="font-size:45px;">
+    Sweet Memories 📸
+  </h1>
+
+  <p style="font-size:18px;color:#ff9ebb;">
+    Capturing your beautiful moments!
+  </p>
+
+  <div class="photo-grid">
+
+    <div class="photo-card">
+      <img src="km.mp3.jpg" alt="Pic 1">
     </div>
 
-    <!-- PAGE 7: 28 GIFTS -->
-    <div class="page" id="page7">
-      <h1 class="shining-title" style="font-size: 45px;">28 Birthday Gifts 🎁</h1>
-      <p style="font-size: 20px;">Click any box to watch your video surprise & message!</p>
-      
-      <div class="gift-grid" id="giftGrid"></div>
-
-      <button onclick="nextPage(8)">Next: Birthday Girl Special Zone 👑</button>
+    <div class="photo-card">
+      <img src="kmp.mp3.jpg" alt="Pic 2">
     </div>
 
-    <!-- PAGE 8: QUESTIONS -->
-    <div class="page" id="page8">
-      <h1 class="shining-title" style="font-size: 45px;">Birthday Special Corner 👑</h1>
-      <p style="font-size: 20px; margin-bottom: 20px;">28 Special Questions for your Birthday!</p>
-      
-      <div id="loginBox" class="form-card" style="text-align: center;">
-        <h3 style="margin-bottom: 15px; color: #ff71ce; font-size: 24px;">Are you Kavya Akka? 🌸</h3>
-        <p style="color: #ccc; font-size: 15px;">Enter your passcode to answer my questions!</p>
-        <input type="password" id="passcode" placeholder="Passcode (e.g. kavya123)" style="text-align:
+    <div class="photo-card">
+      <img src="kmp4.mp3.jpg" alt="Pic 3">
+    </div>
+
+  </div>
+
+  <button onclick="nextPage(3)">
+    Next: Phone Number Magic 📲
+  </button>
+
+</div>
+
+
+<!-- PAGE 3 -->
+
+<div class="page" id="page3">
+
+  <h1 class="shining-title" style="font-size:40px;">
+    Phone Number Magic Surprise 📱
+  </h1>
+
+  <p style="color:#ff9ebb;">
+    Click any number to unlock Panda with Gift Box! 🐼🎁
+  </p>
+
+  <div class="phone-container">
+
+    <div class="phone-digits" id="phoneDigitsBox"></div>
+
+    <div class="pop-item-display" id="popDisplay">
+
+      <div style="font-size:70px;">
+        📲
+      </div>
+
+      <div style="
+      font-size:18px;
+      color:#ff71ce;
+      margin-top:10px;
+      ">
+        Click on any digit above to open Panda's Gift!
+      </div>
+
+    </div>
+
+  </div>
+
+  <button onclick="nextPage(4)">
+    Next: Make A Wish ✨
+  </button>
+
+</div>
+
+
+<!-- PAGE 4 -->
+
+<div class="page" id="page4">
+
+  <h1 class="shining-title" style="font-size:45px;">
+    Make A Magical Wish 🌠
+  </h1>
+
+  <p style="font-size:20px;color:#ff9ebb;">
+    Close your eyes, think of a wish & blow the candle!
+  </p>
+
+  <div class="wish-card">
+
+    <div class="wish-candle-box" onclick="blowWishCandle()">
+
+      <div class="wish-flame" id="wishFlame"></div>
+
+      <div class="wish-candle-body"></div>
+
+    </div>
+
+    <p id="wishMsg"
+    style="
+    font-size:22px;
+    font-weight:600;
+    margin-top:15px;
+    ">
+
+      Click or Blow (uuu ani udandi) on the candle to make your wish! 🕯️
+
+    </p>
+
+    <button class="mic-btn" onclick="startMicForWish()">
+      🎤 Enable Mic to Blow Candle
+    </button>
+
+    <div id="wishMagicBox"
+    style="display:none;"
+    class="glow-sparkles">
+
+      ✨ May all your secret dreams & wishes come true this year! ✨
+
+    </div>
+
+  </div>
+
+  <button onclick="nextPage(5)">
+    Next: Cut the Cake 🎂
+  </button>
+
+</div>
+
+
+<!-- PAGE 5 -->
+
+<div class="page" id="page5">
+
+  <h1 class="shining-title" style="font-size:45px;">
+    Virtual Cake Cutting 🎂
+  </h1>
+
+  <p id="cakeInstruction" style="font-size:22px;margin:15px 0;">
+    Screen మీద టచ్ చేయండి లేదా క్లిక్ చేయండి, కేక్ కట్ అవుతుంది! 🔪🎂
+  </p>
+
+  <div class="cake-container"
+       onclick="cutCake()"
+       ontouchstart="cutCake()">
+
+    <div class="candle-flame" id="flame"></div>
+
+    <div style="
+    font-size:130px;
+    line-height:180px;
+    " id="cakeEmoji">
+      🎂
+    </div>
+
+  </div>
+
+  <button class="mic-btn" onclick="startMicForCake()">
+    🎤 లేదా మైక్‌లో ఊదండి (Blow)
+  </button>
+
+  <br>
+
+  <button onclick="nextPage(6)">
+    Next: Video Song 🎥
+  </button>
+
+</div>
+
+
+<!-- PAGE 6 -->
+
+<div class="page" id="page6">
+
+  <h1 class="shining-title" style="font-size:45px;">
+    Special Video 🎬
+  </h1>
+
+  <p style="margin-bottom:20px;font-size:20px;">
+    A sweet memory created for you!
+  </p>
+
+  <video id="page4Video" controls>
+
+    <source src="akka.mp4" type="video/mp4">
+
+    Your browser does not support video.
+
+  </video>
+
+  <br>
+
+  <button onclick="nextPage(7)">
+    Next: 28 Gifts Surprise 🎁
+  </button>
+
+</div>
+
+
+<!-- PAGE 7 -->
+
+<div class="page" id="page7">
+
+  <h1 class="shining-title" style="font-size:45px;">
+    28 Birthday Gifts 🎁
+  </h1>
+
+  <p style="font-size:20px;">
+    Click any box to watch your surprise!
+  </p>
+
+  <div class="gift-grid" id="giftGrid"></div>
+
+  <button onclick="nextPage(8)">
+    Next: Birthday Girl Special Zone 👑
+  </button>
+
+</div>
+
+
+<!-- PAGE 8 -->
+
+<div class="page" id="page8">
+
+  <h1 class="shining-title" style="font-size:45px;">
+    Birthday Special Corner 👑
+  </h1>
+
+  <p style="font-size:20px;margin-bottom:20px;">
+    28 Special Questions for your Birthday!
+  </p>
+
+  <div id="loginBox"
+       class="form-card"
+       style="text-align:center;">
+
+    <h3 style="
+    margin-bottom:15px;
+    color:#ff71ce;
+    font-size:24px;
+    ">
+      Are you Kavya Akka? 🌸
+    </h3>
+
+    <p style="color:#ccc;font-size:15px;">
+      Enter your passcode to answer my questions!
+    </p>
+
+    <input
+      type="password"
+      id="passcode"
+      placeholder="Enter Passcode"
+    >
+
+    <button onclick="checkPasscode()">
+      🔓 Enter Birthday Zone
+    </button>
+
+    <p id="passMsg"
+       style="
+       margin-top:15px;
+       font-weight:bold;
+       ">
+    </p>
+
+  </div>
+
+
+  <!-- QUESTIONS -->
+
+  <div id="questionBox"
+       class="form-card"
+       style="display:none;text-align:center;">
+
+    <h2 style="color:#ff71ce;">
+      🌸 28 Questions For Kavya Akka 🌸
+    </h2>
+
+    <div id="questions"></div>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* HEARTS */
+
+function createHearts() {
+
+  const heartBg = document.getElementById("heartBg");
+
+  for(let i = 0; i < 20; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "%";
+
+    heart.style.animationDelay =
+      Math.random() * 7 + "s";
+
+    heart.style.fontSize =
+      (15 + Math.random() * 25) + "px";
+
+    heartBg.appendChild(heart);
+
+  }
+
+}
+
+createHearts();
+
+
+/* PAGE NAVIGATION */
+
+function nextPage(pageNumber) {
+
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  const page = document.getElementById(
+    "page" + pageNumber
+  );
+
+  if(page) {
+    page.classList.add("active");
+    window.scrollTo(0,0);
+  }
+
+}
+
+
+/* INITIAL COUNTDOWN */
+
+function startInitialCountdown() {
+
+  document.getElementById("startBtnArea").style.display = "none";
+
+  document.getElementById("countdownBox").style.display = "block";
+
+  let count = 3;
+
+  const countNum =
+    document.getElementById("countNum");
+
+  const timer = setInterval(() => {
+
+    count--;
+
+    if(count > 0) {
+
+      countNum.innerText = count;
+
+    } else {
+
+      clearInterval(timer);
+
+      countNum.innerText = "🎉";
+
+      setTimeout(() => {
+
+        nextPage(1);
+
+      }, 700);
+
+    }
+
+  },1000);
+
+}
+
+
+/* MUSIC */
+
+function toggleMusic() {
+
+  const song =
+    document.getElementById("bgSong");
+
+  const button =
+    document.getElementById("btnMusic");
+
+  if(song.paused) {
+
+    song.play();
+
+    button.innerText = "⏸️ Pause Music";
+
+  } else {
+
+    song.pause();
+
+    button.innerText = "🎵 Play Music";
+
+  }
+
+}
+
+
+/* BIRTHDAY TIMER */
+
+function updateTimer() {
+
+  const now = new Date();
+
+  let year = now.getFullYear();
+
+  let birthday =
+    new Date(year, 9, 3);
+
+  if(now > birthday) {
+
+    birthday =
+      new Date(year + 1, 9, 3);
+
+  }
+
+  const difference =
+    birthday - now;
+
+  const days =
+    Math.floor(difference / 86400000);
+
+  const hours =
+    Math.floor(
+      (difference % 86400000) / 3600000
+    );
+
+  const mins =
+    Math.floor(
+      (difference % 3600000) / 60000
+    );
+
+  const secs =
+    Math.floor(
+      (difference % 60000) / 1000
+    );
+
+  document.getElementById("days").innerText =
+    String(days).padStart(2,"0");
+
+  document.getElementById("hours").innerText =
+    String(hours).padStart(2,"0");
+
+  document.getElementById("mins").innerText =
+    String(mins).padStart(2,"0");
+
+  document.getElementById("secs").innerText =
+    String(secs).padStart(2,"0");
+
+}
+
+setInterval(updateTimer,1000);
+
+updateTimer();
+
+
+/* PHONE DIGITS */
+
+const phoneBox =
+  document.getElementById("phoneDigitsBox");
+
+const digits = [
+  "9","8","7","6","5",
+  "4","3","2","1","0"
+];
+
+digits.forEach((digit,index) => {
+
+  const button =
+    document.createElement("button");
+
+  button.className = "digit-btn";
+
+  button.innerText = digit;
+
+  button.onclick = function() {
+
+    button.classList.add("clicked");
+
+    document.getElementById("popDisplay").innerHTML = `
+
+      <div style="font-size:90px;">
+        🐼🎁
+      </div>
+
+      <div style="
+      font-size:22px;
+      color:#ff71ce;
+      margin-top:15px;
+      ">
+        Surprise Gift ${index + 1}! 💖
+      </div>
+
+    `;
+
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: .6 }
+    });
+
+  };
+
+  phoneBox.appendChild(button);
+
+});
+
+
+/* WISH CANDLE */
+
+function blowWishCandle() {
+
+  document.getElementById("wishFlame").style.display =
+    "none";
+
+  document.getElementById("wishMsg").innerText =
+    "🎉 Your wish has been sent to the stars! ❤️";
+
+  document.getElementById("wishMagicBox").style.display =
+    "block";
+
+  confetti({
+    particleCount: 150,
+    spread: 100,
+    origin: { y: .6 }
+  });
+
+}
+
+
+function startMicForWish() {
+
+  alert(
+    "🎤 Mic enabled! Blow near your phone or click the candle."
+  );
+
+  blowWishCandle();
+
+}
+
+
+/* CAKE */
+
+function cutCake() {
+
+  const cake =
+    document.getElementById("cakeEmoji");
+
+  const flame =
+    document.getElementById("flame");
+
+  cake.innerText = "🍰";
+
+  flame.style.display = "none";
+
+  document.getElementById("cakeInstruction").innerText =
+    "🎉 Cake Cut Successfully! Happy Birthday Kavya Akka! ❤️";
+
+  confetti({
+    particleCount: 250,
+    spread: 120,
+    origin: { y: .6 }
+  });
+
+}
+
+
+function startMicForCake() {
+
+  alert(
+    "🎤 Blow detected! Cutting the cake..."
+  );
+
+  cutCake();
+
+}
+
+
+/* 28 GIFTS */
+
+const giftGrid =
+  document.getElementById("giftGrid");
+
+const giftMessages = [
+
+  "You deserve unlimited happiness! ❤️",
+  "Keep smiling always! 😊",
+  "May all your dreams come true! ✨",
+  "You are very special! 💖",
+  "Lots of love and happiness! 🌸",
+  "Stay blessed always! 🙏",
+  "Keep shining like a star! ⭐",
+  "Enjoy every moment! 🎉",
+  "More smiles, more memories! 📸",
+  "You make everyone happy! ❤️",
+  "Never stop dreaming! 🌠",
+  "Have an amazing year! 🎂",
+  "Stay happy forever! 💕",
+  "You are precious! 💎",
+  "Best wishes always! 🌷",
+  "Keep laughing! 😂",
+  "May your life be beautiful! 🌈",
+  "Lots of success! 🏆",
+  "Always stay positive! ✨",
+  "Have a wonderful birthday! 🎁",
+  "Enjoy your special day! 🎊",
+  "More happiness coming! 💗",
+  "You are one of a kind! 🌸",
+  "Keep shining! 💫",
+  "Beautiful memories ahead! 📸",
+  "Love and blessings! ❤️",
+  "Happy Birthday once again! 🎂",
+  "Forever special! 👑"
+
+];
+
+
+for(let i = 0; i < 28; i++) {
+
+  const gift =
+    document.createElement("div");
+
+  gift.className = "gift-box";
+
+  gift.innerHTML = "🎁";
+
+  gift.onclick = function() {
+
+    alert(
+      "🎁 Gift " + (i + 1) +
+      "\n\n" +
+      giftMessages[i]
+    );
+
+    confetti({
+      particleCount: 100,
+      spread: 80,
+      origin: { y: .6 }
+    });
+
+  };
+
+  giftGrid.appendChild(gift);
+
+}
+
+
+/* PASSCODE */
+
+function checkPasscode() {
+
+  const password =
+    document.getElementById("passcode").value.trim();
+
+  const msg =
+    document.getElementById("passMsg");
+
+  if(password === "kavya123") {
+
+    msg.innerHTML =
+      "🎉 Correct! Welcome Kavya Akka! ❤️";
+
+    msg.style.color =
+      "#00f0ff";
+
+    document.getElementById("loginBox").style.display =
+      "none";
+
+    document.getElementById("questionBox").style.display =
+      "block";
+
+    confetti({
+      particleCount: 250,
+      spread: 120,
+      origin: { y: .6 }
+    });
+
+    showQuestions();
+
+  } else {
+
+    msg.innerHTML =
+      "❌ Wrong Passcode! Try again.";
+
+    msg.style.color =
+      "#ff4081";
+
+  }
+
+}
+
+
+/* 28 QUESTIONS */
+
+function showQuestions() {
+
+  const questionList = [
+
+    "What is your happiest birthday memory? ❤️",
+
+    "What is your favorite color? 🌈",
+
+    "What is your favorite food? 🍕",
+
+    "Which place would you love to visit? ✈️",
+
+    "What makes you smile immediately? 😊",
+
+    "Who inspires you the most? 🌟",
+
+    "What is your favorite movie? 🎬",
+
+    "What is your favorite song? 🎵",
+
+    "What is your dream destination? 🌍",
+
+    "What is your favorite hobby? 🎨",
+
+    "What is your favorite season? 🌸",
+
+    "What is your biggest dream? ✨",
+
+    "What makes you feel special? 💖",
+
+    "What is your favorite memory with family? 👨‍👩‍👧",
+
+    "What is your favorite childhood memory? 🥰",
+
+    "What is something you want to learn? 📚",
+
+    "What is your favorite celebration? 🎉",
+
+    "What is your favorite flower? 🌹",
+
+    "What is your favorite sweet? 🍫",
+
+    "What is one thing you are thankful for? 🙏",
+
+    "Where do you see yourself in the future? 🌟",
+
+    "What makes you proud of yourself? 👑",
+
+    "What is your favorite outfit? 👗",
+
+    "What is your favorite animal? 🐼",
+
+    "What is your dream career? 💼",
+
+    "What is one wish for this birthday? 🌠",
+
+    "What is your favorite family moment? ❤️",
+
+    "What message would you give yourself? 💕"
+
+  ];const box =
+    document.getElementById("questions");
+
+  box.innerHTML = "";
+
+  questionList.forEach((question,index) => {
+
+    const wrapper =
+      document.createElement("div");
+
+    wrapper.style.marginTop = "20px";
+    wrapper.style.textAlign = "left";
+
+    wrapper.innerHTML = `
+
+      <label style="
+      color:#ff71ce;
+      display:block;
+      margin-bottom:6px;
+      ">
+        ${index + 1}. ${question}
+      </label>
+
+      <textarea
+        rows="2"
+        placeholder="Your answer..."
+        style="
+        width:100%;
+        padding:10px;
+        border-radius:10px;
+        background:rgba(255,255,255,.1);
+        color:white;
+        border:1px solid rgba(255,113,206,.4);
+        "
+      ></textarea>
+
+    `;
+
+    box.appendChild(wrapper);
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
