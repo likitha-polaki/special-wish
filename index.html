@@ -1,279 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Kavya Akka!</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Kavya Akka!</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            text-align: center;
-        }
+    body {
+      background: radial-gradient(circle at center, #3b0a45 0%, #110216 100%);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 420px;
-            padding: 20px;
-        }
+    .moon-bg {
+      position: fixed;
+      top: 30px;
+      right: 40px;
+      font-size: 90px;
+      filter: drop-shadow(0 0 35px rgba(255, 220, 150, 0.9));
+      z-index: 0;
+      opacity: 0.85;
+      animation: floatMoon 4s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
 
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 25px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            display: none;
-            animation: fadeIn 0.8s ease-in-out forwards;
-        }
+    @keyframes floatMoon {
+      0% { transform: translateY(0px) rotate(-5deg); }
+      100% { transform: translateY(-20px) rotate(5deg); }
+    }
 
-        .card.active {
-            display: block;
-        }
+    .heart-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
 
-        h1 {
-            color: #ff4757;
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-        }
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      color: rgba(255, 105, 180, 0.6);
+      font-size: 24px;
+      animation: floatUp 7s linear infinite;
+    }
 
-        p {
-            color: #555;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.9; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
 
-        .btn {
-            background: linear-gradient(45deg, #ff4757, #ff6b81);
-            color: white;
-            border: none;
-            padding: 10px 22px;
-            font-size: 0.95rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
-            transition: 0.3s;
-            display: block;
-            margin: 15px auto 0 auto;
-        }
+    .full-wrapper {
+      width: 100%;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
 
-        .btn:hover {
-            transform: scale(1.05);
-        }
+    .page { 
+      display: none; 
+      width: 100%;
+      max-width: 1200px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    .active { display: block !important; }
 
-        /* Interactive Elements Styling */
-        .interactive-box {
-            font-size: 2.5rem;
-            margin: 15px 0;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .interactive-box:hover {
-            transform: scale(1.2);
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .shining-title {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.2;
+      background: linear-gradient(90deg, #ff71ce, #ffffff, #00f0ff, #ffffff, #ff71ce);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      animation: shine 3s linear infinite;
+      text-shadow: 0 0 25px rgba(255, 113, 206, 0.6);
+      margin-bottom: 15px;
+    }
 
-        @keyframes glow {
-            from { transform: scale(1); text-shadow: 0 0 10px rgba(255,65,108,0.5); }
-            to { transform: scale(1.05); text-shadow: 0 0 25px rgba(255,65,108,1); }
-        }
-    </style>
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+
+    .sub-heading {
+      color: #ff9ebb;
+      font-size: 22px;
+      margin-bottom: 35px;
+      text-shadow: 0 0 10px rgba(255, 158, 187, 0.5);
+    }
+
+    .intro-box {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 182, 193, 0.3);
+      border-radius: 24px;
+      padding: 40px 25px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .count-overlay {
+      font-size: 90px;
+      font-weight: bold;
+      color: #ff4081;
+      animation: pulse 1s infinite alternate;
+      margin: 20px 0;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.15); }
+    }
+
+    .timer-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 25px 0 35px 0;
+    }
+    .time-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 113, 206, 0.5);
+      padding: 12px 18px;
+      border-radius: 16px;
+      color: #fff;
+    }
+    .time-box span {
+      display: block;
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff71ce;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 25px auto;
+      width: 100%;
+    }
+
+    .photo-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 113, 206, 0.6);
+      border-radius: 20px;
+      padding: 10px;
+      height: 420px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 14px;
+    }
+
+    .phone-container {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255, 113, 206, 0.5);
+      border-radius: 25px;
+      padding: 25px;
+      max-width: 600px;
+      margin: 15px auto;
+    }
+
+    .phone-digits {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .digit-btn {
+      width: 45px;
+      height: 50px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #ff71ce, #9b51e0);
+      border: 2px solid #ffffff;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pop-item-display {
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .cake-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      cursor: pointer;
+    }
+    .candle-flame {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 26px;
+      background: orange;
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 15px orange;
+      animation: flicker 0.5s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1); }
+      100% { transform: translateX(-50%) scale(1.15); }
+    }
+
+    .wish-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255, 113, 206, 0.5);
+      border-radius: 25px;
+      padding: 30px;
+      max-width: 550px;
+      margin: 20px auto;
+    }
+
+    .wish-candle-box {
+      position: relative;
+      width: 70px;
+      height: 150px;
+      margin: 20px auto;
+      cursor: pointer;
+    }
+
+    .wish-candle-body {
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to right, #ff71ce, #ff4081, #ff71ce);
+      border-radius: 12px;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .wish-flame {
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 30px;
+      background: radial-gradient(circle, #fff, orange, red);
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 20px orange;
+      animation: flicker 0.4s infinite alternate;
+    }
+
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin: 20px auto;
+      max-height: 500px;
+      overflow-y: auto;
+      padding: 10px;
+      max-width: 750px;
+    }
+    .gift-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(255, 113, 206, 0.4);
+      border-radius: 15px;
+      padding: 20px 10px;
+      font-size: 32px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .gift-box:hover { 
+      transform: scale(1.05); 
+      background: linear-gradient(135deg, #ff71ce, #ff4081);
+    }
+
+    button {
+      padding: 12px 32px;
+      border: none;
+      border-radius: 35px;
+      background: linear-gradient(45deg, #ff71ce, #ff4081);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 0 20px rgba(255, 113, 206, 0.5);
+      transition: 0.3s;
+    }
+    button:hover { transform: scale(1.05); }
+
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.6);
+      color: #ff71ce;
+      border: 1px solid #ff71ce;
+      z-index: 1000;
+      padding: 8px 18px;
+      font-size: 14px;
+    }
+
+    .mic-btn {
+      background: linear-gradient(45deg, #00f0ff, #0072ff);
+      font-size: 14px;
+      padding: 8px 18px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .shining-title { font-size: 34px; }
+      .gift-grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-grid { grid-template-columns: 1fr; }
+      .photo-card { height: 380px; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <!-- Page 1: Welcome -->
-        <div class="card active" id="page1">
-            <h1>Hey Kavya Akka! 👋</h1>
-            <p>Oka chinna surprise mee kosam ready ayindi... Chustara? 😉</p>
-            <button class="btn" onclick="nextPage(2)">Let's Go! 🚀</button>
+  <div class="moon-bg">🌙</div>
+  <div class="heart-bg" id="heartBg"></div>
+
+  <button class="music-btn" onclick="toggleMusic()" id="btnMusic">🎵 Play Music</button>
+
+  <audio id="bgSong" loop style="display:none;">
+    <source src="kavaya.mp3.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="full-wrapper">
+    
+    <!-- PAGE 0: INTRO -->
+    <div class="page active" id="page0">
+      <div class="intro-box">
+        <p style="font-size: 18px; color: #ff71ce;">Something special is waiting for you...</p>
+        <div id="countdownBox" style="display:none;">
+          <div class="count-overlay" id="countNum">3</div>
         </div>
-
-        <!-- Page 2: Balloons Pop -->
-        <div class="card" id="page2">
-            <h1>Pop the Balloons! 🎈</h1>
-            <p>Balloons mida touch chesi pop cheseeyandi Akka!</p>
-            <div class="interactive-box" onclick="this.innerHTML='💥'; this.style.color='#ff4757';">🎈🎈🎈</div>
-            <button class="btn" onclick="nextPage(3)">Next ➡️</button>
+        <div id="startBtnArea">
+          <button onclick="startInitialCountdown()">Celebrate Her Day ❤️</button>
         </div>
-
-        <!-- Page 3: Cake Cutting -->
-        <div class="card" id="page3">
-            <h1>Virtual Cake Cutting 🎂</h1>
-            <p>Screen mida touch chesi cake cut cheseeyandi!</p>
-            <div class="interactive-box" onclick="this.innerHTML='🍰😋';">🎂</div>
-            <button class="btn" onclick="nextPage(4)">Next ➡️</button>
-        </div>
-
-        <!-- Page 4: Candles -->
-        <div class="card" id="page4">
-            <h1>Light Up the Candles 🕯️</h1>
-            <p>Velige prathi deepam laa mee jeevitham eppatiki veligipovali!</p>
-            <div class="interactive-box" onclick="this.innerHTML='✨🔥✨';">🕯️🕯️🕯️</div>
-            <button class="btn" onclick="nextPage(5)">Next ➡️</button>
-        </div>
-
-        <!-- Page 5: Gift Box -->
-        <div class="card" id="page5">
-            <h1>Gift Box Unlocking 🎁</h1>
-            <p>Mee kosam unna special gift box ni open cheyandi!</p>
-            <div class="interactive-box" onclick="this.innerHTML='🎉💖💎';">🎁</div>
-            <button class="btn" onclick="nextPage(6)">Next ➡️</button>
-        </div>
-
-        <!-- Page 6: Memories -->
-        <div class="card" id="page6">
-            <h1>Sweet Memories 📸</h1>
-            <p>Mana life lo chala unforgettable moments unnayi.</p>
-            <div class="interactive-box">📸✨</div>
-            <button class="btn" onclick="nextPage(7)">Next ➡️</button>
-        </div>
-
-        <!-- Page 7: Smiles -->
-        <div class="card" id="page7">
-            <h1>Beautiful Smiles 😊</h1>
-            <p>Mee happiness chudadam maaku chala anandamm ga untundi.</p>
-            <div class="interactive-box">💖🥰🌻</div>
-            <button class="btn" onclick="nextPage(8)">Next ➡️</button>
-        </div>
-
-        <!-- Page 8: Good Vibes / Video Sneak peek -->
-        <div class="card" id="page8">
-            <h1>Good Vibes & Videos ✨</h1>
-            <p>Eppudu ilaage chala energetic ga, happy ga undali Akka!</p>
-            <div class="interactive-box">🎬🌟🎊</div>
-            <button class="btn" onclick="nextPage(9)">Final Surprise 🎉</button>
-        </div>
-
-        <!-- Page 9: Magical Page with Royal Letter Button -->
-        <div class="card" id="page9" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: white; padding: 35px 20px;">
-            <h1 style="color: #ff416c; font-size: 1.6rem; text-shadow: 0 0 20px rgba(255, 65, 108, 0.8); margin-bottom: 12px; animation: glow 1.5s infinite alternate;">
-                ✨ HAPPY BIRTHDAY ✨<br><span style="color: #fff; font-size: 1.8rem;">KAVYA AKKA!</span>
-            </h1>
-            
-            <p style="color: #ddd; font-size: 0.9rem; margin-bottom: 18px;">
-                Ee roju antha andaroo happy ga undali, mee face lo navvu eppatiki marakapovali! ❤️
-            </p>
-
-            <button class="btn" onclick="nextPage(10)" style="background: linear-gradient(45deg, #f7b733, #fc4a1a); margin-bottom: 12px; width: 100%;">
-                📜 Open Royal Journey Letter
-            </button>
-
-            <div id="magicBtn" onclick="triggerMagic()" style="background: linear-gradient(45deg, #ff416c, #ff4b2b); color: white; padding: 10px 20px; font-size: 0.9rem; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 75, 43, 0.8); display: inline-block;">
-                🎁 Tap for Magic! 💖
-            </div>
-
-            <p id="magicText" style="color: #00ffcc; font-size: 0.95rem; margin-top: 12px; opacity: 0; transition: 1s; text-shadow: 0 0 10px rgba(0,255,204,0.5);">
-                🎉 Stay Awesome & Keep Smiling Forever! 🌟
-            </p>
-        </div>
-
-        <!-- PAGE 10: Ancient Royal Scroll Letter (Parts 1 to 4) -->
-        <div class="card" id="page10" style="background: #f4e8c1; border: 5px solid #5c2c16; background-image: radial-gradient(circle, #f9f3df 60%, #e2c999 100%); font-family: 'Georgia', serif; text-align: left; max-height: 85vh; overflow-y: auto; padding: 25px 15px; position: relative;">
-            
-            <!-- Seal -->
-            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 35px; height: 35px; background: #8b0000; border-radius: 50%; border: 2px solid #ffcc00; display: flex; align-items: center; justify-content: center; color: #ffcc00; font-size: 1rem;">📜</div>
-
-            <h2 style="color: #4a2511; font-size: 1.3rem; text-align: center; margin-bottom: 15px; text-transform: uppercase; border-bottom: 2px dashed #8b5a2b; padding-bottom: 8px; font-family: 'Georgia', serif;">
-                Naa Jeevitha Prayanam
-            </h2>
-
-            <!-- Part 1 -->
-            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
-                <b>1.</b> Nenu e stage lo vunna ante only u mam. Because chala ariga vdedhani next ma grand ma government teacher, ma mommy duty ki vellipoyaru. Nenu ma grand mother chinappati nundi school ki velladhni, lekopthe vihilo evariko valaki ichi vellivaru. Nenu ami kavali ante adi iche varuku chala allari chese dani. So 7th varaku iam good and excellent student. 7th lo naku hostel lo join chesaru. Nenu appudu ma parents lekuda vere village kuda velledhu, so hostel lo vudatam chala kastam, chala adichanu. Thisukuvallipomani chepa kani na maata evaru vinaledhu. Sunday mom daddy vachevaru, valla kallu pattukoni akkadiki chala prayatnallu chesa kani thsukuvallru kadhu. Ma mommy ithe chala gattiga kottèvaru, akkada ami vunte avi like stone chipuru alla chesavru, kani nenu vdaledhu chadvaledhu. Intiki thisuvallipoyaru next 2 days vudi ala chala jarigaiee.
-            </p>
-
-            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
-                Naku health issue vachindi. Na chinappudu body lo water valla right side pipes pettru lopala, adi edhebaddiki malli stage 1 vachindi. One month bed rest, next malli routine. One day come my father and grandma in hostel, nenu ithe ee gatulu nanana kallu pattukuni bathimadanu. Daddy okaroju kuda kottaledhu, intiki thisuvallipoyaru. Intiki velinaka mommy maatalu adleshu, appudu anipichidhi nenu andhuku puthaniyo ani. Inka ala pindi ma polam lo minapa vaseu, nait matadukuni mrg he nanu lepi "nuv natho polam ki ra, nuv ango chdavu gaa" ani thisuku valli akkada ithe sun mummy affusthundi nannu chusu. Naku okapaka pain, thnakopam + badha... akkada unna matto tho kotti chala adicharu.
-            </p>
-
-            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
-                Next day naku hostel vallu naku dascholer chaimani option ischru, ina maata niledhu nenu. Ithe gate ki kallu cheyulu katti andalo vdhili valliporu duty ki ma amma garu. Ithe ra maa lopalki annakuda nenu na mondhi tho ma amma savaste kani nenu vallnu ani 11:30 ki vachiru intiki. Apotuvaraku andalu vunna ma ma chusi "pichipilla ilaachesta" ani thisukuvallru lopali. Aa roju ithe kallu tho thensru, nannalariki inak ela kshu nai tc thisukoni old school lo jion chesry. Appudunaku e chadhuvu ante istem poindhi, 10th varaku ala china allriltho completely chesaa.
-            </p>
-
-            <!-- Part 2 -->
-            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
-                <b>2. Diploma stage:</b> Nenu agri diploma rasaa naku rank 2000 vachidhi, polytechnic kuda rank vachidhi ma school lo nadhi, ur ma family ki support because ma annaya valla. Akkada sir cheppru okasari political counseling ki velladi ani last day counseling.. Complete chesanu return avuthuna time lo naku nijaiga chepputhuna mam ur my biggest god mam. Naku e roju ani pistudhi nakosam oka devatha ni naku ichadu, aa devudu only u mam. Meru call cheyకపోతే iam a unlucky fellow.
-            </p>
-
-            <!-- Part 3 -->
-            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
-                <b>3. Memorable moments:</b> Return time lo call vachidhi nenu lift chesanu dryving lo vunna malli call chesamu ani cheppanu. Intiki vellu inka food thintunte malli call chesaru. Memu ists college some village ani chepparu, ma ku ee maata nachidhi, picha laga chusamu next college chudani ki vachaa. A roju ists lo movie promotion name "Kotha Kotha Ga"... E name lo vudhu na life new chapter.
-            </p>
-
-            <!-- Part 4 -->
-            <p style="color: #2c1810; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">
-                <b>4. Kotha kotha ga movie la na life kotha ga marindi:</b> Meru mana clg lo reciving ki mamtha mam tho vacharu. Na dhariki ki vachi likitha ani adgaru, naku edhi appatiki gurtu vudipothidhi mam. Yes mam ani cheopa, admission ki thisu vellru. Kada kuda ma mommy and nayya ithe chudu join avtavu ante ne certificates istamu ani hali items adigaru. Ma maya ithee nenu chdhavunu ni judgment ichesaru ma village lo. Nenu me matalulu falt ipoya mam tqq!
-            </p>
-
-            <!-- Restart button inside letter -->
-            <div style="text-align: center; margin-top: 15px; border-top: 2px dashed #8b5a2b; padding-top: 10px;">
-                <button class="btn" onclick="nextPage(1)" style="font-size: 0.85rem; padding: 8px 18px; margin: 0 auto; background: #5c2c16;">
-                    🔄 Restart Story
-                </button>
-            </div>
-
-        </div>
-
+      </div>
     </div>
 
-    <script>
-        // Page switching function
-        function nextPage(num) {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => card.classList.remove('active'));
-            
-            const targetPage = document.getElementById('page' + num);
-            if(targetPage) {
-                targetPage.classList.add('active');
-            }
-            window.scrollTo(0, 0);
-        }
+    <!-- PAGE 1: WISHES -->
+    <div class="page" id="page1">
+      <div style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h1 class="shining-title">🎉 Happy Birthday Kavya Akka! 🎉</h1>
+        <h2 class="sub-heading">Wishing You A Life Full Of Happiness, Love & Smiles ❤️✨</h2>
+        <div class="timer-container">
+          <div class="time-box"><span id="days">00</span>Days</div>
+          <div class="time-box"><span id="hours">00</span>Hours</div>
+          <div class="time-box"><span id="mins">00</span>Mins</div>
+          <div class="time-box"><span id="secs">00</span>Secs</div>
+        </div>
+        <button onclick="nextPage(2)">Next: Sweet Memories 📸</button>
+      </div>
+    </div>
 
-        // Magical Button Heart Burst Effect for Page 9
-        function triggerMagic() {
-            document.getElementById('magicText').style.opacity = '1';
-            document.getElementById('magicBtn').innerHTML = "💖 So Awesome! 🎈";
-            
-            for (let i = 0; i < 40; i++) {
-                let heart = document.createElement('div');
-                heart.innerHTML = '❤️';
-                heart.style.position = 'fixed';
-                heart.style.left = (window.innerWidth / 2 + (Math.random() - 0.5) * 250) + 'px';
-                heart.style.top = (window.innerHeight / 2 + (Math.random() - 0.5) * 250) + 'px';
-                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                heart.style.zIndex = '9999';
-                heart.style.transition = 'all 2s ease-out';
-                document.body.appendChild(heart);
+    <!-- PAGE 2: PHOTO GRID -->
+    <div class="page" id="page2">
+      <h1 class="shining-title" style="font-size: 42px;">Sweet Memories 📸</h1>
+      <p style="font-size: 16px; color: #ff9ebb; margin-bottom: 10px;">Capturing your beautiful moments!</p>
+      <div class="photo-grid">
+        <div class="photo-card"><img src="km.mp3.jpg" alt="Pic 1"></div>
+        <div class="photo-card"><img src="kmp.mp3.jpg" alt="Pic 2"></div>
+        <div class="photo-card"><img src="kmp4.mp3.jpg" alt="Pic 3"></div>
+      </div>
+      <button onclick="nextPage(3)">Next: Phone Number Magic 📲</button>
+    </div>
 
-                setTimeout(() => {
-                    heart.style.transform = `translate(${(Math.random() - 0.5) * 400}px, ${-Math.random() * 400}px) scale(1.5)`;
-                    heart.style.opacity = '0';
-                }, 50);
+    <!-- PAGE 3: PHONE NUMBER MAGIC -->
+    <div class="page" id="page3">
+      <h1 class="shining-title" style="font-size: 38px;">Phone Number Magic Surprise 📱</h1>
+      <p style="font-size: 15px; color: #ff9ebb;">Click any number to unlock Panda with Gift Box! 🐼🎁</p>
+      <div class="phone-container">
+        <div class="phone-digits" id="phoneDigitsBox"></div>
+        <div class="pop-item-display" id="popDisplay">
+          <div style="font-size: 60px;">📲</div>
+          <div style="font-size: 16px; color: #ff71ce; margin-top: 10px;">Click on any digit above to open Panda's Gift!</div>
+        </div>
+      </div>
+      <button onclick="nextPage(4)">Next: Make A Wish ✨</button>
+    </div>
 
-                setTimeout(() => {
-                    heart.remove();
-                }, 2000);
-            }
-        }
-    </script>
+    <!-- PAGE 4: MAKE A WISH -->
+    <div class="page" id="page4">
+      <h1 class="shining-title" style="font-size: 42px;">Make A Magical Wish 🌠</h1>
+      <p style="font-size: 18px; color: #ff9ebb;">Close your eyes, think of a wish & blow the candle!</p>
+      <div class="wish-card">
+        <div class="wish-candle-box" onclick="blowWishCandle()">
+          <div class="wish-flame" id="wishFlame"></div>
+          <div class="wish-candle-body"></div>
+        </div>
+        <p id="wishMsg" style="font-size: 18px; color: #ffffff; font-weight: 600; margin-top: 10px;">
+          Click or Blow on the candle to make your wish! 🕯️
+        </p>
+        <button class="mic-btn" onclick="startMicForWish()">🎤 Enable Mic to Blow Candle</button>
+        <div id="wishMagicBox" style="display:none; font-size: 20px; margin-top: 10px; color: #00f0ff;">
+          ✨ May all your secret dreams come true this year! ✨
+        </div>
+      </div>
+      <button onclick="nextPage(5)">Next: Cut the Cake 🎂</button>
+    </div>
 
-</body>
-</html>
+    <!-- PAGE 5: CAKE CUTTING -->
+    <div class="page" id="page5">
+      <h1 class="shining-title" style="font-size: 42px;">Virtual Cake Cutting 🎂</h1>
+      <p id="cakeInstruction" style="font-size: 18px; margin: 10px 0;">Screen మీద టచ్ చేయండి లేదా క్లిక్ చేయండి, కేక్ కట్ అవుతుంది! 🔪🎂</p>
+      <div class="cake-container" id="cakeBox" onclick="cutCake()" ontouchstart="cutCake()">
+        <div class="candle-flame" id="flame"></div>
+        <div style="font-size: 110px; line-height: 150px;" id="cakeEmoji">🎂</div>
+      </div>
+      <button class="mic-btn" onclick="startMicForCake()">🎤 మైక్‌లో ఊదండి (Blow)</button>
+      <br>
+      <button onclick="nextPage(6)">Next: Video Song 🎥</button>
+    </div>
+
+    <!-- PAGE 6: VIDEO -->
+    <div class="page" id="page6">
+      <h1 class="shining-title" style="font-size: 42px;">Special Video 🎬</h1>
+      <p style="margin-bottom: 15px; font-size: 18px;">A sweet memory created for you!</p>
+      <video id="page4Video" controls style="width: 100%; max-width: 650px; max-height: 400px; border-radius: 20px; object-fit: contain;">
+        <source src="akka.mp4" type="video/mp4">
+      </video>
+      <br>
+      <button onclick="nextPage(7)">Next: 28 Gifts Surprise 🎁</button>
+    </div>
+
+    <!-- PAGE 7: 28 GIFTS -->
+    <div class="page" id="page7">
+      <h1 class="shining-title" style="font-size: 42px;">28 Birthday Gifts 🎁</h1>
+      <p style="font-size: 18px;">Click any box to watch your surprise & message!</p>
+      <div class="gift-grid" id="giftGrid"></div>
+      <button onclick="nextPage(8)">Next: Final Magic Zone ✨</button>
+    </div>
+
+    <!-- PAGE 8: FINAL INTERACTIVE ZONE WITH 10TH PAGE LETTER BUTTON -->
+    <div class="page" id="page8">
+      <div style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: white; padding: 35px 20px; border-radius: 25px; border: 2px solid rgba(255,113,206,0.5);">
+        <h1 style="color: #ff416c; font-size: 2rem; text-shadow: 0 0 20px rgba(255, 65, 108, 0.8); margin-bottom: 15px;">
+          ✨ HAPPY BIRTHDAY ✨<br><span style="color: #fff; font-size: 2.2rem;">KAVYA AKKA!</span>
+        </h1>
+        
+        <p style="color: #ddd; font-size: 1rem; margin-bottom: 25px;">
+          Ee roju antha andaroo happy ga undali, mee face lo navvu eppatiki marakapovali! ❤️
+        </p>
+
+        <!-- 10th Page Royal Letter Trigger Button -->
+        <button onclick="nextPage(10)" style="background: linear-gradient(45deg, #f7b733, #fc4a1a); margin-bottom: 20px; width: 100%; font-size: 1.1rem; padding: 15px;">
+          📜 Open Royal Journey Letter (Page 10)
+        </button>
+
+        <div id="magicBtn" onclick="triggerMagic()" style="background: linear-gradient(45deg, #ff416c, #ff4b2b); color: white; padding: 12px 25px; font-size: 1rem; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 0 20px rgba(255, 75, 43, 0.8); display: inline-block;">
+          🎁 Tap for Magic! 💖
+        </div>
+
+        <p id="magicText" style="color: #00ffcc; font-size: 1.05rem; margin-top: 15px; opacity: 0; transition: 1s; text-shadow: 0 0 10px rgba(0,255,204,0.5);">
+          🎉 Stay Awesome & Keep Smiling Forever! 🌟
+        </p>
+      </div>
+    </div>
+
+    <!-- PAGE 10: ANCIENT ROYAL SCROLL LETTER (PARTS 1 TO 4) -->
+    <div class="page" id="page10" style="background: #f4e8c1; border: 5px solid #5c2c16; background-image: radial-gradient(circle, #f9f3df 60%, #e2c999 100%); font-family: 'Georgia', serif; text-align: left; max-height: 85vh; overflow-y: auto; padding: 30px 20px; position: relative; border-radius: 15px; color: #2c1810;">
+      
+      <!-- Seal -->
+      <div style="position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; background: #8b0000; border-radius: 50%; border: 2px solid #ffcc00; display: flex; align-items: center; justify-content: center; color: #ffcc00; font-size: 1.1rem;">📜</div>
+
+      <h2 style="color: #4a2511; font-size: 1.4rem; text-align: center; margin-bottom: 20px; text-transform: uppercase; border-bottom: 2px dashed #8b5a2b; padding-bottom: 10px; font-family: 'Georgia', serif;">
+        Naa Jeevitha Prayanam
+      </h2>
+
+      <!-- Part 1 -->
+      <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px;">
+        <b>1.</b> Nenu e stage lo vunna ante only u mam. Because chala ariga vdedhani next ma grand ma government teacher, ma mommy duty ki vellipoyaru. Nenu ma grand mother chinappati nundi school ki velladhni, lekopthe vihilo evariko valaki ichi vellivaru. Nenu ami kavali ante adi iche varuku chala allari chese dani. So 7th varaku iam good and excellent student. 7th lo naku hostel lo join chesaru. Nenu appudu ma parents lekuda vere village kuda velledhu, so hostel lo vudatam chala kastam, chala adichanu. Thisukuvallipomani chepa kani na maata evaru vinaledhu. Sunday mom daddy vachevaru, valla kallu pattukoni akkadiki chala prayatnallu chesa kani thsukuvallru kadhu. Ma mommy ithe chala gattiga kottèvaru, akkada ami vunte avi like stone chipuru alla chesavru, kani nenu vdaledhu chadvaledhu. Intiki thisuvallipoyaru next 2 days vudi ala chala jarigaiee.
+      </p>
+
+      <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px;">
+        Naku health issue vachindi. Na chinappudu body lo water valla right side pipes pettru lopala, adi edhebaddiki malli stage 1 vachindi. One month bed rest, next malli routine. One day come my father and grandma in hostel, nenu ithe ee gatulu nanana kallu pattukuni bathimadanu. Daddy okaroju kuda kottaledhu, intiki thisuvallipoyaru. Intiki velinaka mommy maatalu adleshu, appudu anipichidhi nenu andhuku puthaniyo ani. Inka ala pindi ma polam lo minapa vaseu, nait matadukuni mrg he nanu lepi "nuv natho polam ki ra, nuv ango chdavu gaa" ani thisuku valli akkada ithe sun mummy affusthundi nannu chusu. Naku okapaka pain, thnakopam + badha... akkada unna matto tho kotti chala adicharu.
+      </p>
+
+      <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px;">
+        Next day naku hostel vallu naku dascholer chaimani option ischru, ina maata niledhu nenu. Ithe gate ki kallu cheyulu katti andalo vdhili valliporu duty ki ma amma garu. Ithe ra maa lopalki annakuda nenu na mondhi tho ma amma savaste kani nenu vallnu ani 11:30 ki vachiru intiki. Apotuvaraku andalu vunna ma ma chusi "pichipilla ilaachesta" ani thisukuvallru lopali. Aa roju ithe kallu tho thensru, nannalariki inak ela kshu nai tc thisukoni old school lo jion chesry. Appudunaku e chadhuvu ante istem poindhi, 10th varaku ala china allriltho completely chesaa.
+      </p>
+
+      <!-- Part 2 -->
+      <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px;">
+        <b>2. Diploma stage:</b> Nenu agri diploma rasaa naku rank 2000 vachidhi, polytechnic kuda rank vachidhi ma school lo nadhi, ur ma family ki support because ma annaya valla. Akkada sir cheppru okasari political counseling ki velladi ani last day counseling.. Complete chesanu return avuthuna time lo naku nijaiga chepputhuna mam ur my biggest god mam. Naku e roju ani pistudhi nakosam oka devatha ni naku ichadu, aa devudu only u mam. Meru call cheyకపోతే iam a unlucky fellow.
+      </p>
+
+      <!-- Part 3 -->
+      <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px;">
+        <b>3. Memorable moments:</b> Return time lo call vachidhi nenu lift che
