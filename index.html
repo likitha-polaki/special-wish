@@ -1412,6 +1412,11 @@
     #page0 .intro-box { width:100% !important; max-width:100% !important; padding:30px 18px !important; }
   }
 
+
+    /* Gift wish tiles are compact grid buttons; each opens its matching video. */
+    button.gift-box { width:100%; min-width:0; min-height:118px; margin:0; padding:18px 10px !important; font-size:32px !important; border-radius:18px !important; white-space:normal; }
+    button.gift-box span { overflow-wrap:anywhere; }
+
 </style>
 </head>
 <body>
@@ -1555,12 +1560,12 @@
       </video>
 
       <br>
-      <button onclick="nextPage(7)">Next: 28 Gifts Surprise 🎁</button>
+      <button onclick="nextPage(7)">Next: 13 Birthday Wishes 🎁</button>
     </div>
 
-    <!-- PAGE 7: 28 GIFTS -->
+    <!-- PAGE 7: 13 VIDEO WISHES -->
     <div class="page" id="page7">
-      <h1 class="shining-title" style="font-size: 45px;">28 Birthday Gifts 🎁</h1>
+      <h1 class="shining-title" style="font-size: 45px;">13 Birthday Wishes 🎁</h1>
       <p style="font-size: 20px;">Click any box to watch your video surprise & message!</p>
       
       <div class="gift-grid" id="giftGrid"></div>
@@ -1792,7 +1797,7 @@
   <!-- VIDEO MODAL -->
   <div class="modal" id="giftModal">
     <div class="modal-content">
-      <video id="modalVideo" controls style="width: 100%; border-radius: 12px; margin-bottom: 15px;" playsinline></video>
+      <video id="modalVideo" controls playsinline preload="metadata" style="width:100%;max-height:58vh;object-fit:contain;background:#000;border-radius:12px;margin-bottom:15px;"></video>
       <p id="modalText" style="color: #ff71ce; font-weight: bold; font-size: 16px; margin-bottom: 15px;"></p>
       <button onclick="closeModal()" style="padding: 8px 25px; font-size: 14px;">Close ❌</button>
     </div>
@@ -2087,32 +2092,36 @@
     }
 
     const giftMessages = [
-      "1. You inspire us every single day! 🌸", "2. Best Akka ever! 📚",
-      "3. Thank you for your endless guidance! ❤️", "4. Stay blessed and happy always! ✨",
-      "5. May your year be full of joy! 🥳", "6. Always keep smiling! 😊",
-      "7. You are a true light in our lives! 🌟", "8. Wishing you health and success! 🏆",
-      "9. Thank you for your patience! 💐", "10. Happy Birthday Kavya Akka! 🎂",
-      "11. Best wishes on your birthday! 🎉", "12. You make everything special! ✏️",
-      "13. Forever grateful for you! 🙏", "14. Hope all your wishes come true! 🌈",
-      "15. Brightest star! ⭐", "16. Enjoy your special day! 🎁",
-      "17. Keep shining bright! 💖", "18. Thank you for always believing in us! 🤗",
-      "19. Super Akka! 🦸‍♀️", "20. Best memories with you! 📸",
-      "21. Wishing you peace & laughter! 😄", "22. Lots of love on your birthday! 💕",
-      "23. Wonderful guide & friend! 🌼", "24. May today be unforgettable! 🎈",
-      "25. Celebrating YOU today! 🥂", "26. Always stay positive! 🌺",
-      "27. Thank you for being awesome! 🔥", "28. Happy Birthday Kavya Akka! ❤️🎂"
+      "🌸 May your life always bloom with happiness and peace, Kavya Akka!",
+      "💖 You make the people around you feel special. Keep shining!",
+      "🌟 May every dream you carry turn into a beautiful reality.",
+      "😊 Wishing you countless smiles and joyful moments this year.",
+      "🎂 Happy Birthday, Kavya Akka! May your day be full of love.",
+      "🌈 May every new day bring hope, success, and beautiful surprises.",
+      "💐 Thank you for your kindness, guidance, and encouragement.",
+      "✨ Keep being the wonderful and inspiring person you are.",
+      "🕊️ Wishing you good health, calm days, and a peaceful heart.",
+      "🎉 May this year open the door to exciting opportunities.",
+      "📸 May you make many more precious memories with people you love.",
+      "🥰 You deserve all the happiness that life has to offer.",
+      "❤️ One final wish: stay blessed, keep smiling, and have the happiest birthday ever!"
     ];
 
-    const availableVideos = ["v1.mp4", "v2.mp4", "jo.mp4", "v3.mp4", "v4.mp4", "v5.mp4", "v6.mp4", "h1.mp4", "h2.mp4", "h3.mp4", "h5.mp4", "h7.mp4"];
-    const giftVideos = Array.from({length: 28}, (_, i) => availableVideos[i % availableVideos.length]);
+    // Add your 13 video files beside index.html. The filenames below must match exactly.
+    const giftVideos = [
+      "v1.mp4", "v2.mp4", "jo.mp4", "v3.mp4", "v4.mp4", "v5.mp4", "v6.mp4",
+      "h1.mp4", "h2.mp4", "h3.mp4", "h5.mp4", "h7.mp4", "v13.mp4"
+    ];
 
     const grid = document.getElementById("giftGrid");
-    if(grid) {
-      for (let i = 1; i <= 28; i++) {
-        const box = document.createElement("div");
+    if (grid) {
+      for (let i = 1; i <= 13; i++) {
+        const box = document.createElement("button");
+        box.type = "button";
         box.className = "gift-box";
-        box.innerHTML = "🎁<br><span style='font-size:16px; font-weight:bold;'>Gift #" + i + "</span>";
-        box.onclick = function() { openGift(i); };
+        box.setAttribute("aria-label", "Play birthday wish video " + i);
+        box.innerHTML = "🎁<br><span style='font-size:14px;font-weight:700;line-height:1.5;display:inline-block;margin-top:8px;'>Wish " + i + "</span>";
+        box.onclick = function () { openGift(i); };
         grid.appendChild(box);
       }
     }
@@ -2401,7 +2410,7 @@
       const hud = document.getElementById('journeyHud');
       const fill = document.getElementById('journeyFill');
       const label = document.getElementById('journeyLabel');
-      const names = {0:'Welcome',1:'Birthday Wishes',2:'Sweet Memories',3:'Magic Surprise',4:'Make a Wish',5:'Cake Time',6:'Video Memories',7:'28 Gifts',8:'Special Zone',9:'Scratch Surprise',10:'Puzzle Time',11:'Memory Lane',12:'Things I Appreciate',13:'Final Letter'};
+      const names = {0:'Welcome',1:'Birthday Wishes',2:'Sweet Memories',3:'Magic Surprise',4:'Make a Wish',5:'Cake Time',6:'Video Memories',7:'13 Video Wishes',8:'Special Zone',9:'Scratch Surprise',10:'Puzzle Time',11:'Memory Lane',12:'Things I Appreciate',13:'Final Letter'};
       if (!hud || !fill || !label) return;
       if (pageNumber === 0) {
         hud.classList.remove('visible');
