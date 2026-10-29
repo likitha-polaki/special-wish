@@ -1570,9 +1570,9 @@
       <button onclick="nextPage(7)">Next: 13 Birthday Wishes 🎁</button>
     </div>
 
-    <!-- PAGE 7: 13 VIDEO WISHES -->
+    <!-- PAGE 7: 11 VIDEO WISHES -->
     <div class="page" id="page7">
-      <h1 class="shining-title" style="font-size: 45px;">13 Birthday Wishes 🎁</h1>
+      <h1 class="shining-title" style="font-size: 45px;">11 Birthday Wishes 🎁</h1>
       <p style="font-size: 20px;">Click any box to watch your video surprise & message!</p>
       
       <div class="gift-grid" id="giftGrid"></div>
@@ -2179,7 +2179,6 @@
 
     const giftMessages = [
       "🌸 May your life always bloom with happiness and peace, Kavya Akka!",
-      "💖 You make the people around you feel special. Keep shining!",
       "🌟 May every dream you carry turn into a beautiful reality.",
       "😊 Wishing you countless smiles and joyful moments this year.",
       "🎂 Happy Birthday, Kavya Akka! May your day be full of love.",
@@ -2189,19 +2188,18 @@
       "🕊️ Wishing you good health, calm days, and a peaceful heart.",
       "🎉 May this year open the door to exciting opportunities.",
       "📸 May you make many more precious memories with people you love.",
-      "🥰 You deserve all the happiness that life has to offer.",
       "❤️ One final wish: stay blessed, keep smiling, and have the happiest birthday ever!"
     ];
 
-    // Add your 13 video files beside index.html. The filenames below must match exactly.
+    // Add your 11 video files beside index.html. The filenames below must match exactly.
     const giftVideos = [
-      "v1.mp4", "v2.mp4", "jo.mp4", "v3.mp4", "v4.mp4", "v5.mp4", "v6.mp4",
+      "v1.mp4", "v2.mp4", "jo.mp4", "v3.mp4", "v4.mp4", "v5.mp4", 
       "h1.mp4", "h2.mp4", "h3.mp4", "h5.mp4", "h7.mp4", "v13.mp4"
     ];
 
     const grid = document.getElementById("giftGrid");
     if (grid) {
-      for (let i = 1; i <= 13; i++) {
+      for (let i = 1; i <= 11; i++) {
         const box = document.createElement("button");
         box.type = "button";
         box.className = "gift-box";
